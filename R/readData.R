@@ -23,8 +23,11 @@ readData <- function(infile){
 	if (dim(x)[2] == 7){
 		class(x) <- c("grid", class(x))
 	}
+	if (dim(x)[2] != 3 & dim(x)[2] != 7){
+		x <- NULL
+		stop("MARCO")
+	}
 	return(x)
 }
-
 
 
