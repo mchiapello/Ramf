@@ -4,8 +4,21 @@ Title: Arbuscular Mycorrhizal colonization calculation
 Version: 0.1
 Author: Marco Chiapello
 Maintainer: Marco Chiapello <mc983@cam.ac.uk>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: MIT
+Description: The package reads data from trouvelot quantification files or grid
+	system quantification files, compute the colonization rate according to the
+	different scoring system and produce different types of plots.
+Depends: R (>= 3.2.0)
+Imports: readr,
+			ggplot2,
+			dplyr,
+			methods,
+			utils
+Suggests: testthat,
+			knitr (>= 1.1.0),
+			roxygen2
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
+VignetteBuilder: knitr
+BugReports: https://github.com/mchiapello/Ramf/issues
+RoxygenNote: 6.0.1

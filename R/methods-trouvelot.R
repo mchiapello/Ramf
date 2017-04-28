@@ -1,0 +1,3 @@
+gplot.trouvelot <- function(x) {
+	...
+}
