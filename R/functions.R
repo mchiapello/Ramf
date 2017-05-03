@@ -1,4 +1,6 @@
 grid_summary <- function(x){
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	features <- replicates <- samples <- values <- NULL
 	# Create summary table
 	y <- x %>% 
 			group_by(samples, replicates) %>%

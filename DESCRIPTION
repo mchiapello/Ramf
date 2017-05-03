@@ -13,7 +13,8 @@ Imports: readr,
 			methods,
 			utils,
 			ggplot2,
-			dplyr
+			dplyr,
+			tidyr
 Suggests: testthat,
 			knitr (>= 1.1.0),
 			roxygen2

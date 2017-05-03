@@ -15,11 +15,13 @@ summary.grid <- function(x){
 #' @export
 #' @import tidyr ggplot2
 plot.grid <- function(x, type = "boxplot", ...){
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	features <- replicates <- samples <- values <- NULL
 	if (type == "boxplot"){
 		# Create summary table
 		y <- grid_summary(x)
 	# Change table shape
-		z <- y %>% gather(features, values, -samples, -replicates)
+		z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 		# The palette with grey:
 		cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442",
 					   "#0072B2", "#D55E00", "#CC79A7")
