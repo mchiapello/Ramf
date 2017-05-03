@@ -1,7 +1,19 @@
+#' Summary object.
+#' 
+#' @param x surveyor object
+#' @param ... ignored
+#' @export
+#' @import dplyr
 summary.grid <- function(x){
 	grid_summary(x)
 }
 
+#' plot object.
+#' 
+#' @param x surveyor object
+#' @param ... ignored
+#' @export
+#' @import tidyr ggplot2
 plot.grid <- function(x, type = "boxplot", ...){
 	if (type == "boxplot"){
 		# Create summary table

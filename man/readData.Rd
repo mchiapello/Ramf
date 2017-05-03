@@ -18,12 +18,6 @@ Reads data
 \details{
 This funtion reads trouvelot and grid data
 }
-\examples{
-f <- dir(system.file("extdata",package="Ramf"))
-f
-aa <- readData(f[1])
-aa
-}
 \author{
 Marco Chiapello <mc983@cam.ac.uk>
 }
