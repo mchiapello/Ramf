@@ -6,11 +6,6 @@
 ##' @param infile the name of the file which the data are to be read from.
 ##' @return an object of class \code{grid} or \code{trouvelot}.
 ##' @export
-##' @examples
-##' f <- dir(system.file("extdata",package="Ramf"))
-##' f
-##' aa <- readData(f[1])
-##' aa
 ##' @author Marco Chiapello <mc983@cam.ac.uk>
 ##' @keywords IO, file
 ##' @import methods utils stats readr dplyr
