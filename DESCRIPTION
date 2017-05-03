@@ -9,10 +9,11 @@ Description: The package reads data from trouvelot quantification files or grid
 	different scoring system and produce different types of plots.
 Depends: R (>= 3.2.0)
 Imports: readr,
-			ggplot2,
-			dplyr,
+			stats,
 			methods,
-			utils
+			utils,
+			ggplot2,
+			dplyr
 Suggests: testthat,
 			knitr (>= 1.1.0),
 			roxygen2

@@ -3,7 +3,6 @@ summary.grid <- function(x){
 }
 
 plot.grid <- function(x, type = "boxplot", ...){
-	Arbuscules <- Hypopodia <-  Intr_Hyphae <- Total <- Vesicles <- NULL
 	if (type == "boxplot"){
 		# Create summary table
 		y <- grid_summary(x)
