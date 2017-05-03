@@ -13,7 +13,7 @@
 ##' aa
 ##' @author Marco Chiapello <mc983@cam.ac.uk>
 ##' @keywords IO, file
-##' @import methods utils stats readr
+##' @import methods utils stats readr dplyr
 
 readData <- function(infile, ...){
 	x <- suppressMessages(read_csv(infile))
