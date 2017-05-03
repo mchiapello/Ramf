@@ -1,20 +1,22 @@
-#' Summary object.
+#' gsummary object.
 #' 
 #' @param x surveyor object
 #' @param ... ignored
 #' @export
 #' @import dplyr
-summary.grid <- function(x){
+gsummary <- function(x){ UseMethod("gsummary") }
+gsummary.grid <- function(x){
 	grid_summary(x)
 }
 
-#' plot object.
+#' gplot object.
 #' 
 #' @param x surveyor object
 #' @param ... ignored
 #' @export
 #' @import tidyr ggplot2
-plot.grid <- function(x, type = "boxplot", ...){
+gplot <- function(x){ UseMethod("gplot") }
+gplot.grid <- function(x, type = "boxplot", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	if (type == "boxplot"){
