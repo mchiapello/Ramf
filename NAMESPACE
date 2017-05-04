@@ -2,6 +2,8 @@
 
 S3method(gplot,grid)
 S3method(gsummary,grid)
+export(gplot)
+export(gsummary)
 export(readData)
 import(dplyr)
 import(ggplot2)
