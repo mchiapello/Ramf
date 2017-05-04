@@ -20,7 +20,7 @@ gsummary.grid <- function(x){
 gplot <- function(x) UseMethod("gplot")
 
 #'@export
-gplot.grid <- function(x, type = "boxplot", ...){
+gplot.grid <- function(x, type = NULL){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	if (type == "boxplot"){
