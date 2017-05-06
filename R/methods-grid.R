@@ -23,6 +23,9 @@ gplot <- function(x) UseMethod("gplot")
 gplot.grid <- function(x, type = NULL){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
+	if (is.null(type)){
+		stop("type should be: boxplot or barplot")
+	}
 	if (type == "boxplot"){
 		grid_boxplot(x)
 	}
