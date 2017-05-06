@@ -26,10 +26,5 @@ am_plot.grid <- function(x, type = NULL){
 	if (is.null(type)){
 		stop("type should be: boxplot or barplot")
 	}
-	if (type == "boxplot"){
-		grid_boxplot(x)
-	}
-	if (type == "barplot"){
-		grid_barplot(x)
-	}
+	gt_plot(x, type)
 }
