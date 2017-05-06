@@ -1,26 +1,26 @@
-#' gsummary object.
+#' am_summary object.
 #' 
 #' @param x surveyor object
 #' @param ... ignored
 #' @export
 #' @import dplyr
-gsummary <- function(x) UseMethod("gsummary")
+am_summary <- function(x) UseMethod("am_summary")
 
 #' @export
-gsummary.grid <- function(x){
+am_summary.grid <- function(x){
 	grid_summary(x)
 }
 
-#' gplot object.
+#' am_plot object.
 #' 
 #' @param x surveyor object
 #' @param ... ignored
 #' @export
 #' @import tidyr ggplot2
-gplot <- function(x) UseMethod("gplot")
+am_plot <- function(x) UseMethod("am_plot")
 
 #'@export
-gplot.grid <- function(x, type = NULL){
+am_plot.grid <- function(x, type = NULL){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	if (is.null(type)){
@@ -31,5 +31,5 @@ gplot.grid <- function(x, type = NULL){
 	}
 	if (type == "barplot"){
 		grid_barplot(x)
-		}
+	}
 }

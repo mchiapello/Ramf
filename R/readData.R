@@ -10,7 +10,7 @@
 ##' @keywords IO, file
 ##' @import methods utils stats readr
 
-readData <- function(infile, ...){
+readData <- function(infile){
 	x <- suppressMessages(read_csv(infile))
 	if (any(is.na(x))) {
 			stop("The datasets contains NAs")

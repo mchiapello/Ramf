@@ -4,7 +4,7 @@
 \alias{readData}
 \title{Read colonization files.}
 \usage{
-readData(infile, ...)
+readData(infile)
 }
 \arguments{
 \item{infile}{the name of the file which the data are to be read from.}

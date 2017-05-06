@@ -80,6 +80,8 @@ grid_boxplot <- function(x){
 }
 
 grid_barplot <- function(x){
+	# Create summary table
+	y <- grid_summary(x)
 	# Change table shape
 	z <- y %>% gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
