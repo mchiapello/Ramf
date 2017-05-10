@@ -17,7 +17,8 @@ Imports: readr,
 			tidyr
 Suggests: testthat,
 			knitr (>= 1.1.0),
-			roxygen2
+			roxygen2,
+			BiocStyle
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

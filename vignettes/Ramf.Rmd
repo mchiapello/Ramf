@@ -1,0 +1,44 @@
+--- 
+title: "Arbuscular mycorrhizal fungi colonization" 
+author: "Marco Chiapello"
+output:  
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Ramf colonization analysis} 
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r env, echo=FALSE}
+library("Ramf")
+library("BiocStyle")
+```
+# Introduction
+
+...
+
+# Loading the data 
+
+To load data in, independently of the colonization scoring system, use the
+follow command:
+
+```{r loadData}
+x <- readData("../inst/extdata/grid.csv") 
+```
+
+# Summarize data
+
+```{r summary}
+am_summary(x)
+```
+
+# Plot data
+
+There are 2 plot types: 
+- barplot
+- boxplot
+
+```{r plot}
+am_plot(x, type = "barplot")
+```
+

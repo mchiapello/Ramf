@@ -16,6 +16,7 @@ grid_summary <- function(x){
 
 ## PLOTS
 gt_plot <- function(x, type){
+	features <- replicates <- samples <- values <- comp <- NULL
 		# Create summary table
 		y <- grid_summary(x)
 		# Change table shape
@@ -74,9 +75,9 @@ gt_plot <- function(x, type){
 		final <- z %>% group_by(samples, features) %>%
 			  summarize(means = mean(values, na.rm = TRUE),
 						se    = sd(values, na.rm = TRUE))
-		final2 <- final %>% gather(comp, values, -samples, -features)
-		final3 <- final2 %>% filter(grepl("mean", comp))
-		se <- final2 %>% filter(grepl("se", comp))
+		final2 <- final %>% tidyr::gather(comp, values, -samples, -features)
+		final3 <- final2 %>% dplyr::filter(grepl("mean", comp))
+		se <- final2 %>% dplyr::filter(grepl("se", comp))
 		g <- ggplot(data = final3, aes(x = interaction(factor(final3$samples, levels = unique(x$samples)),
 												  factor(final3$features, levels = c("Arbuscule", "Hyphopodia",
 																			   "IntrHyphae", "Vesicles", "Total"))),
