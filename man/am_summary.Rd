@@ -4,7 +4,7 @@
 \alias{am_summary}
 \title{am_summary object.}
 \usage{
-am_summary(x)
+am_summary(x, ...)
 }
 \arguments{
 \item{x}{surveyor object}

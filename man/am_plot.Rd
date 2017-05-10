@@ -4,7 +4,7 @@
 \alias{am_plot}
 \title{am_plot object.}
 \usage{
-am_plot(x)
+am_plot(x, ...)
 }
 \arguments{
 \item{x}{surveyor object}
