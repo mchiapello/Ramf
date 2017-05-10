@@ -4,7 +4,7 @@
 #' @param ... ignored
 #' @export
 #' @import dplyr
-am_summary <- function(x) UseMethod("am_summary")
+am_summary <- function(x, ...) UseMethod("am_summary")
 
 #' @export
 am_summary.grid <- function(x){
@@ -17,7 +17,7 @@ am_summary.grid <- function(x){
 #' @param ... ignored
 #' @export
 #' @import tidyr ggplot2
-am_plot <- function(x) UseMethod("am_plot")
+am_plot <- function(x, ...) UseMethod("am_plot")
 
 #'@export
 am_plot.grid <- function(x, type = NULL){
