@@ -1,3 +1,3 @@
-gplot.trouvelot <- function(x) {
-	...
-}
+# gplot.trouvelot <- function(x) {
+#     ...
+# }
