@@ -8,6 +8,8 @@ am_summary <- function(x) UseMethod("am_summary")
 
 #' @export
 am_summary.grid <- function(x){
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	features <- replicates <- samples <- values <- NULL
 	grid_summary(x)
 }
 
@@ -75,6 +77,8 @@ am_boxplot <- function(x, ...) UseMethod("am_boxplot")
 
 #' @export
 am_boxplot.grid <- function(x, ...){
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	features <- replicates <- samples <- values <- NULL
 	# Create summary table
 	y <- grid_summary(x)
 	# Change table shape

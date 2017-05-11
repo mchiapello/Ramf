@@ -18,6 +18,9 @@ grid_summary <- function(x){
 
 # Trouvelot
 trouvelot_summary <- function(x){
+	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
+	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
+	values <- NULL
 	y <- x %>% 
 		group_by(scoring, replicates, samples) %>%
 		tally %>%
@@ -94,5 +97,3 @@ trouvelot_summary <- function(x){
 	tmp <- inner_join(z, tmp, by = c("samples", "replicates")) %>% 
 		select(samples, replicates, F, M, a, A)
 }
-
-
