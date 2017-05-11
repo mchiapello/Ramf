@@ -39,6 +39,6 @@ There are 2 plot types:
 - boxplot
 
 ```{r plot}
-am_plot(x, type = "barplot")
+am_barplot(x)
 ```
 
