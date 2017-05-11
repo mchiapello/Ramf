@@ -1,133 +1,1009 @@
 scoring,replicates,samples
-4A3,A,TT
-3A2,A,TT
-3A2,A,TT
-2A2,A,TT
-3A2,A,TT
-3A2,A,TT
-3A1,A,TT
-1A1,A,TT
-4A2,A,TT
-3A2,A,TT
-2A3,A,TT
-4A2,A,TT
-4A2,A,TT
-3A3,A,TT
-4A2,A,TT
-4A2,A,TT
-3A2,A,TT
-3A2,A,TT
-4A3,A,TT
-5A3,A,TT
-5A3,A,TT
-4A3,A,TT
-3A3,A,TT
-2A1,A,TT
-4A1,A,TT
-3A2,A,TT
-4A3,A,TT
-4A2,A,TT
-2A2,A,TT
-3A2,A,TT
-3A3,A,TT
-2A2,A,TT
-4A3,A,TT
-5A2,A,TT
-4A3,A,TT
-5A3,A,TT
-4A3,A,TT
-2A2,A,TT
-3A3,A,TT
-5A3,A,TT
-5A3,A,TT
-2A2,A,TT
-5A3,A,TT
-3A3,A,TT
-4A2,A,TT
-2A2,A,TT
-5A3,A,TT
-1A1,A,TT
-3A2,A,TT
-3A2,A,TT
-4A2,A,TT
-3A3,A,TT
-1A1,A,TT
-2A2,A,TT
-3A2,A,TT
-4A2,A,TT
-2A1,A,TT
-4A2,A,TT
-3A2,A,TT
-5A2,A,TT
-2A2,A,TT
-4A3,A,TT
-2A2,A,TT
-3A3,A,TT
-0A0,A,TT
-3A3,A,TT
-4A2,A,TT
-4A3,A,TT
-0A0,A,TT
-0A0,A,TT
-3A2,A,TT
-3A2,A,TT
-3A3,A,TT
-4A3,A,TT
-2A2,A,TT
-3A3,A,TT
-3A2,A,TT
-4A3,A,TT
-2A2,A,TT
-3A2,A,TT
-2A3,A,TT
-2A2,A,TT
-5A3,A,TT
-2A3,A,TT
-3A2,A,TT
-1A1,A,TT
-3A2,A,TT
-5A3,A,TT
-1A1,A,TT
-3A3,A,TT
-3A3,A,TT
-3A3,A,TT
-4A3,A,TT
-2A3,A,TT
-4A3,A,TT
-4A3,A,TT
-5A3,A,TT
-3A3,A,TT
-3A3,A,TT
-1A2,A,TT
-2A2,A,TT
-1A3,A,TT
-3A2,A,TT
-1A3,A,TT
-2A2,A,TT
-3A2,A,TT
-3A3,A,TT
-2A1,A,TT
-3A2,A,TT
-3A2,A,TT
-0A0,A,TT
-3A2,A,TT
-4A2,A,TT
-4A3,A,TT
-4A2,A,TT
-0A0,A,TT
-2A2,A,TT
-1A1,A,TT
-3A3,A,TT
-2A2,A,TT
-4A3,A,TT
-3A3,A,TT
-0A0,A,TT
-4A3,A,TT
-2A3,A,TT
-0A0,A,TT
-0A0,A,TT
-3A2,A,TT
-0A0,A,TT
-0A0,A,TT
-0A0,A,TT
-0A0,A,TT
+1A3,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+1A3,A,Lys 11
+3A2,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+1A3,A,Lys 11
+3A2,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+4A3,A,Lys 11
+2A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+2A3,A,Lys 11
+5A3,A,Lys 11
+3A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+4A3,A,Lys 11
+3A3,A,Lys 11
+2A3,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+3A3,A,Lys 11
+2A3,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+3A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+1A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+4A3,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+4A3,A,Lys 11
+3A3,A,Lys 11
+1A3,A,Lys 11
+3A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+4A3,A,Lys 11
+5A3,A,Lys 11
+1A3,A,Lys 11
+0A0,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+1A3,A,Lys 11
+0A0,A,Lys 11
+1A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+2A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+4A3,A,Lys 11
+3A3,A,Lys 11
+2A3,A,Lys 11
+4A3,A,Lys 11
+2A3,A,Lys 11
+0A0,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+5A3,A,Lys 11
+1A3,A,Lys 11
+4A3,A,Lys 11
+5A3,A,Lys 11
+3A3,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+5A3,A,Lys 11
+3A3,A,Lys 11
+3A3,A,Lys 11
+1A3,A,Lys 11
+0A0,A,Lys 11
+5A3,A,Lys 11
+5A3,A,Lys 11
+5A3,A,Lys 11
+5A3,A,Lys 11
+3A3,A,Lys 11
+2A3,A,Lys 11
+4A3,A,Lys 11
+4A3,A,Lys 11
+3A3,A,Lys 11
+0A0,A,Lys 11
+5A3,A,Lys 11
+2A3,A,Lys 11
+3A3,A,Lys 11
+4A3,A,Lys 11
+0A0,A,Lys 11
+3A3,A,Lys 11
+5A3,A,Lys 11
+2A3,A,Lys 11
+2A3,A,Lys 11
+2A3,A,Lys 11
+5A3,A,Lys 11
+5A3,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+0A0,A,Lys 11
+2A3,B,Lys 11
+4A3,B,Lys 11
+0A0,B,Lys 11
+3A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+5A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+3A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+3A3,B,Lys 11
+3A3,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+2A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+3A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+3A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+3A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+2A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+2A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+1A3,B,Lys 11
+1A3,B,Lys 11
+0A0,B,Lys 11
+0A0,B,Lys 11
+2A3,B,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+3A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+0A0,C,Lys 11
+1A3,C,Lys 11
+5A3,C,Lys 11
+2A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+2A3,C,Lys 11
+5A3,C,Lys 11
+0A0,C,Lys 11
+1A3,C,Lys 11
+5A3,C,Lys 11
+4A3,C,Lys 11
+0A0,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+5A3,C,Lys 11
+3A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+5A3,C,Lys 11
+3A3,C,Lys 11
+2A3,C,Lys 11
+5A3,C,Lys 11
+2A3,C,Lys 11
+2A3,C,Lys 11
+3A3,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+3A3,C,Lys 11
+2A3,C,Lys 11
+5A3,C,Lys 11
+0A0,C,Lys 11
+3A3,C,Lys 11
+1A3,C,Lys 11
+5A3,C,Lys 11
+0A0,C,Lys 11
+3A3,C,Lys 11
+5A3,C,Lys 11
+2A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+5A3,C,Lys 11
+3A3,C,Lys 11
+5A3,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+3A3,C,Lys 11
+3A3,C,Lys 11
+5A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+3A3,C,Lys 11
+1A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+4A3,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+0A0,C,Lys 11
+1A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+0A0,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+5A3,C,Lys 11
+3A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+5A3,C,Lys 11
+1A3,C,Lys 11
+3A3,C,Lys 11
+0A0,C,Lys 11
+0A0,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+2A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+1A3,C,Lys 11
+0A0,C,Lys 11
+1A3,C,Lys 11
+4A3,C,Lys 11
+5A3,C,Lys 11
+3A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+5A3,C,Lys 11
+1A3,C,Lys 11
+5A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+5A3,C,Lys 11
+5A3,C,Lys 11
+5A3,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+4A3,C,Lys 11
+2A3,C,Lys 11
+5A3,C,Lys 11
+5A3,C,Lys 11
+5A3,C,Lys 11
+4A3,C,Lys 11
+3A3,C,Lys 11
+4A3,C,Lys 11
+5A3,C,Lys 11
+4A3,C,Lys 11
+0A0,C,Lys 11
+5A3,A,TM
+3A3,A,TM
+0A0,A,TM
+3A3,A,TM
+3A3,A,TM
+0A0,A,TM
+3A3,A,TM
+4A3,A,TM
+0A0,A,TM
+1A3,A,TM
+0A0,A,TM
+2A3,A,TM
+3A3,A,TM
+0A0,A,TM
+3A3,A,TM
+2A3,A,TM
+2A3,A,TM
+2A3,A,TM
+0A0,A,TM
+0A0,A,TM
+4A3,A,TM
+0A0,A,TM
+3A3,A,TM
+4A3,A,TM
+0A0,A,TM
+4A3,A,TM
+0A0,A,TM
+1A3,A,TM
+0A0,A,TM
+2A3,A,TM
+0A0,A,TM
+4A3,A,TM
+0A0,A,TM
+5A3,A,TM
+4A3,A,TM
+0A0,A,TM
+0A0,A,TM
+1A3,A,TM
+4A3,A,TM
+3A3,B,TM
+3A3,B,TM
+4A3,B,TM
+5A3,B,TM
+2A3,B,TM
+4A3,B,TM
+4A3,B,TM
+0A0,B,TM
+1A3,B,TM
+1A3,B,TM
+3A3,B,TM
+3A3,B,TM
+4A3,B,TM
+3A3,B,TM
+3A3,B,TM
+5A3,B,TM
+4A3,B,TM
+4A3,B,TM
+0A0,B,TM
+0A0,B,TM
+0A0,B,TM
+3A3,B,TM
+0A0,B,TM
+2A3,B,TM
+0A0,B,TM
+3A3,B,TM
+2A3,B,TM
+2A3,B,TM
+3A3,B,TM
+0A0,B,TM
+0A0,B,TM
+0A0,B,TM
+0A0,B,TM
+0A0,B,TM
+0A0,B,TM
+2A3,B,TM
+0A0,B,TM
+0A0,B,TM
+0A0,B,TM
+3A3,B,TM
+3A3,B,TM
+4A3,B,TM
+4A3,B,TM
+2A3,B,TM
+2A3,B,TM
+3A3,B,TM
+2A3,B,TM
+5A3,B,TM
+0A0,B,TM
+0A0,B,TM
+2A3,B,TM
+2A3,B,TM
+0A0,B,TM
+5A3,B,TM
+3A3,B,TM
+0A0,B,TM
+0A0,B,TM
+1A3,B,TM
+5A3,B,TM
+0A0,B,TM
+3A3,B,TM
+0A0,B,TM
+0A0,B,TM
+3A3,B,TM
+3A3,B,TM
+2A3,B,TM
+0A0,B,TM
+1A3,B,TM
+3A3,B,TM
+1A3,B,TM
+1A3,B,TM
+3A3,B,TM
+0A0,B,TM
+1A3,B,TM
+0A0,B,TM
+3A3,B,TM
+0A0,B,TM
+4A3,B,TM
+1A3,B,TM
+0A0,C,TM
+1A3,C,TM
+0A0,C,TM
+2A3,C,TM
+2A3,C,TM
+0A0,C,TM
+4A3,C,TM
+0A0,C,TM
+2A3,C,TM
+1A3,C,TM
+0A0,C,TM
+2A3,C,TM
+1A3,C,TM
+2A3,C,TM
+2A3,C,TM
+0A0,C,TM
+1A3,C,TM
+3A3,C,TM
+0A0,C,TM
+0A0,C,TM
+3A3,C,TM
+4A3,C,TM
+3A3,C,TM
+5A3,C,TM
+3A3,C,TM
+1A3,C,TM
+1A3,C,TM
+3A3,C,TM
+3A3,C,TM
+0A0,C,TM
+1A3,C,TM
+2A3,C,TM
+4A3,C,TM
+2A3,C,TM
+2A3,C,TM
+3A3,C,TM
+1A3,C,TM
+0A0,C,TM
+0A0,C,TM
+0A0,C,TM
+0A0,C,TM
+1A3,C,TM
+5A3,C,TM
+4A3,C,TM
+1A3,C,TM
+3A3,C,TM
+0A0,C,TM
+0A0,C,TM
+2A3,C,TM
+0A0,C,TM
+1A3,C,TM
+3A3,C,TM
+1A3,C,TM
+5A3,C,TM
+5A3,C,TM
+4A3,C,TM
+4A3,C,TM
+3A3,C,TM
+3A3,C,TM
+0A0,C,TM
+3A3,C,TM
+4A3,C,TM
+5A3,C,TM
+2A3,C,TM
+2A3,C,TM
+4A3,C,TM
+5A3,C,TM
+5A3,C,TM
+5A3,C,TM
+3A3,C,TM
+4A3,C,TM
+1A3,C,TM
+0A0,C,TM
+3A3,C,TM
+5A3,C,TM
+3A3,C,TM
+5A3,C,TM
+4A3,C,TM
+2A3,C,TM
+1A3,C,TM
+4A3,A,Gifu
+0A0,A,Gifu
+2A3,A,Gifu
+4A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+4A3,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+4A3,A,Gifu
+1A3,A,Gifu
+3A3,A,Gifu
+0A0,A,Gifu
+0A0,A,Gifu
+0A0,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+1A3,A,Gifu
+4A3,A,Gifu
+2A3,A,Gifu
+1A3,A,Gifu
+1A3,A,Gifu
+2A3,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+1A3,A,Gifu
+4A3,A,Gifu
+2A3,A,Gifu
+4A3,A,Gifu
+5A2,A,Gifu
+1A3,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+5A2,A,Gifu
+5A3,A,Gifu
+4A3,A,Gifu
+5A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+3A3,A,Gifu
+2A3,A,Gifu
+4A3,A,Gifu
+0A0,A,Gifu
+1A2,A,Gifu
+4A3,A,Gifu
+0A0,A,Gifu
+4A3,A,Gifu
+4A3,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+1A3,A,Gifu
+3A3,A,Gifu
+5A3,A,Gifu
+1A3,A,Gifu
+2A3,A,Gifu
+0A0,A,Gifu
+4A3,A,Gifu
+5A3,A,Gifu
+2A3,A,Gifu
+5A3,A,Gifu
+1A3,A,Gifu
+5A3,A,Gifu
+3A3,A,Gifu
+4A3,A,Gifu
+5A3,A,Gifu
+0A0,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+5A3,A,Gifu
+5A3,A,Gifu
+4A3,A,Gifu
+4A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+1A3,A,Gifu
+2A3,A,Gifu
+1A3,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+2A3,A,Gifu
+0A0,A,Gifu
+0A0,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+4A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+0A0,A,Gifu
+4A3,A,Gifu
+2A3,A,Gifu
+3A3,A,Gifu
+2A3,A,Gifu
+4A3,A,Gifu
+1A3,A,Gifu
+2A3,A,Gifu
+1A3,A,Gifu
+0A0,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+2A3,A,Gifu
+3A2,A,Gifu
+3A3,A,Gifu
+0A0,A,Gifu
+5A2,A,Gifu
+0A0,A,Gifu
+5A3,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+5A3,A,Gifu
+4A3,A,Gifu
+4A3,A,Gifu
+3A3,A,Gifu
+5A3,A,Gifu
+4A3,A,Gifu
+5A3,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+4A3,A,Gifu
+5A3,A,Gifu
+3A3,A,Gifu
+3A3,A,Gifu
+1A3,A,Gifu
+1A3,A,Gifu
+4A3,A,Gifu
+5A3,A,Gifu
+2A3,A,Gifu
+3A3,A,Gifu
+5A3,A,Gifu
+0A0,A,Gifu
+1A3,A,Gifu
+3A3,A,Gifu
+2A3,A,Gifu
+3A3,A,Gifu
+2A3,A,Gifu
+4A3,A,Gifu
+0A0,A,Gifu
+5A3,A,Gifu
+4A3,A,Gifu
+2A3,A,Gifu
+4A3,A,Gifu
+2A3,A,Gifu
+2A3,A,Gifu
+0A0,A,Gifu
+5A3,A,Gifu
+3A3,A,Gifu
+0A0,A,Gifu
+1A3,B,Gifu
+0A0,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+4A3,B,Gifu
+3A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+3A3,B,Gifu
+3A3,B,Gifu
+4A3,B,Gifu
+4A3,B,Gifu
+3A3,B,Gifu
+3A3,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+4A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+2A3,B,Gifu
+4A3,B,Gifu
+4A3,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+4A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+2A3,B,Gifu
+1A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+2A3,B,Gifu
+0A0,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+1A3,B,Gifu
+3A3,B,Gifu
+4A3,B,Gifu
+3A3,B,Gifu
+0A0,B,Gifu
+3A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+5A3,B,Gifu
+4A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+4A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+4A3,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+5A3,B,Gifu
+5A3,B,Gifu
+4A3,B,Gifu
+5A3,B,Gifu
+1A3,B,Gifu
+5A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+5A3,B,Gifu
+2A3,B,Gifu
+0A0,B,Gifu
+5A3,B,Gifu
+3A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+2A3,B,Gifu
+4A3,B,Gifu
+4A3,B,Gifu
+0A0,B,Gifu
+2A3,B,Gifu
+2A3,B,Gifu
+5A3,B,Gifu
+2A3,C,Gifu
+0A0,C,Gifu
+3A3,C,Gifu
+4A3,C,Gifu
+2A3,C,Gifu
+0A0,C,Gifu
+2A3,C,Gifu
+0A0,C,Gifu
+3A3,C,Gifu
+4A3,C,Gifu
+5A3,C,Gifu
+4A3,C,Gifu
+4A3,C,Gifu
+0A0,C,Gifu
+3A3,C,Gifu
+5A3,C,Gifu
+4A3,C,Gifu
+3A3,C,Gifu
+4A3,C,Gifu
+5A3,C,Gifu
+5A3,C,Gifu
+0A0,C,Gifu
+5A3,C,Gifu
+5A3,C,Gifu
+4A3,C,Gifu
+2A3,C,Gifu
+4A3,C,Gifu
+4A3,C,Gifu
+5A3,C,Gifu
+5A3,C,Gifu
+4A3,C,Gifu
+5A3,C,Gifu
+5A3,C,Gifu
+4A3,C,Gifu
+2A3,C,Gifu
+3A3,C,Gifu
+3A3,C,Gifu
+5A3,C,Gifu
+2A3,C,Gifu
+3A3,C,Gifu
+5A3,C,Gifu
+0A0,C,Gifu
+1A3,C,Gifu
+0A0,C,Gifu
+3A3,C,Gifu
+0A0,C,Gifu
+1A3,C,Gifu
+0A0,C,Gifu
+3A3,C,Gifu
+4A3,C,Gifu
+3A3,C,Gifu
+1A3,C,Gifu
+3A3,C,Gifu
+5A3,C,Gifu
+0A0,C,Gifu
+3A3,C,Gifu
+4A3,C,Gifu
+0A0,C,Gifu
+4A3,C,Gifu
+5A3,C,Gifu
+5A3,C,Gifu
+0A0,C,Gifu
+0A0,C,Gifu
+4A3,C,Gifu
+2A3,C,Gifu
+4A3,C,Gifu
+0A0,C,Gifu
+4A3,C,Gifu
+2A3,C,Gifu
+3A3,C,Gifu
+5A3,C,Gifu
+0A0,C,Gifu
+4A3,C,Gifu
+1A3,C,Gifu
+3A3,C,Gifu
+1A3,C,Gifu
+0A0,C,Gifu
+2A3,C,Gifu
+2A3,C,Gifu
+0A0,C,Gifu
+2A3,C,Gifu
+4A3,C,Gifu
+5A3,C,Gifu
+3A3,C,Gifu
+0A0,C,Gifu
+5A3,C,Gifu
+1A3,C,Gifu
+3A3,C,Gifu
+5A3,C,Gifu
+4A3,C,Gifu
+4A3,C,Gifu
+2A3,C,Gifu
+2A3,C,Gifu
