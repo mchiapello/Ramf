@@ -7,10 +7,12 @@
 am_boxplot(x, ...)
 }
 \arguments{
-\item{x}{surveyor object}
-
-\item{...}{ignored}
+\item{x}{dataset containing Trouvelot or Grid data}
 }
 \description{
 am_boxplot object.
+}
+\examples{
+am_boxplot(example_grid)
+am_boxplot(example_trouvelot)
 }

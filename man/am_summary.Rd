@@ -7,10 +7,12 @@
 am_summary(x)
 }
 \arguments{
-\item{x}{surveyor object}
-
-\item{...}{ignored}
+\item{x}{dataset containing Trouvelot or Grid data}
 }
 \description{
 am_summary object.
+}
+\examples{
+am_summary(example_grid)
+am_summary(example_trouvelot)
 }

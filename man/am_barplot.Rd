@@ -7,10 +7,12 @@
 am_barplot(x, ...)
 }
 \arguments{
-\item{x}{surveyor object}
-
-\item{...}{ignored}
+\item{x}{dataset containing Trouvelot or Grid data}
 }
 \description{
 am_barplot object.
+}
+\examples{
+am_barplot(example_grid)
+am_barplot(example_trouvelot)
 }
