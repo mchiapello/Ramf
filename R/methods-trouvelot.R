@@ -23,7 +23,19 @@ am_barplot.trouvelot <- function(x, ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
-	final <- trouvelot_summary(x)
+	tmp <- trouvelot_summary(x)
+	final <- tmp %>%
+		mutate(num = n()) %>%
+		group_by(samples) %>%
+		summarise(mean_F = mean(F, na.rm = TRUE),
+				  se_F = sd(F, na.rm = TRUE) / mean(num, na.rm = TRUE),
+				  mean_M = mean(M, na.rm = TRUE),
+				  se_M = sd(M, na.rm = TRUE) / mean(num, na.rm = TRUE),
+				  mean_a = mean(a, na.rm = TRUE),
+				  se_a = sd(a, na.rm = TRUE) / mean(num, na.rm = TRUE),
+				  mean_A = mean(A, na.rm = TRUE),
+				  se_A = sd(A, na.rm = TRUE) / mean(num, na.rm = TRUE)
+				  )
 	final2 <- final %>% gather(feature, value, -samples)
 	final3 <- final2 %>% dplyr::filter(grepl("mean", feature))
 	se <- final2 %>% dplyr::filter(grepl("se", feature))
@@ -63,6 +75,8 @@ am_boxplot.trouvelot <- function(x, ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
+	# The palette with grey:
+	cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 	tmp <- trouvelot_summary(x)
 	fin <- tmp %>% gather(feature, value, -samples, -replicates)
 	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),

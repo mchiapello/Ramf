@@ -45,8 +45,8 @@ There are 2 plot types:
 
 ```{r plot}
 am_barplot(gr)
-# am_barplot(trs)
+am_barplot(tr)
 am_boxplot(gr)
-# am_boxplot(trs)
+am_boxplot(tr)
 ```
 
