@@ -1,8 +1,5 @@
 #' @export
 am_summary.trouvelot <- function(x){
-	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
-	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
-	values <- NULL
 	tmp <- trouvelot_summary(x)
 	# Final table
 	final <- tmp %>%

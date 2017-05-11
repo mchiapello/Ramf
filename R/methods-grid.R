@@ -1,29 +1,9 @@
-#' am_summary object.
-#' 
-#' @param x dataset containing Trouvelot or Grid data
-#' @examples
-#' am_summary(example_grid)
-#' am_summary(example_trouvelot)
-#' @export
-#' @import dplyr
-am_summary <- function(x) UseMethod("am_summary")
-
 #' @export
 am_summary.grid <- function(x){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	grid_summary(x)
 }
-
-#' am_barplot object.
-#' 
-#' @param x dataset containing Trouvelot or Grid data
-#' @examples
-#' am_barplot(example_grid)
-#' am_barplot(example_trouvelot)
-#' @export
-#' @import tidyr ggplot2
-am_barplot <- function(x, ...) UseMethod("am_barplot")
 
 #' @export
 am_barplot.grid <- function(x, ...){
@@ -70,16 +50,6 @@ am_barplot.grid <- function(x, ...){
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
 }
-
-#' am_boxplot object.
-#' 
-#' @param x dataset containing Trouvelot or Grid data
-#' @examples
-#' am_boxplot(example_grid)
-#' am_boxplot(example_trouvelot)
-#' @export
-#' @import tidyr ggplot2
-am_boxplot <- function(x, ...) UseMethod("am_boxplot")
 
 #' @export
 am_boxplot.grid <- function(x, ...){

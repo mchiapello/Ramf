@@ -8,6 +8,8 @@ am_boxplot(x, ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
+
+\item{...}{ignored}
 }
 \description{
 am_boxplot object.
