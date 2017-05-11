@@ -93,22 +93,7 @@ trouvelot_summary <- function(x){
 		mutate(A = a * (M / 100))
 	tmp <- inner_join(z, tmp, by = c("samples", "replicates")) %>% 
 		select(samples, replicates, F, M, a, A)
-	# Final table
-	final <- tmp %>%
-	mutate(num = n()) %>%
-	group_by(samples) %>%
-	summarise(mean_F = mean(F, na.rm = TRUE),
-			  se_F = sd(F, na.rm = TRUE) / mean(num, na.rm = TRUE),
-			  mean_M = mean(M, na.rm = TRUE),
-			  se_M = sd(M, na.rm = TRUE) / mean(num, na.rm = TRUE),
-			  mean_a = mean(a, na.rm = TRUE),
-			  se_a = sd(a, na.rm = TRUE) / mean(num, na.rm = TRUE),
-			  mean_A = mean(A, na.rm = TRUE),
-			  se_A = sd(A, na.rm = TRUE) / mean(num, na.rm = TRUE)
-			  )
-	class(final) <- c("trouvelot", class(final))
-	return(final)
-}
+	}
 
 ## PLOTS
 gt_plot <- function(x, type){
