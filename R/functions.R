@@ -38,7 +38,7 @@ trouvelot_summary <- function(x){
 		summarise(N = sum(n, na.rm = TRUE))
 	n0 <- complete_df %>% 
 		group_by(samples, replicates) %>%
-		filter(scoring == "0A0") %>%
+		dplyr::filter(scoring == "0A0") %>%
 		summarise(n0 = sum(n, na.rm = TRUE))
 	z <- inner_join(N, n0, by = c("samples", "replicates"))
 	z <- z %>% 
@@ -63,14 +63,14 @@ trouvelot_summary <- function(x){
 	# Compute m
 	yy3 <- yy %>%
 		group_by(samples, replicates) %>%
-		filter(Abundance != "A0") %>%
+		dplyr::filter(Abundance != "A0") %>%
 		summarize(n_myc = sum(n, na.rm = TRUE))
 	yy4 <- inner_join(yy2, yy3, by = c("samples", "replicates"))
 	yy4 <- yy4 %>%
 		mutate(m = M * tot2 / n_myc)
 	# Compute a
 	yy5 <- yy %>%
-		filter(Abundance != "A0") %>%
+		dplyr::filter(Abundance != "A0") %>%
 		group_by(samples, replicates, Abundance, Colonization) %>%
 		summarise(mA = sum(n, na.rm = TRUE)) %>%
 		mutate(perc = c(1, 5, 30, 70, 95)) %>%
