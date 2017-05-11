@@ -23,13 +23,18 @@ To load data in, independently of the colonization scoring system, use the
 follow command:
 
 ```{r loadData}
-x <- readData("../inst/extdata/grid.csv") 
+# Grid
+gr <- readData("../inst/extdata/grid.csv") 
+# Trouvelot
+tr <- readData("../inst/extdata/trouvelot.csv") 
+
 ```
 
 # Summarize data
 
 ```{r summary}
-am_summary(x)
+am_summary(gr)
+am_summary(tr)
 ```
 
 # Plot data
@@ -39,6 +44,9 @@ There are 2 plot types:
 - boxplot
 
 ```{r plot}
-am_barplot(x)
+am_barplot(gr)
+# am_barplot(trs)
+am_boxplot(gr)
+# am_boxplot(trs)
 ```
 

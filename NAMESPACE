@@ -3,6 +3,7 @@
 S3method(am_barplot,grid)
 S3method(am_boxplot,grid)
 S3method(am_summary,grid)
+S3method(am_summary,trouvelot)
 export(am_barplot)
 export(am_boxplot)
 export(am_summary)
