@@ -1,5 +1,6 @@
 #' @export
 am_summary.trouvelot <- function(x){
+	A <- M <- a <- num <- samples <- NULL
 	tmp <- trouvelot_summary(x)
 	# Final table
 	final <- tmp %>%
