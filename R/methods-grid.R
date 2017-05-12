@@ -2,7 +2,25 @@
 am_summary.grid <- function(x){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
-	grid_summary(x)
+	tmp <- grid_summary(x)
+	final <- tmp %>%
+	mutate(num = n()) %>%
+	group_by(samples) %>%
+	summarise(mean_Total = mean(Total, na.rm = TRUE),
+			  se_Total = sd(Total, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
+			  mean_Hyphopodia = mean(Hyphopodia, na.rm = TRUE),
+			  se_Hyphopodia = sd(Hyphopodia, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
+			  mean_IntrHyphae = mean(IntrHyphae, na.rm = TRUE),
+			  se_IntrHyphae = sd(IntrHyphae, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
+			  mean_Arbuscule = mean(Arbuscule, na.rm = TRUE),
+			  se_Arbuscule = sd(Arbuscule, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
+			  mean_Vesicles = mean(Vesicles, na.rm = TRUE),
+			  se_Vesicles = sd(Vesicles, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))
+			  )
+	l <- list(tmp, final)
+	names(l) <- c("Summary per Replicate", "Summary per Sample")
+	class(l) <- c("grid_summary", "list")
+	return(l)
 }
 
 #' @export

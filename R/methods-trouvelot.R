@@ -7,16 +7,18 @@ am_summary.trouvelot <- function(x){
 	mutate(num = n()) %>%
 	group_by(samples) %>%
 	summarise(mean_F = mean(F, na.rm = TRUE),
-			  se_F = sd(F, na.rm = TRUE) / mean(num, na.rm = TRUE),
+			  se_F = sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
 			  mean_M = mean(M, na.rm = TRUE),
-			  se_M = sd(M, na.rm = TRUE) / mean(num, na.rm = TRUE),
+			  se_M = sd(M, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
 			  mean_a = mean(a, na.rm = TRUE),
-			  se_a = sd(a, na.rm = TRUE) / mean(num, na.rm = TRUE),
+			  se_a = sd(a, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
 			  mean_A = mean(A, na.rm = TRUE),
-			  se_A = sd(A, na.rm = TRUE) / mean(num, na.rm = TRUE)
+			  se_A = sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))
 			  )
-	class(final) <- c("trouvelot", class(final))
-	return(final)
+	l <- list(tmp, final)
+	names(l) <- c("Summary per Replicate", "Summary per Sample")
+	class(l) <- c("trouvelot_summary", "list")
+	return(l)
 }
 
 #' @export
