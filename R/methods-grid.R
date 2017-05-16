@@ -41,8 +41,8 @@ am_barplot.grid <- function(x, ...){
 	final3 <- final2 %>% dplyr::filter(grepl("mean", comp))
 	se <- final2 %>% dplyr::filter(grepl("se", comp))
 	g <- ggplot(data = final3, aes(x = interaction(factor(final3$samples, levels = unique(x$samples)),
-											  factor(final3$features, levels = c("Arbuscule", "Hyphopodia",
-																		   "IntrHyphae", "Vesicles", "Total"))),
+											  factor(final3$features, levels = c("Total", "Hyphopodia",
+																		   "IntrHyphae", "Arbuscules", "Vesicles"))),
 											  y = values, fill = samples))
 	g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
 		geom_errorbar(aes(ymin = values - se$values, ymax = values + se$values), width = .1) +
@@ -63,8 +63,8 @@ am_barplot.grid <- function(x, ...){
 		ylim(-0.5, max(z$values) + max(z$values) / 10) +
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
-				 y = max(z$values) + max(z$values) / 10, label = c("Arbuscule", "Hyphopodia",
-																  "Intr. Hyphae", "Vesicles", "Total")) +
+				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
+																   "IntrHyphae", "Arbuscules", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
 }
@@ -82,11 +82,8 @@ am_boxplot.grid <- function(x, ...){
 				   "#0072B2", "#D55E00", "#CC79A7")
 	g <- ggplot(data = z,
 				aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
-									factor(z$features, levels = c("Arbuscule",
-																  "Hyphopodia",
-																  "IntrHyphae",
-																  "Vesicles",
-																  "Total")),
+									factor(z$features, levels = c("Total", "Hyphopodia",
+																  "IntrHyphae", "Arbuscules", "Vesicles")),
 										  sep = ": "),
 						  y = values))
 	g +
@@ -112,17 +109,11 @@ am_boxplot.grid <- function(x, ...){
 	annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
 							 length(unique(z$samples)) * 5 + .5,
 							 length(unique(z$samples)))[1:5],
-			 y = max(z$values) + max(z$values) / 10, label = c("Arbuscule",
-															   "Hyphopodia",
-															  "Intr. Hyphae",
-															  "Vesicles",
-															  "Total")) +
+			 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
+															   "IntrHyphae", "Arbuscules", "Vesicles")) +
 	scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 	scale_colour_manual(values = cbPalette, 
 						breaks = levels(factor(z$features,
-											   levels = c("Arbuscule",
-														  "Hyphopodia",
-														  "IntrHyphae",
-														  "Vesicles",
-														  "Total"))))
+											   levels = c("Total", "Hyphopodia",
+														  "IntrHyphae", "Arbuscules", "Vesicles"))))
 }
