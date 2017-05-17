@@ -45,8 +45,8 @@ am_barplot.trouvelot <- function(x, ...){
 	# The palette with grey:
 	cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 	g <- ggplot(data = final3, aes(x = interaction(factor(final3$samples, levels = unique(x$samples)),
-											  factor(final3$feature, levels = c("mean_F", "mean_M", "mean_a", "mean_A"))),
-											  y = value, fill = samples))
+												   factor(final3$feature, levels = c("mean_F", "mean_M", "mean_a", "mean_A"))),
+												   y = value, fill = samples))
 	a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
 		geom_errorbar(aes(ymin = value - se$value, ymax = value + se$value), width = .1) +
 		theme_bw() +
@@ -55,8 +55,7 @@ am_barplot.trouvelot <- function(x, ...){
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank(),
-			  text = element_text(family = "Avenir")) +
+			  panel.grid.minor.x = element_blank()) +
 				geom_vline(xintercept = seq(length(unique(final3$samples)) + .5, length(unique(final3$samples)) * 3 + .5,
 										length(unique(final3$samples))), colour = "lightgrey") +
 					  #         geom_hline(yintercept = 105, colour = "lightgrey") +
@@ -95,8 +94,7 @@ am_boxplot.trouvelot <- function(x, ...){
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank(),
-			  text = element_text(family = "Avenir")) +
+			  panel.grid.minor.x = element_blank()) +
 		geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
 									length(unique(fin$samples))), colour = "lightgrey") +
 					  #     geom_hline(yintercept = 105, colour = "lightgrey") +

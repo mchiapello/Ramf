@@ -52,8 +52,7 @@ am_barplot.grid <- function(x, ...){
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank(),
-			 text = element_text(family = "Avenir")) +
+			  panel.grid.minor.x = element_blank()) +
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5, length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
 		labs(title = "Colonization", 
@@ -96,8 +95,7 @@ am_boxplot.grid <- function(x, ...){
 		  panel.grid.major.y = element_blank(),
 		  panel.grid.minor.y = element_blank(),
 		  panel.grid.major.x = element_blank(),
-		  panel.grid.minor.x = element_blank(),
-		 text = element_text(family = "Avenir")) +
+		  panel.grid.minor.x = element_blank()) +
 	geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
 								length(unique(z$samples)) * 4 + .5,
 								length(unique(z$samples))), colour = "lightgrey") +
