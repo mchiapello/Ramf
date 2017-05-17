@@ -12,13 +12,13 @@ Imports: readr,
 			stats,
 			methods,
 			utils,
+			BiocStyle,
 			ggplot2,
 			dplyr,
 			tidyr
 Suggests: testthat,
 			knitr (>= 1.1.0),
 			roxygen2,
-			BiocStyle,
 			rmarkdown
 License: GPL-2
 Encoding: UTF-8
