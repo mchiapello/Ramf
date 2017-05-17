@@ -18,7 +18,8 @@ Imports: readr,
 Suggests: testthat,
 			knitr (>= 1.1.0),
 			roxygen2,
-			BiocStyle
+			BiocStyle,
+			rmarkdown
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

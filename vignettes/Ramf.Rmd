@@ -20,7 +20,7 @@ mycorrhizal fungi.
 
 All the functions of the package work independently of the colonization scoring system.
 
-#### Grid sytem scoring system
+#### Grid scoring system
 
 ...
 
