@@ -30,9 +30,9 @@ readData <- function(infile){
 	} else {
 		tmp <- names(x)[which(names(x) != tnames)]
 		if (length(tmp) != 0){
-			for (i in length(tmp)){
-			message(paste("The column header ","'", names(x)[i], "' ", "should be ", tnames[i], "\n", sep = ""))
-			}
+			message(paste("The column header ","'", names(x)[tmp],
+						  "' are not correct!\nColumn headers should be instead ",
+						  tnames[tmp], "\n", sep = ""))
 		}
 		x <- NULL
 		stop("I can not import the data")
