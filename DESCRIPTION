@@ -1,7 +1,7 @@
 Package: Ramf
 Type: Package
 Title: Arbuscular Mycorrhizal colonization calculation
-Version: 0.2
+Version: 0.3
 Author: Marco Chiapello
 Maintainer: Marco Chiapello <mc983@cam.ac.uk>
 Description: The package reads data from trouvelot quantification files or grid
