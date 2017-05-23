@@ -21,37 +21,48 @@ readData <- function(infile){
 		stop("Incorrect dimentions")
 	}
 	## Trouvelot specific checks
-	if (dim(x)[2] == 3){
-		ttest1 <- TRUE
-	}
 	tnames <- c("scoring", "replicates", "samples")
-	if (all(names(x) == tnames)){
-		ttest2 <- TRUE
-	} else {
-		tmp <- names(x)[which(names(x) != tnames)]
-		if (length(tmp) != 0){
-			message(paste("The column header ","'", names(x)[tmp],
-						  "' are not correct!\nColumn headers should be instead ",
-						  tnames[tmp], "\n", sep = ""))
+	if (dim(x)[2] == 3){
+		if (all(names(x) == tnames)){
+			class(x) <- c("trouvelot", class(x))
+		} else {
+			ttmp <- which(names(x) != tnames)
+			if (length(ttmp) != 0){
+				message(paste("The column header (",ttmp, ") ", "'", names(x)[ttmp],
+							  "' is not correct!\nIt should be: ",
+							  tnames[ttmp], "\n\n", sep = ""))
+			x <- NULL
+			stop("I can not import the data")
+			}
 		}
-		x <- NULL
-		stop("I can not import the data")
 	}
-	if (ttest1 == TRUE & ttest2 == TRUE){
-		### dataset validation
-		class(x) <- c("trouvelot", class(x))
-	}
+	## Grid specific checks
+	gnames <- c("replicates", "samples", "Total", "Hyphopodia", "IntrHyphae",
+				"Arbuscule", "Vesicles")
 	if (dim(x)[2] == 7){
-		class(x) <- c("grid", class(x))
-		### dataset validation
-		list <- c(rep("character", 2), rep("integer", 5))
-				for (i in seq_along(list)){
-					if (class(x[[i]]) != list[i]){
-						stop(paste(colnames(x[i]), "column does not contain only", list[i]))
-					}
-				}
+		if(all(names(x) == gnames)){
+			class(x) <- c("grid", class(x))
+		} else {
+			gtmp <- which(names(x) != gnames)
+			if (length(gtmp) != 0){
+				message(paste("The column header (",gtmp, ") ", "'", names(x)[gtmp],
+							  "' is not correct!\nIt should be: ",
+							  gnames[gtmp], "\n\n", sep = ""))
+			x <- NULL
+			stop("I can not import the data")
+			}
+		}
 	}
 	return(x)
 }
 
 
+# it is nor working!!! do a nested if statement
+# if (dim == 3){
+#     if (names){
+#         grid
+#     } else {
+#         message header
+#         x <- NULL
+#         stop
+#     }
