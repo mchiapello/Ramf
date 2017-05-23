@@ -30,9 +30,9 @@ readData <- function(infile){
 			if (length(ttmp) != 0){
 				message(paste("The column header (",ttmp, ") ", "'", names(x)[ttmp],
 							  "' is not correct!\nIt should be: ",
-							  tnames[ttmp], "\n\n", sep = ""))
+							  tnames[ttmp], "\n", sep = ""))
 			x <- NULL
-			stop("I can not import the data")
+			stop("The dataset has not been imported")
 			}
 		}
 	}
@@ -49,7 +49,7 @@ readData <- function(infile){
 							  "' is not correct!\nIt should be: ",
 							  gnames[gtmp], "\n\n", sep = ""))
 			x <- NULL
-			stop("I can not import the data")
+			stop("The dataset has not been imported")
 			}
 		}
 	}
