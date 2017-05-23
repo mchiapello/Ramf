@@ -1,7 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Build Status](https://travis-ci.org/mchiapello/Ramf.svg?branch=master)](https://travis-ci.org/mchiapello/Ramf)
-[![codecov.io](https://codecov.io/github/mchiapello/Ramf.svg?branch=master)](https://codecov.io/github/mchiapello/Ramf?branch=master)
+[![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 
 # The **Ramf** package
 
