@@ -8,7 +8,7 @@ A package for arbuscular mycorrhyzal fungi colonization
 ## Installation
 
 ```{r, eval = FALSE}
-devtools::install_github("tidyverse/dplyr")
+devtools::install_github("mchiapello/Ramf")
 ```
 
 ## Usage
