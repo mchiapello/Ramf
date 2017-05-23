@@ -2,7 +2,7 @@
 % Please edit documentation in R/readData.R
 \name{readData}
 \alias{readData}
-\title{Read colonization files.}
+\title{Read colonization files in.}
 \usage{
 readData(infile)
 }
@@ -17,6 +17,14 @@ Reads data
 }
 \details{
 This funtion reads trouvelot and grid data
+
+The imported datasets should be correctly formatted:
+		 1. Grid dataset: 7 columns with the follow headers: "replicates", "samples",
+			"Total", "Hyphopodia", "IntrHyphae","Arbuscule", "Vesicles"
+		 2. Trouvelot datasets: 3 columns with the follow headers: "scoring", "replicates", "samples"
+
+		 The order of the samples (in the "samples" column) is the order used for plot display. So,
+		 if you like to have a specific order, please sort the original data accordingly
 }
 \author{
 Marco Chiapello <mc983@cam.ac.uk>
