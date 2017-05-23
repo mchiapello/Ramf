@@ -3,6 +3,11 @@
 
 # The `Ramf` package
 
+```{r env, echo=FALSE}
+suppressPackageStartupMessages(library("BiocStyle"))
+knitr::opts_chunk$set(comment=NA)
+```
+
 ## Overview
 
 A package for arbuscular mycorrhyzal fungi colonization
@@ -17,7 +22,7 @@ devtools::install_github("mchiapello/Ramf")
 
 ```{r, eval = FALSE}
 ## Read data in
-x <- readData("grid.csv")
+x <- readData("inst/extdata/grid.csv")
 
 ## Summary of the data
 am_summary(x)
@@ -29,3 +34,4 @@ am_boxplot(x)
 
 
 If you encounter a bug, please report it on [github](https://github.com/mchiapello/Ramf/issues).
+
