@@ -9,8 +9,8 @@
 #'   \item{replicates}{Sample replicates}
 #'   \item{samples}{Sample names}
 #'   \item{Total}{Number of total fungal structures identified}
-#'   \item{Hypopodia}{Number of hypopodia identified}
-#'   \item{Intr_Hyphae}{Number of interanl hyphae identified}
+#'   \item{Hyphopodia}{Number of hypopodia identified}
+#'   \item{IntrHyphae}{Number of interanl hyphae identified}
 #'   \item{Arbuscule}{Number of arbuscules identified}
 #'   \item{Vesicles}{Number of vesicles identified}
 #' }

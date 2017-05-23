@@ -5,10 +5,24 @@
 ##' @title Read colonization files in.
 ##' @param infile the name of the file which the data are to be read from.
 ##' @return an object of class \code{grid} or \code{trouvelot}.
-##' @details The imported datasets should be correctly formatted:
-##' 		 1. Grid dataset: 7 columns with the follow headers: "replicates", "samples",
-##' 			"Total", "Hyphopodia", "IntrHyphae","Arbuscule", "Vesicles"
-##' 		 2. Trouvelot datasets: 3 columns with the follow headers: "scoring", "replicates", "samples"
+##' @format A grid dataset should have 7 variables:
+##' \describe{
+##'   It is mandatory that the dataset is formatted as follow
+##'   \item{- replicates:}{Sample replicates:}
+##'   \item{- samples:}{Sample names:}
+##'   \item{- Total:}{Number of total fungal structures identified:}
+##'   \item{- Hyphopodia:}{Number of hypopodia identified:}
+##'   \item{- IntrHyphae:}{Number of interanl hyphae identified:}
+##'   \item{- Arbuscule:}{Number of arbuscules identified:}
+##'   \item{- Vesicles:}{Number of vesicles identified:}
+##' }
+##' A Trouvelot dataset should have 3 variables:
+##' \describe{
+##'   It is mandatory that the dataset is formatted as follow
+##'   \item{- scoring:}{Scoring value}
+##'   \item{- replicates:}{Sample replicates}
+##'   \item{- samples:}{Sample names}
+##' }
 ##'
 ##' 		 The order of the samples (in the "samples" column) is the order used for plot display. So,
 ##' 		 if you like to have a specific order, please sort the original data accordingly
