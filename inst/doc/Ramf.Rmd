@@ -1,0 +1,79 @@
+--- 
+title: "Arbuscular mycorrhizal fungi colonization" 
+author: "Marco Chiapello"
+output:  
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Ramf colonization analysis} 
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r env, echo=FALSE, warnings=FALSE}
+library("Ramf")
+library("BiocStyle")
+```
+### Introduction
+
+The package is meant to help scientists to compute the degree of arbuscular
+mycorrhizal fungi.
+
+All the functions of the package work independently of the colonization scoring system.
+
+#### Grid scoring system
+
+...
+
+#### Trouvelot scoring system
+
+...
+
+### Loading the data 
+
+To load data in, use the follow command: 
+
+>readData
+
+#### Example
+```{r loadData}
+# Grid
+gr <- readData("../inst/extdata/grid.csv") 
+# Trouvelot
+tr <- readData("../inst/extdata/trouvelot.csv") 
+
+```
+
+### Summarize data
+
+To summarise the data and export the scoring results in a tabular format use the
+follow command:
+
+> am_summary
+
+
+#### Example
+```{r summary}
+am_summary(gr)
+am_summary(tr)
+```
+
+### Plot data
+
+To summarise the data in a graphical way the package provide 2 plot types:
+
+- barplot
+
+  >am_barplot
+
+- boxplot
+
+  >am_boxplot
+
+#### Example
+```{r plot}
+am_barplot(gr)
+am_boxplot(gr)
+am_barplot(tr)
+am_boxplot(tr)
+```
+
