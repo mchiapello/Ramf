@@ -1,7 +1,7 @@
 #' @export
 am_summary.grid <- function(x){
 	Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicles <- comp <- NULL
-	features <- replicates <- samples <- values <- num <- NULL
+	features <- replicates <- samples <- values <- num <- n <- NULL
 	tmp <- grid_summary(x)
 	final <- tmp %>%
 	mutate(num = n()) %>%

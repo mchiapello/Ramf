@@ -19,7 +19,7 @@ grid_summary <- function(x){
 # Trouvelot
 trouvelot_summary <- function(x){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
-	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
+	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- NULL
 	y <- x %>% 
 		group_by(scoring, replicates, samples) %>%

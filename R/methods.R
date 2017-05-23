@@ -5,7 +5,17 @@
 #' am_summary(example_grid)
 #' am_summary(example_trouvelot)
 #' @export
-#' @import dplyr
+#' @importFrom dplyr group_by
+#' @importFrom dplyr select
+#' @importFrom dplyr summarise
+#' @importFrom dplyr summarize
+#' @importFrom dplyr mutate
+#' @importFrom dplyr ungroup
+#' @importFrom dplyr arrange
+#' @importFrom dplyr tally
+#' @importFrom dplyr tibble
+#' @importFrom dplyr left_join
+#' @importFrom dplyr inner_join
 am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
