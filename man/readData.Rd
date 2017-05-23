@@ -6,20 +6,20 @@
 \format{A grid dataset should have 7 variables:
 \describe{
   It is mandatory that the dataset is formatted as follow
-  \item{replicates}{Sample replicates}
-  \item{samples}{Sample names}
-  \item{Total}{Number of total fungal structures identified}
-  \item{Hyphopodia}{Number of hypopodia identified}
-  \item{IntrHyphae}{Number of interanl hyphae identified}
-  \item{Arbuscule}{Number of arbuscules identified}
-  \item{Vesicles}{Number of vesicles identified}
+  \item{- replicates:}{Sample replicates:}
+  \item{- samples:}{Sample names:}
+  \item{- Total:}{Number of total fungal structures identified:}
+  \item{- Hyphopodia:}{Number of hypopodia identified:}
+  \item{- IntrHyphae:}{Number of interanl hyphae identified:}
+  \item{- Arbuscule:}{Number of arbuscules identified:}
+  \item{- Vesicles:}{Number of vesicles identified:}
 }
-A data frame with 1008 rows and 3 variables:
+A Trouvelot dataset should have 3 variables:
 \describe{
   It is mandatory that the dataset is formatted as follow
-  \item{scoring}{Scoring value}
-  \item{replicates}{Sample replicates}
-  \item{samples}{Sample names}
+  \item{- scoring:}{Scoring value}
+  \item{- replicates:}{Sample replicates}
+  \item{- samples:}{Sample names}
 }
 
 		 The order of the samples (in the "samples" column) is the order used for plot display. So,
