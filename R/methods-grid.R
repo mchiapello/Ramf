@@ -17,6 +17,7 @@ am_summary.grid <- function(x){
 			  mean_Vesicles = mean(Vesicles, na.rm = TRUE),
 			  se_Vesicles = sd(Vesicles, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))
 			  )
+	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)
 	names(l) <- c("Summary per Replicate", "Summary per Sample")
 	class(l) <- c("grid_summary", "list")

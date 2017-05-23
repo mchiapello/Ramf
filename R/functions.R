@@ -12,9 +12,7 @@ grid_summary <- function(x){
 					  Arbuscule = mean(Arbuscule, na.rm = TRUE),
 					  Vesicles = mean(Vesicles, na.rm = TRUE)) %>%
 			ungroup
-	tmp <- table(y$samples)[match(unique(x$samples), names(table(y$samples)))]
-	tmp2 <- rep(unique(x$samples), tmp)
-	y <- y[match(tmp2, y$samples), ]
+	y <- y %>% arrange(factor(samples, levels = unique(x$samples)), replicates)
 	class(y) <- c("grid", class(y))
 	return(y)
 }
