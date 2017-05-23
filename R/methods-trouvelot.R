@@ -15,6 +15,7 @@ am_summary.trouvelot <- function(x){
 			  mean_A = mean(A, na.rm = TRUE),
 			  se_A = sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))
 			  )
+	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)
 	names(l) <- c("Summary per Replicate", "Summary per Sample")
 	class(l) <- c("trouvelot_summary", "list")

@@ -13,7 +13,6 @@ grid_summary <- function(x){
 					  Vesicles = mean(Vesicles, na.rm = TRUE)) %>%
 			ungroup
 	y <- y %>% arrange(factor(samples, levels = unique(x$samples)), replicates)
-	class(y) <- c("grid", class(y))
 	return(y)
 }
 
@@ -97,4 +96,6 @@ trouvelot_summary <- function(x){
 		mutate(A = a * (M / 100))
 	tmp <- inner_join(z, tmp, by = c("samples", "replicates")) %>% 
 		select(samples, replicates, F, M, a, A)
+	tmp <- tmp %>% arrange(factor(samples, levels = unique(x$samples)), replicates)
+	return(tmp)
 }
