@@ -9,3 +9,10 @@ script:
   - | 
     R CMD build .
     travis_wait 30 R CMD check *tar.gz
+
+
+r_packages:
+      - covr
+
+after_success:
+      - Rscript -e 'library(covr); codecov()'
