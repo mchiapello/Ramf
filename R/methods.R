@@ -52,8 +52,8 @@ am_save <- function(x, ...) UseMethod("am_save")
 
 #' @export
 am_save.am_summary <- function(x, ...){
-	write.csv(x[[1]], "Summary_per_Replicate.csv")
-	write.csv(x[[2]], "Summary_per_Sample.csv")
+	write.csv(x[[1]], "Summary_per_Replicate.csv", row.names = FALSE)
+	write.csv(x[[2]], "Summary_per_Sample.csv", row.names = FALSE)
 }
 
 
