@@ -53,8 +53,10 @@ follow command:
 
 #### Example
 ```{r summary}
-am_summary(gr)
-am_summary(tr)
+grs <- am_summary(gr)
+trs <- am_summary(tr)
+grs
+trs
 ```
 
 ### Plot data
@@ -76,4 +78,17 @@ am_boxplot(gr)
 am_barplot(tr)
 am_boxplot(tr)
 ```
+
+### Save data
+
+To export the summary data, a "save data" function is provided. The function 
+exports both the summary per replicate and the summary per sample in two distinct
+csv files.
+
+#### Example
+```{r save}
+am_save(grs)
+am_save(trs)
+```
+
 

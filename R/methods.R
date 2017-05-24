@@ -40,4 +40,20 @@ am_barplot <- function(x, ...) UseMethod("am_barplot")
 #' @import tidyr ggplot2
 am_boxplot <- function(x, ...) UseMethod("am_boxplot")
 
+#' am_save object.
+#' 
+#' @param x dataset containing Trouvelot or Grid summary data
+#' @param ... ignored
+#' @examples
+#' am_save(am_summary(example_grid))
+#' am_save(am_summary(example_trouvelot))
+#' @export
+am_save <- function(x, ...) UseMethod("am_save")
+
+#' @export
+am_save.am_summary <- function(x, ...){
+	write.csv(x[[1]], "Summary_per_Replicate.csv")
+	write.csv(x[[2]], "Summary_per_Sample.csv")
+}
+
 

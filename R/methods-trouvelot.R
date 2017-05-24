@@ -18,7 +18,7 @@ am_summary.trouvelot <- function(x){
 	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)
 	names(l) <- c("Summary per Replicate", "Summary per Sample")
-	class(l) <- c("trouvelot_summary", "list")
+	class(l) <- c("am_summary", "list")
 	return(l)
 }
 

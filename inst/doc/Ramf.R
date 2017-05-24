@@ -19,3 +19,7 @@ am_boxplot(gr)
 am_barplot(tr)
 am_boxplot(tr)
 
+## ----save----------------------------------------------------------------
+am_save(am_summary(gr))
+am_save(am_summary(tr))
+

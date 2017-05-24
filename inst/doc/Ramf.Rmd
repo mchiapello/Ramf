@@ -77,3 +77,13 @@ am_barplot(tr)
 am_boxplot(tr)
 ```
 
+### Save data
+
+To export the summary data, a "save data" function is provided. The function 
+exports both the summary per replicate and the summary per sample.
+
+#### Example
+```{r save}
+am_save(am_summary(gr))
+am_save(am_summary(tr))
+```

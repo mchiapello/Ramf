@@ -11,7 +11,7 @@ test_that("Grid_table", {
 context("Class grid summary")
 
 test_that("Grid_summary", {
-  expect_equal(class(am_summary(example_grid))[1], "grid_summary")
+  expect_equal(class(am_summary(example_grid))[1], "am_summary")
   expect_equal(class(am_summary(example_grid))[2], "list")
 })
 
@@ -27,7 +27,7 @@ test_that("Trouvelot_table", {
 context("Class trouvelot summary")
 
 test_that("Trouvelot_summary", {
-  expect_equal(class(am_summary(example_trouvelot))[1], "trouvelot_summary")
+  expect_equal(class(am_summary(example_trouvelot))[1], "am_summary")
   expect_equal(class(am_summary(example_trouvelot))[2], "list")
 })
 
