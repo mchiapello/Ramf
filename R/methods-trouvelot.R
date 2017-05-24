@@ -88,7 +88,7 @@ am_boxplot.trouvelot <- function(x, ...){
 							  y = value))
 	a2 <- g +
 		geom_boxplot(colour = "lightgrey", alpha = 0) +
-		geom_point(aes(color = feature, shape = replicates), position = position_jitter(width = 0.2)) +
+		geom_point(aes(color = feature), position = position_jitter(width = 0.2)) +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
 			  plot.title = element_text(size = 19),

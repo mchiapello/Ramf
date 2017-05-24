@@ -45,7 +45,7 @@ am_barplot.grid <- function(x, ...){
 											  factor(final3$features, levels = c("Total", "Hyphopodia",
 																		   "IntrHyphae", "Arbuscule", "Vesicles"))),
 											  y = values, fill = samples))
-	g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
+	a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
 		geom_errorbar(aes(ymin = values - se$values, ymax = values + se$values), width = .1) +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
@@ -67,6 +67,7 @@ am_barplot.grid <- function(x, ...){
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
+	a1
 }
 
 #' @export
@@ -86,33 +87,34 @@ am_boxplot.grid <- function(x, ...){
 																  "IntrHyphae", "Arbuscule", "Vesicles")),
 										  sep = ": "),
 						  y = values))
-	g +
-	geom_boxplot(colour = "lightgrey", alpha = 0) +
-	geom_point(aes(color = features, shape = replicates),
-			   position = position_jitter(width = 0.2)) +
-	theme_bw() +
-	theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-		  plot.title = element_text(size = 19),
-		  panel.grid.major.y = element_blank(),
-		  panel.grid.minor.y = element_blank(),
-		  panel.grid.major.x = element_blank(),
-		  panel.grid.minor.x = element_blank()) +
-	geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-								length(unique(z$samples)) * 4 + .5,
-								length(unique(z$samples))), colour = "lightgrey") +
-	labs(title = "Colonization", 
-		 subtitle = "Grid method",
-		 x = "",
-		 y = "") +
-	ylim(-0.5, max(z$values) + max(z$values) / 10) +
-	annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
-							 length(unique(z$samples)) * 5 + .5,
-							 length(unique(z$samples)))[1:5],
-			 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
-															   "IntrHyphae", "Arbuscule", "Vesicles")) +
-	scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-	scale_colour_manual(values = cbPalette, 
-						breaks = levels(factor(z$features,
-											   levels = c("Total", "Hyphopodia",
-														  "IntrHyphae", "Arbuscule", "Vesicles"))))
+	a2 <- g +
+		geom_boxplot(colour = "lightgrey", alpha = 0) +
+		geom_point(aes(color = features),
+				   position = position_jitter(width = 0.2)) +
+		theme_bw() +
+		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+			  plot.title = element_text(size = 19),
+			  panel.grid.major.y = element_blank(),
+			  panel.grid.minor.y = element_blank(),
+			  panel.grid.major.x = element_blank(),
+			  panel.grid.minor.x = element_blank()) +
+		geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
+									length(unique(z$samples)) * 4 + .5,
+									length(unique(z$samples))), colour = "lightgrey") +
+		labs(title = "Colonization", 
+			 subtitle = "Grid method",
+			 x = "",
+			 y = "") +
+		ylim(-0.5, max(z$values) + max(z$values) / 10) +
+		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
+								 length(unique(z$samples)) * 5 + .5,
+								 length(unique(z$samples)))[1:5],
+				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
+																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_colour_manual(values = cbPalette, 
+							breaks = levels(factor(z$features,
+												   levels = c("Total", "Hyphopodia",
+															  "IntrHyphae", "Arbuscule", "Vesicles"))))
+	a2
 }
