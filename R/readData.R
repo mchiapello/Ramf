@@ -43,8 +43,20 @@ readData <- function(infile){
 	}
 	## Trouvelot specific checks
 	tnames <- c("scoring", "replicates", "samples")
+	snames <-c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3", "1A2", "2A2", "3A2",
+			   "4A2", "5A2", "1A1", "2A1", "3A1", "4A1", "5A1", "1A0", "2A0",
+			   "3A0", "4A0", "5A0") 
 	if (dim(x)[2] == 3){
 		if (all(names(x) == tnames)){
+			if (length(setdiff(x$scoring, snames)) != 0){
+				message(paste("This term in column scoring is wrong:\n",
+							  setdiff(x$scoring, snames), "\n", sep = ""))
+				message("The only allowed terms are:")
+				message(paste(snames, "", sep = ","))
+				message("\n")
+			x <- NULL
+			stop("The dataset has not been imported")
+			}
 			x$scoring <- as.character(x$scoring)
 			x$replicates <- as.character(x$replicates)
 			x$samples <- as.character(x$samples)
