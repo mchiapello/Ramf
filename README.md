@@ -22,6 +22,9 @@ devtools::install_github("mchiapello/Ramf")
 
 
 ```r
+## Load package
+library(Ramf)
+
 ## Read data in
 x <- readData("inst/extdata/grid.csv")
 
@@ -32,8 +35,11 @@ am_summary(x)
 am_barplot(x)
 am_boxplot(x)
 
-## Save data
+## Save summary data
 am_save(am_summary(x))
+
+## Save plot data
+am_save(am_barplot(x))
 ```
 
 
