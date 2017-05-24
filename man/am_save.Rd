@@ -4,10 +4,12 @@
 \alias{am_save}
 \title{am_save object.}
 \usage{
-am_save(x, ...)
+am_save(x, filename, ...)
 }
 \arguments{
-\item{x}{dataset containing Trouvelot or Grid summary data}
+\item{x}{summary or plot data from Trouvelot or Grid dataset}
+
+\item{filename}{path where save the file}
 
 \item{...}{ignored}
 }
@@ -17,4 +19,8 @@ am_save object.
 \examples{
 am_save(am_summary(example_grid))
 am_save(am_summary(example_trouvelot))
+am_save(am_barplot(example_trouvelot))
+}
+\seealso{
+`ggsave` from ggplot2 package
 }

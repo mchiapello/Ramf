@@ -10,16 +10,20 @@ tr <- readData("../inst/extdata/trouvelot.csv")
 
 
 ## ----summary-------------------------------------------------------------
-am_summary(gr)
-am_summary(tr)
+grs <- am_summary(gr)
+trs <- am_summary(tr)
+grs
+trs
 
 ## ----plot----------------------------------------------------------------
-am_barplot(gr)
-am_boxplot(gr)
-am_barplot(tr)
-am_boxplot(tr)
+p1 <- am_barplot(gr)
+p2 <- am_boxplot(gr)
+p3 <- am_barplot(tr)
+p4 <- am_boxplot(tr)
 
 ## ----save----------------------------------------------------------------
-am_save(am_summary(gr))
-am_save(am_summary(tr))
+am_save(grs, "example_grid.csv")
+am_save(trs, "example_trouvelot.csv")
+am_save(p1, "barplor_grid.pdf")
+am_save(p4, "boxplor_trouvelot.pdf")
 

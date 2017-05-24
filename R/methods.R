@@ -42,18 +42,25 @@ am_boxplot <- function(x, ...) UseMethod("am_boxplot")
 
 #' am_save object.
 #' 
-#' @param x dataset containing Trouvelot or Grid summary data
+#' @param x summary or plot data from Trouvelot or Grid dataset
+#' @param filename path where save the file
 #' @param ... ignored
+#' @seealso `ggsave` from ggplot2 package
 #' @examples
 #' am_save(am_summary(example_grid))
 #' am_save(am_summary(example_trouvelot))
+#' am_save(am_barplot(example_trouvelot))
 #' @export
-am_save <- function(x, ...) UseMethod("am_save")
+am_save <- function(x, filename, ...) UseMethod("am_save")
 
 #' @export
-am_save.am_summary <- function(x, ...){
-	write.csv(x[[1]], "Summary_per_Replicate.csv", row.names = FALSE)
-	write.csv(x[[2]], "Summary_per_Sample.csv", row.names = FALSE)
+am_save.am_summary <- function(x, filename = "Summary", ...){
+	write.csv(x[[1]], paste0(filename, "_per_Replicate.csv"), row.names = FALSE)
+	write.csv(x[[2]], paste0(filename, "_per_Sample.csv"), row.names = FALSE)
 }
 
-
+#' @export
+#' @importFrom ggplot2 ggsave
+am_save.am_plot <- function(x, filename = "Rplot.pdf", ...){
+	ggsave(plot = x, filename, ...)
+}

@@ -67,7 +67,8 @@ am_barplot.grid <- function(x, ...){
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
-	a1
+	class(a1) <- c("am_plot", class(a1))
+	return(a1)
 }
 
 #' @export
@@ -116,5 +117,6 @@ am_boxplot.grid <- function(x, ...){
 							breaks = levels(factor(z$features,
 												   levels = c("Total", "Hyphopodia",
 															  "IntrHyphae", "Arbuscule", "Vesicles"))))
-	a2
+	class(a2) <- c("am_plot", class(a2))
+	return(a2)
 }

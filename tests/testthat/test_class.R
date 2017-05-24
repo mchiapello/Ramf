@@ -34,17 +34,21 @@ test_that("Trouvelot_summary", {
 context("Class grid plot")
 
 test_that("Grid_plot", {
-  expect_equal(class(am_barplot(example_grid))[1], "gg")
-  expect_equal(class(am_barplot(example_grid))[2], "ggplot")
-  expect_equal(class(am_boxplot(example_grid))[1], "gg")
-  expect_equal(class(am_boxplot(example_grid))[2], "ggplot")
+  expect_equal(class(am_barplot(example_grid))[1], "am_plot")
+  expect_equal(class(am_barplot(example_grid))[2], "gg")
+  expect_equal(class(am_barplot(example_grid))[3], "ggplot")
+  expect_equal(class(am_boxplot(example_grid))[1], "am_plot")
+  expect_equal(class(am_boxplot(example_grid))[2], "gg")
+  expect_equal(class(am_boxplot(example_grid))[3], "ggplot")
 })
 
 context("Class trouvelot plot")
 
 test_that("Trouvelot_plot", {
-  expect_equal(class(am_barplot(example_trouvelot))[1], "gg")
-  expect_equal(class(am_barplot(example_trouvelot))[2], "ggplot")
-  expect_equal(class(am_boxplot(example_trouvelot))[1], "gg")
-  expect_equal(class(am_boxplot(example_trouvelot))[2], "ggplot")
+  expect_equal(class(am_barplot(example_trouvelot))[1], "am_plot")
+  expect_equal(class(am_barplot(example_trouvelot))[2], "gg")
+  expect_equal(class(am_barplot(example_trouvelot))[3], "ggplot")
+  expect_equal(class(am_barplot(example_trouvelot))[1], "am_plot")
+  expect_equal(class(am_boxplot(example_trouvelot))[2], "gg")
+  expect_equal(class(am_boxplot(example_trouvelot))[3], "ggplot")
 })

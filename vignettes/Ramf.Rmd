@@ -73,10 +73,10 @@ To summarise the data in a graphical way the package provide 2 plot types:
 
 #### Example
 ```{r plot}
-am_barplot(gr)
-am_boxplot(gr)
-am_barplot(tr)
-am_boxplot(tr)
+p1 <- am_barplot(gr)
+p2 <- am_boxplot(gr)
+p3 <- am_barplot(tr)
+p4 <- am_boxplot(tr)
 ```
 
 ### Save data
@@ -89,6 +89,8 @@ csv files.
 ```{r save}
 am_save(grs)
 am_save(trs)
+am_save(p1, "barplor_grid.pdf")
+am_save(p4, "boxplor_trouvelot.pdf")
 ```
 
 

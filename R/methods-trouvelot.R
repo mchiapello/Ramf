@@ -70,7 +70,8 @@ am_barplot.trouvelot <- function(x, ...){
 					 y = 110, label = c("F%", "A%", "a%", "M%")) +
 			scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 			scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
-		a1
+	class(a1) <- c("am_plot", class(a1))
+	return(a1)
 }
 
 #' @export
@@ -109,5 +110,6 @@ am_boxplot.trouvelot <- function(x, ...){
 				 y = 110, label = c("F%", "A%", "a%", "M%")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
-	a2
+	class(a2) <- c("am_plot", class(a2))
+	return(a2)
 }
