@@ -45,6 +45,10 @@ readData <- function(infile){
 	tnames <- c("scoring", "replicates", "samples")
 	if (dim(x)[2] == 3){
 		if (all(names(x) == tnames)){
+			x$scoring <- as.character(x$scoring)
+			x$replicates <- as.character(x$replicates)
+			x$samples <- as.character(x$samples)
+			x$scoring <- gsub("^0$", "0A0", x$scoring)
 			class(x) <- c("trouvelot", class(x))
 		} else {
 			ttmp <- which(names(x) != tnames)
@@ -62,6 +66,13 @@ readData <- function(infile){
 				"Arbuscule", "Vesicles")
 	if (dim(x)[2] == 7){
 		if(all(names(x) == gnames)){
+			x$replicates <- as.character(x$replicates)
+			x$samples <- as.character(x$samples)
+			x$Total <- as.numeric(x$Total)
+			x$Hyphopodia <- as.numeric(x$Hyphopodia)
+			x$IntrHyphae <-  as.numeric(x$IntrHyphae)
+			x$Arbuscule <- as.numeric(x$Arbuscule)
+			x$Vesicles <- as.numeric(x$Vesicles)
 			class(x) <- c("grid", class(x))
 		} else {
 			gtmp <- which(names(x) != gnames)
