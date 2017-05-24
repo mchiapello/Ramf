@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/mchiapello/Ramf.svg?branch=master)](https://travis-ci.org/mchiapello/Ramf)
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 
-# The **Ramf** package
+# The **Ramf** package [pre-release]
 
 
 
@@ -31,7 +31,11 @@ am_summary(x)
 ## Plot
 am_barplot(x)
 am_boxplot(x)
+
+## Save data
+am_save(am_summary(x))
 ```
+
 
 
 If you encounter a bug, please report it on [github](https://github.com/mchiapello/Ramf/issues).
