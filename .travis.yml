@@ -4,21 +4,17 @@ language: r
 sudo: false
 cache: packages
 
-env:
-  global:
-  - _R_CHECK_FORCE_SUGGESTS_=false
-  - MAKEFLAGS="-j 2"
-
 include:
   - r: release
   - r: oldrel
   - r: devel
 
+bioc_packages:
+  - BiocStyle
+  - BiocParallel
+
 r_packages:
   - covr
-
-before_script:
-  - echo "BiocParallel::register(BiocParallel::SerialParam())" > ~/.Rprofile
 
 after_failure:
   find *Rcheck -name '*.fail' -print -exec cat '{}' \;
