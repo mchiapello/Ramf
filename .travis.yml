@@ -21,9 +21,6 @@ bioc_packages:
 r_packages:
   - covr
 
-before_script:
-  - echo "BiocParallel::register(BiocParallel::SerialParam())" > ~/.Rprofile
-
 after_failure:
   find *Rcheck -name '*.fail' -print -exec cat '{}' \;
 
