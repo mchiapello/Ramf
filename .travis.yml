@@ -16,6 +16,7 @@ include:
 
 bioc_packages:
   - BiocStyle
+  - BiocParallel
 
 r_packages:
   - covr
