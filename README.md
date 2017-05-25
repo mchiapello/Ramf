@@ -22,18 +22,25 @@ devtools::install_github("mchiapello/Ramf")
 
 
 ```r
+## Load library
+library(Ramf)
+
 ## Read data in
 x <- readData("inst/extdata/grid.csv")
 
 ## Summary of the data
-am_summary(x)
+sx <- am_summary(x)
 
 ## Plot
-am_barplot(x)
-am_boxplot(x)
+barx <- am_barplot(x)
+boxx <- am_boxplot(x)
 
-## Save data
-am_save(am_summary(x))
+## Save summary data
+am_save(sx, "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"
+
+## Save plot data
+am_save(boxx, "RPlot.jpg")
+am_save(barx,·"RPlot.pdf",·unit·=·"cm",·width·=·20,·height·=·20,·dpi·=·300)¬# set image unit, dimention and quality
 ```
 
 
