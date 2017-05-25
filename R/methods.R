@@ -5,7 +5,6 @@
 #' am_summary(example_grid)
 #' am_summary(example_trouvelot)
 #' @export
-#' @import BiocStyle
 #' @importFrom dplyr group_by
 #' @importFrom dplyr select
 #' @importFrom dplyr summarise
