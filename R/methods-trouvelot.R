@@ -23,8 +23,8 @@ am_summary.trouvelot <- function(x){
 }
 
 #' @export
-am_barplot.trouvelot <- function(x, ...){
-	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
+am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), ...){
+	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- NULL
 	tmp <- trouvelot_summary(x)
@@ -43,8 +43,6 @@ am_barplot.trouvelot <- function(x, ...){
 	final2 <- final %>% gather(feature, value, -samples)
 	final3 <- final2 %>% dplyr::filter(grepl("mean", feature))
 	se <- final2 %>% dplyr::filter(grepl("se", feature))
-	# The palette with grey:
-	cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 	g <- ggplot(data = final3, aes(x = interaction(factor(final3$samples, levels = unique(x$samples)),
 												   factor(final3$feature, levels = c("mean_F", "mean_M", "mean_a", "mean_A"))),
 												   y = value, fill = samples))
@@ -56,9 +54,10 @@ am_barplot.trouvelot <- function(x, ...){
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank()) +
-				geom_vline(xintercept = seq(length(unique(final3$samples)) + .5, length(unique(final3$samples)) * 3 + .5,
-										length(unique(final3$samples))), colour = "lightgrey") +
+			  panel.grid.minor.x = element_blank(),
+			  legend.position = leg[1]) +
+		geom_vline(xintercept = seq(length(unique(final3$samples)) + .5, length(unique(final3$samples)) * 3 + .5,
+									length(unique(final3$samples))), colour = "lightgrey") +
 					  #         geom_hline(yintercept = 105, colour = "lightgrey") +
 			labs(title = "Colonization", 
 				 subtitle = "Trouvelot method",
@@ -75,12 +74,10 @@ am_barplot.trouvelot <- function(x, ...){
 }
 
 #' @export
-am_boxplot.trouvelot <- function(x, ...){
-	A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
+am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), ...){
+	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
-	# The palette with grey:
-	cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 	tmp <- trouvelot_summary(x)
 	fin <- tmp %>% gather(feature, value, -samples, -replicates)
 	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
@@ -96,7 +93,8 @@ am_boxplot.trouvelot <- function(x, ...){
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank()) +
+			  panel.grid.minor.x = element_blank(),
+			  legend.position = leg[1]) +
 		geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
 									length(unique(fin$samples))), colour = "lightgrey") +
 					  #     geom_hline(yintercept = 105, colour = "lightgrey") +
