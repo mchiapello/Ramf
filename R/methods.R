@@ -20,7 +20,7 @@ am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
 #' 
-#' @usage am_barplot(x, cbPalette, leg = "none", main = "Colonization")
+#' @usage am_barplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -39,7 +39,7 @@ am_barplot <- function(x, ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
-#' @usage am_boxplot(x, cbPalette, leg = "none", main = "Colonization")
+#' @usage am_boxplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").

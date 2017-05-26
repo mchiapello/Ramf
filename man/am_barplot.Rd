@@ -4,7 +4,7 @@
 \alias{am_barplot}
 \title{am_barplot object.}
 \usage{
-am_barplot(x, cbPalette, leg = "none", main = "Colonization")
+am_barplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}

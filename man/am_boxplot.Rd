@@ -4,7 +4,7 @@
 \alias{am_boxplot}
 \title{am_boxplot object.}
 \usage{
-am_boxplot(x, cbPalette, leg = "none", main = "Colonization")
+am_boxplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
