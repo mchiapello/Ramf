@@ -25,7 +25,11 @@ am_summary.grid <- function(x){
 }
 
 #' @export
-am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
+am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+											 "#009E73", "#F0E442", "#0072B2",
+											 "#D55E00", "#CC79A7"),
+							leg = c("none", "right", "left", "bottom", "top"),
+							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	# Create summary table
@@ -70,7 +74,11 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#
 }
 
 #' @export
-am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
+am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+											 "#009E73", "#F0E442", "#0072B2",
+											 "#D55E00", "#CC79A7"),
+							leg = c("none", "right", "left", "bottom", "top"),
+							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	# Create summary table

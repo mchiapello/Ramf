@@ -23,7 +23,11 @@ am_summary.trouvelot <- function(x){
 }
 
 #' @export
-am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
+am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+												  "#009E73", "#F0E442", "#0072B2",
+												  "#D55E00", "#CC79A7"),
+								 leg = c("none", "right", "left", "bottom", "top"),
+								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- NULL
@@ -74,7 +78,11 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 }
 
 #' @export
-am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
+am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+												  "#009E73", "#F0E442", "#0072B2",
+												  "#D55E00", "#CC79A7"),
+								 leg = c("none", "right", "left", "bottom", "top"),
+								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL

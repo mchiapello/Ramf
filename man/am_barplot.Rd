@@ -4,12 +4,22 @@
 \alias{am_barplot}
 \title{am_barplot object.}
 \usage{
-am_barplot(x, ...)
+am_barplot(x, cbPalette, leg = "none", main = "Colonization")
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
 
 \item{...}{ignored}
+
+\item{cbPalette}{a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
+"#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
+    Colorbrewer and Colorgorical are website where is possible
+    design nice color palettes.}
+
+\item{leg}{this parameter allows to set the legend. Default is "none". The other
+possible parameters are: "left", "right", "top", "bottom".}
+
+\item{main}{Plot title. Default "Colonization".}
 }
 \description{
 am_barplot object.
