@@ -9,8 +9,6 @@ am_boxplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
 
-\item{...}{ignored}
-
 \item{cbPalette}{a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
     Colorbrewer and Colorgorical are website where is possible
@@ -20,6 +18,8 @@ am_boxplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 possible parameters are: "left", "right", "top", "bottom".}
 
 \item{main}{Plot title. Default "Colonization".}
+
+\item{...}{ignored}
 }
 \description{
 am_boxplot object.

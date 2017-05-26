@@ -35,7 +35,7 @@ am_summary <- function(x) UseMethod("am_summary")
 #' am_barplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_barplot <- function(x, ...) UseMethod("am_barplot")
+am_barplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
@@ -54,7 +54,7 @@ am_barplot <- function(x, ...) UseMethod("am_barplot")
 #' am_boxplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_boxplot <- function(x, ...) UseMethod("am_boxplot")
+am_boxplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) UseMethod("am_boxplot")
 
 #' am_save object.
 #' 
