@@ -8,13 +8,13 @@
 ##' @format A grid dataset should have 7 variables:
 ##' \describe{
 ##'   It is mandatory that the dataset is formatted as follow
-##'   \item{- replicates:}{Sample replicates:}
-##'   \item{- samples:}{Sample names:}
-##'   \item{- Total:}{Number of total fungal structures identified:}
-##'   \item{- Hyphopodia:}{Number of hypopodia identified:}
-##'   \item{- IntrHyphae:}{Number of interanl hyphae identified:}
-##'   \item{- Arbuscule:}{Number of arbuscules identified:}
-##'   \item{- Vesicles:}{Number of vesicles identified:}
+##'   \item{- replicates:}{Sample replicates}
+##'   \item{- samples:}{Sample names}
+##'   \item{- Total:}{Number of total fungal structures identified}
+##'   \item{- Hyphopodia:}{Number of hypopodia identified}
+##'   \item{- IntrHyphae:}{Number of interanl hyphae identified}
+##'   \item{- Arbuscule:}{Number of arbuscules identified}
+##'   \item{- Vesicles:}{Number of vesicles identified}
 ##' }
 ##' A Trouvelot dataset should have 3 variables:
 ##' \describe{
