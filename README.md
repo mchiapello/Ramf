@@ -1,14 +1,12 @@
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 [![Build Status](https://travis-ci.org/mchiapello/Ramf.svg?branch=master)](https://travis-ci.org/mchiapello/Ramf)
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 
 # The **Ramf** package [pre-release]
 
-
-
 ## Overview
 <img align = "right" src="inst/extdata/Ramf.png" height="200">
+<img align = "right" src="inst/extdata/Ramf2.png" height="200">
+<img align = "right" src="inst/extdata/Ramf3.png" height="200">
 
 A package for arbuscular mycorrhyzal fungi colonization
 

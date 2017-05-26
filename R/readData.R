@@ -8,13 +8,13 @@
 ##' @format A grid dataset should have 7 variables:
 ##' \describe{
 ##'   It is mandatory that the dataset is formatted as follow
-##'   \item{- replicates:}{Sample replicates:}
-##'   \item{- samples:}{Sample names:}
-##'   \item{- Total:}{Number of total fungal structures identified:}
-##'   \item{- Hyphopodia:}{Number of hypopodia identified:}
-##'   \item{- IntrHyphae:}{Number of interanl hyphae identified:}
-##'   \item{- Arbuscule:}{Number of arbuscules identified:}
-##'   \item{- Vesicles:}{Number of vesicles identified:}
+##'   \item{- replicates:}{Sample replicates}
+##'   \item{- samples:}{Sample names}
+##'   \item{- Total:}{Number of total fungal structures identified}
+##'   \item{- Hyphopodia:}{Number of hypopodia identified}
+##'   \item{- IntrHyphae:}{Number of interanl hyphae identified}
+##'   \item{- Arbuscule:}{Number of arbuscules identified}
+##'   \item{- Vesicles:}{Number of vesicles identified}
 ##' }
 ##' A Trouvelot dataset should have 3 variables:
 ##' \describe{
@@ -47,7 +47,7 @@ readData <- function(infile){
 	}
 	## Trouvelot specific checks
 	tnames <- c("scoring", "replicates", "samples")
-	snames <-c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3", "1A2", "2A2", "3A2",
+	snames <- c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3", "1A2", "2A2", "3A2",
 			   "4A2", "5A2", "1A1", "2A1", "3A1", "4A1", "5A1", "1A0", "2A0",
 			   "3A0", "4A0", "5A0", "0") 
 	if (dim(x)[2] == 3){
