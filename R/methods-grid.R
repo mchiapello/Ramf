@@ -25,7 +25,7 @@ am_summary.grid <- function(x){
 }
 
 #' @export
-am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), ...){
+am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	# Create summary table
@@ -54,8 +54,8 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#
 			  legend.position = leg[1]) +
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5, length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
-		labs(title = "Colonization", 
-			 subtitle = "Grid method",
+		labs(title = main, 
+			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
 		ylim(-0.5, max(z$values) + max(z$values) / 10) +
@@ -70,7 +70,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#
 }
 
 #' @export
-am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), ...){
+am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	# Create summary table
@@ -98,8 +98,8 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
 									length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
-		labs(title = "Colonization", 
-			 subtitle = "Grid method",
+		labs(title = main,
+			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
 		ylim(-0.5, max(z$values) + max(z$values) / 10) +

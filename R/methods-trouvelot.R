@@ -23,7 +23,7 @@ am_summary.trouvelot <- function(x){
 }
 
 #' @export
-am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), ...){
+am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- NULL
@@ -59,8 +59,8 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		geom_vline(xintercept = seq(length(unique(final3$samples)) + .5, length(unique(final3$samples)) * 3 + .5,
 									length(unique(final3$samples))), colour = "lightgrey") +
 					  #         geom_hline(yintercept = 105, colour = "lightgrey") +
-			labs(title = "Colonization", 
-				 subtitle = "Trouvelot method",
+			labs(title = main, 
+				 #                  subtitle = "Trouvelot method",
 				 x = "",
 				 y = "") +
 			ylim(-0.5, 110) +
@@ -74,7 +74,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 }
 
 #' @export
-am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), ...){
+am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7"), leg = c("none", "right", "left", "bottom", "top"), main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
@@ -98,8 +98,8 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
 									length(unique(fin$samples))), colour = "lightgrey") +
 					  #     geom_hline(yintercept = 105, colour = "lightgrey") +
-		labs(title = "Colonization", 
-			 subtitle = "Trouvelot method",
+		labs(title = main, 
+			 #              subtitle = "Trouvelot method",
 			 x = "",
 			 y = "") +
 		ylim(-0.5, 110) +
