@@ -1,3 +1,5 @@
+{{ site.time | date_to_string }}
+
 <center><h1>Ramf package</h1></center>
 
 <h2>Estimation of Arbuscular Mycorrhizal Fungi colonisation</h2> 
