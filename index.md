@@ -1,3 +1,9 @@
+---
+day2_pm: "SQL for data management"
+---
+
+{{page.day2_pm}}
+
 {{ site.time | date_to_string }}
 
 <center><h1>Ramf package</h1></center>
