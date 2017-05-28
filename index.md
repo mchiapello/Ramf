@@ -7,8 +7,16 @@
 
 <h3>Estimation of mycorrhizal colonization according to Trouvelot method</h3>
 
-a. Mount 15 root fragments on one slide; prepare two slides (30 root fragments total).
-b. Observe these fragments under the microscope and rate according to the range of classes indicated in figure 4 and Annex 1. These classes give a rapid estimation of the level of mycorrhizal colonisation of each root fragment and the abundance of arbuscules.
+- Mount 15 root fragments on one slide; prepare two slides (30 root fragments total).
+
+- Observe these fragments under the microscope and rate according to the range of classes indicated in figure  1. 
+
+
+
+
+
+
+These classes give a rapid estimation of the level of mycorrhizal colonisation of each root fragment and the abundance of arbuscules.
 c. Put the values into the computer program 'Mycocalc' to calculate the parameters: %F, %M, %m, %a and %A, according to Trouvelot et al.. 1986. (see Figure 4 from Trouvelot et al 1986)
 
 Frequency of mycorrhiza in the root system
