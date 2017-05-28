@@ -11,7 +11,7 @@
 
 - Observe these fragments under the microscope and rate according to the range of classes indicated in figure  1. 
 
-
+<img·align·=·"right"·src="Ramf.png"·height="200">¬
 
 
 
