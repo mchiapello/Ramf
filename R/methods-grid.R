@@ -6,16 +6,16 @@ am_summary.grid <- function(x){
 	final <- tmp %>%
 	mutate(num = n()) %>%
 	group_by(samples) %>%
-	summarise(mean_Total = mean(Total, na.rm = TRUE),
-			  se_Total = sd(Total, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_Hyphopodia = mean(Hyphopodia, na.rm = TRUE),
-			  se_Hyphopodia = sd(Hyphopodia, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_IntrHyphae = mean(IntrHyphae, na.rm = TRUE),
-			  se_IntrHyphae = sd(IntrHyphae, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_Arbuscule = mean(Arbuscule, na.rm = TRUE),
-			  se_Arbuscule = sd(Arbuscule, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_Vesicles = mean(Vesicles, na.rm = TRUE),
-			  se_Vesicles = sd(Vesicles, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))
+	summarise(`Mean Total` = round(mean(Total, na.rm = TRUE), 2),
+			  `Standard error Total` = round(sd(Total, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean Hyphopodia` = round(mean(Hyphopodia, na.rm = TRUE), 2),
+			  `Standard error Hyphopodia` = round(sd(Hyphopodia, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean IntrHyphae` = round(mean(IntrHyphae, na.rm = TRUE), 2),
+			  `Standard error IntrHyphae` = round(sd(IntrHyphae, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean Arbuscule` = round(mean(Arbuscule, na.rm = TRUE), 2),
+			  `Standard error Arbuscule` = round(sd(Arbuscule, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean Vesicles` = round(mean(Vesicles, na.rm = TRUE), 2),
+			  `Standard error Vesicles` = round(sd(Vesicles, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
 			  )
 	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)

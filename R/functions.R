@@ -6,11 +6,11 @@ grid_summary <- function(x){
 	# Create summary table
 	y <- x %>% 
 			group_by(samples, replicates) %>%
-			summarise(Total = mean(Total, na.rm = TRUE),
-					  Hyphopodia = mean(Hyphopodia, na.rm = TRUE),
-					  IntrHyphae = mean(IntrHyphae, na.rm = TRUE),
-					  Arbuscule = mean(Arbuscule, na.rm = TRUE),
-					  Vesicles = mean(Vesicles, na.rm = TRUE)) %>%
+			summarise(Total = round(mean(Total, na.rm = TRUE), 2),
+					  Hyphopodia = round(mean(Hyphopodia, na.rm = TRUE), 2),
+					  IntrHyphae = round(mean(IntrHyphae, na.rm = TRUE), 2),
+					  Arbuscule = round(mean(Arbuscule, na.rm = TRUE), 2),
+					  Vesicles = round(mean(Vesicles, na.rm = TRUE),2)) %>%
 			ungroup
 	y <- y %>% arrange(factor(samples, levels = unique(x$samples)), replicates)
 	return(y)
