@@ -6,14 +6,14 @@ am_summary.trouvelot <- function(x){
 	final <- tmp %>%
 	mutate(num = n()) %>%
 	group_by(samples) %>%
-	summarise(mean_F = mean(F, na.rm = TRUE),
-			  se_F = sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_M = mean(M, na.rm = TRUE),
-			  se_M = sd(M, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_a = mean(a, na.rm = TRUE),
-			  se_a = sd(a, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)),
-			  mean_A = mean(A, na.rm = TRUE),
-			  se_A = sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))
+	summarise(mean_F = round(mean(F, na.rm = TRUE), 2),
+			  se_F = round(sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  mean_M = round(mean(M, na.rm = TRUE), 2),
+			  se_M = round(sd(M, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  mean_a = round(mean(a, na.rm = TRUE), 2),
+			  se_a = round(sd(a, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  mean_A = round(mean(A, na.rm = TRUE), 2),
+			  se_A = round(sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
 			  )
 	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)
