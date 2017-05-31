@@ -6,14 +6,14 @@ am_summary.trouvelot <- function(x){
 	final <- tmp %>%
 	mutate(num = n()) %>%
 	group_by(samples) %>%
-	summarise(mean_F = round(mean(F, na.rm = TRUE), 2),
-			  se_F = round(sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
-			  mean_M = round(mean(M, na.rm = TRUE), 2),
-			  se_M = round(sd(M, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
-			  mean_a = round(mean(a, na.rm = TRUE), 2),
-			  se_a = round(sd(a, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
-			  mean_A = round(mean(A, na.rm = TRUE), 2),
-			  se_A = round(sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
+	summarise(`Mean F` = round(mean(F, na.rm = TRUE), 2),
+			  `Standard error F` = round(sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean M` = round(mean(M, na.rm = TRUE), 2),
+			  `Standard error M` = round(sd(M, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean a` = round(mean(a, na.rm = TRUE), 2),
+			  `Standar error a` = round(sd(a, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+			  `Mean A` = round(mean(A, na.rm = TRUE), 2),
+			  `Standard error A` = round(sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
 			  )
 	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)
