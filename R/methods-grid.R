@@ -31,7 +31,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 							leg = c("none", "right", "left", "bottom", "top"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
-	features <- replicates <- samples <- values <- NULL
+	features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
 	# Create summary table
 	y <- grid_summary(x)
 	# Change table shape

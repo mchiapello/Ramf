@@ -30,7 +30,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
-	values <- NULL
+	values <- means <- se <- num <- NULL
 	y <- trouvelot_summary(x)
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
