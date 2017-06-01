@@ -31,27 +31,17 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- NULL
-	tmp <- trouvelot_summary(x)
-	final <- tmp %>%
-		mutate(num = n()) %>%
-		group_by(samples) %>%
-		summarise(mean_F = mean(F, na.rm = TRUE),
-				  se_F = sd(F, na.rm = TRUE) / mean(num, na.rm = TRUE),
-				  mean_M = mean(M, na.rm = TRUE),
-				  se_M = sd(M, na.rm = TRUE) / mean(num, na.rm = TRUE),
-				  mean_a = mean(a, na.rm = TRUE),
-				  se_a = sd(a, na.rm = TRUE) / mean(num, na.rm = TRUE),
-				  mean_A = mean(A, na.rm = TRUE),
-				  se_A = sd(A, na.rm = TRUE) / mean(num, na.rm = TRUE)
-				  )
-	final2 <- final %>% gather(feature, value, -samples)
-	final3 <- final2 %>% dplyr::filter(grepl("mean", feature))
-	se <- final2 %>% dplyr::filter(grepl("se", feature))
-	g <- ggplot(data = final3, aes(x = interaction(factor(final3$samples, levels = unique(x$samples)),
-												   factor(final3$feature, levels = c("mean_F", "mean_M", "mean_a", "mean_A"))),
-												   y = value, fill = samples))
+	y <- trouvelot_summary(x)
+	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+	final <- z %>% group_by(samples, features) %>%
+		  mutate(num = n()) %>%
+		  summarize(means = mean(values, na.rm = TRUE),
+					se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
+	g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
+												   factor(final$features, levels = c("F", "M", "a", "A"))),
+												   y = means, fill = samples))
 	a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
-		geom_errorbar(aes(ymin = value - se$value, ymax = value + se$value), width = .1) +
+		geom_errorbar(aes(ymin = means - se, ymax = means + se), width = .1) +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
 			  plot.title = element_text(size = 19),
@@ -60,19 +50,20 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			  panel.grid.major.x = element_blank(),
 			  panel.grid.minor.x = element_blank(),
 			  legend.position = leg[1]) +
-		geom_vline(xintercept = seq(length(unique(final3$samples)) + .5, length(unique(final3$samples)) * 3 + .5,
-									length(unique(final3$samples))), colour = "lightgrey") +
+		geom_vline(xintercept = seq(length(unique(final$samples)) + .5, length(unique(final$samples)) * 3 + .5,
+									length(unique(final$samples))), colour = "lightgrey") +
 					  #         geom_hline(yintercept = 105, colour = "lightgrey") +
 			labs(title = main, 
 				 #                  subtitle = "Trouvelot method",
 				 x = "",
 				 y = "") +
-			ylim(-0.5, 110) +
-			annotate("text", x = seq(length(unique(final3$samples)) * .5 + .5, length(unique(final3$samples)) * 5 + .5,
-									 length(unique(final3$samples)))[1:4],
+			ylim(ifelse(min(final$means - final$se) < 0,
+					min(final$means - final$se), 0), 110) +
+			annotate("text", x = seq(length(unique(final$samples)) * .5 + .5, length(unique(final$samples)) * 5 + .5,
+									 length(unique(final$samples)))[1:4],
 					 y = 110, label = c("F%", "M%", "a%", "A%")) +
 			scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-			scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
+			scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
 	class(a1) <- c("am_plot", class(a1))
 	return(a1)
 }
