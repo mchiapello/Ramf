@@ -4,8 +4,8 @@ am_summary.trouvelot <- function(x){
 	tmp <- trouvelot_summary(x)
 	# Final table
 	final <- tmp %>%
-	mutate(num = n()) %>%
 	group_by(samples) %>%
+	mutate(num = n()) %>%
 	summarise(`Mean F` = round(mean(F, na.rm = TRUE), 2),
 			  `Standard error F` = round(sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
 			  `Mean M` = round(mean(M, na.rm = TRUE), 2),

@@ -4,8 +4,8 @@ am_summary.grid <- function(x){
 	features <- replicates <- samples <- values <- num <- n <- NULL
 	tmp <- grid_summary(x)
 	final <- tmp %>%
-	mutate(num = n()) %>%
 	group_by(samples) %>%
+	mutate(num = n()) %>%
 	summarise(`Mean Total` = round(mean(Total, na.rm = TRUE), 2),
 			  `Standard error Total` = round(sd(Total, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
 			  `Mean Hyphopodia` = round(mean(Hyphopodia, na.rm = TRUE), 2),
