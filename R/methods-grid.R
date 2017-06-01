@@ -62,7 +62,8 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
-		ylim(-0.5, max(z$values) + max(z$values) / 10) +
+		ylim(ifelse(min(final3$values - se$values) < 0,
+					min(final3$values - se$values), 0), max(z$values) + max(z$values) / 10) +
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
