@@ -37,17 +37,15 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
+		  mutate(num = n()) %>%
 		  summarize(means = mean(values, na.rm = TRUE),
-					se    = sd(values, na.rm = TRUE))
-	final2 <- final %>% tidyr::gather(comp, values, -samples, -features)
-	final3 <- final2 %>% dplyr::filter(grepl("mean", comp))
-	se <- final2 %>% dplyr::filter(grepl("se", comp))
-	g <- ggplot(data = final3, aes(x = interaction(factor(final3$samples, levels = unique(x$samples)),
-											  factor(final3$features, levels = c("Total", "Hyphopodia",
+					se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
+	g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
+											  factor(final$features, levels = c("Total", "Hyphopodia",
 																		   "IntrHyphae", "Arbuscule", "Vesicles"))),
-											  y = values, fill = samples))
+											  y = means, fill = samples))
 	a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
-		geom_errorbar(aes(ymin = values - se$values, ymax = values + se$values), width = .1) +
+		geom_errorbar(aes(ymin = means - se, ymax = means + se), width = .1) +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
 			  plot.title = element_text(size = 19),
@@ -62,14 +60,14 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
-		ylim(ifelse(min(final3$values - se$values) < 0,
-					min(final3$values - se$values), 0), max(z$values) + max(z$values) / 10) +
+		ylim(ifelse(min(final$means - final$se) < 0,
+					min(final$means - final$se), 0), max(z$values) + max(z$values) / 10) +
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-		scale_fill_manual(values = cbPalette, breaks = levels(factor(final3$samples, levels = unique(x$samples))))
+		scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
 	class(a1) <- c("am_plot", class(a1))
 	return(a1)
 }
