@@ -4,9 +4,11 @@ library("BiocStyle")
 
 ## ----loadData------------------------------------------------------------
 # Grid
-gr <- readData("../inst/extdata/grid.csv") 
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
+gr <- readData(f)
 # Trouvelot
-tr <- readData("../inst/extdata/trouvelot.csv") 
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "trouvelot.csv")
+tr <- readData(f) 
 
 
 ## ----summary-------------------------------------------------------------
