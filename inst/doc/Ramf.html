@@ -122,26 +122,23 @@ grs</code></pre>
 ## 
 ## $`Summary per Sample`
 ## # A tibble: 4 x 11
-##     samples `Mean Total` `Standard error Total`
-##       &lt;chr&gt;        &lt;dbl&gt;                  &lt;dbl&gt;
-## 1        WT        30.00                   4.99
-## 2 cyclops-3        18.67                   4.44
-## 3 cyclops-4        16.00                   2.17
-## 4  ccamk-13        11.55                   1.75
-## # ... with 8 more variables: `Mean Hyphopodia` &lt;dbl&gt;, `Standard error
-## #   Hyphopodia` &lt;dbl&gt;, `Mean IntrHyphae` &lt;dbl&gt;, `Standard error
-## #   IntrHyphae` &lt;dbl&gt;, `Mean Arbuscule` &lt;dbl&gt;, `Standard error
-## #   Arbuscule` &lt;dbl&gt;, `Mean Vesicles` &lt;dbl&gt;, `Standard error
-## #   Vesicles` &lt;dbl&gt;
+##     samples `Mean Total` `Standard error Total` `Mean Hyphopodia`
+##       &lt;chr&gt;        &lt;dbl&gt;                  &lt;dbl&gt;             &lt;dbl&gt;
+## 1        WT        30.00                   4.99              3.44
+## 2 cyclops-3        18.67                   4.44             10.00
+## 3 cyclops-4        16.00                   2.17              6.11
+## 4  ccamk-13        11.55                   1.75             11.55
+## # ... with 7 more variables: `Standard error Hyphopodia` &lt;dbl&gt;, `Mean
+## #   IntrHyphae` &lt;dbl&gt;, `Standard error IntrHyphae` &lt;dbl&gt;, `Mean
+## #   Arbuscule` &lt;dbl&gt;, `Standard error Arbuscule` &lt;dbl&gt;, `Mean
+## #   Vesicles` &lt;dbl&gt;, `Standard error Vesicles` &lt;dbl&gt;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;am_summary&quot; &quot;list&quot;</code></pre>
 <pre class="r"><code>trs</code></pre>
 <pre><code>## $`Summary per Replicate`
-## Source: local data frame [9 x 6]
-## Groups: samples [3]
-## 
 ## # A tibble: 9 x 6
+## # Groups:   samples [3]
 ##   samples replicates     F     M      a     A
 ##     &lt;chr&gt;      &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
 ## 1  Lys 11          A 59.68 26.65  99.09 26.41
@@ -156,13 +153,13 @@ grs</code></pre>
 ## 
 ## $`Summary per Sample`
 ## # A tibble: 3 x 9
-##   samples `Mean F` `Standard error F` `Mean M`
-##     &lt;chr&gt;    &lt;dbl&gt;              &lt;dbl&gt;    &lt;dbl&gt;
-## 1  Lys 11    62.46               6.66    21.17
-## 2      TM    68.29               4.77    24.26
-## 3    Gifu    86.55               4.48    41.97
-## # ... with 5 more variables: `Standard error M` &lt;dbl&gt;, `Mean a` &lt;dbl&gt;,
-## #   `Standar error a` &lt;dbl&gt;, `Mean A` &lt;dbl&gt;, `Standard error A` &lt;dbl&gt;
+##   samples `Mean F` `Standard error F` `Mean M` `Standard error M` `Mean a`
+##     &lt;chr&gt;    &lt;dbl&gt;              &lt;dbl&gt;    &lt;dbl&gt;              &lt;dbl&gt;    &lt;dbl&gt;
+## 1  Lys 11    62.46               6.66    21.17               8.07    99.70
+## 2      TM    68.29               4.77    24.26               1.55   100.00
+## 3    Gifu    86.55               4.48    41.97               5.85    98.93
+## # ... with 3 more variables: `Standar error a` &lt;dbl&gt;, `Mean A` &lt;dbl&gt;,
+## #   `Standard error A` &lt;dbl&gt;
 ## 
 ## attr(,&quot;class&quot;)
 ## [1] &quot;am_summary&quot; &quot;list&quot;</code></pre>

@@ -85,7 +85,6 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 							  y = value))
 	a2 <- g +
 		geom_boxplot(colour = "lightgrey", alpha = 0) +
-		geom_point(aes(color = feature), position = position_jitter(width = 0.2)) +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
 			  plot.title = element_text(size = 19),
@@ -110,3 +109,48 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 	class(a2) <- c("am_plot", class(a2))
 	return(a2)
 }
+
+
+#' @export
+am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+												  "#009E73", "#F0E442", "#0072B2",
+												  "#D55E00", "#CC79A7"),
+								 leg = c("none", "right", "left", "bottom", "top"),
+								 main = "Colonization", ...){
+	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
+	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
+	values <- NULL
+	tmp <- trouvelot_summary(x)
+	fin <- tmp %>% gather(feature, value, -samples, -replicates)
+	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
+											  factor(fin$feature, levels = c("F", "A", "a", "M")),
+											  sep = ": "),
+							  y = value))
+	a2 <- g +
+		geom_point(aes(color = samples), position = position_jitter(width = 0.2)) +
+		theme_bw() +
+		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+			  plot.title = element_text(size = 19),
+			  panel.grid.major.y = element_blank(),
+			  panel.grid.minor.y = element_blank(),
+			  panel.grid.major.x = element_blank(),
+			  panel.grid.minor.x = element_blank(),
+			  legend.position = leg[1]) +
+		geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
+									length(unique(fin$samples))), colour = "lightgrey") +
+					  #     geom_hline(yintercept = 105, colour = "lightgrey") +
+		labs(title = main, 
+			 #              subtitle = "Trouvelot method",
+			 x = "",
+			 y = "") +
+		ylim(-0.5, 110) +
+		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
+								 length(unique(fin$samples)))[1:4],
+				 y = 110, label = c("F%", "M%", "a%", "A%")) +
+		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+	class(a2) <- c("am_plot", class(a2))
+	return(a2)
+}
+
+
