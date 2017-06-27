@@ -5,8 +5,6 @@
 
 ## Overview
 <img align = "right" src="inst/extdata/Ramf.png" height="200">
-<img align = "right" src="inst/extdata/Ramf2.png" height="200">
-<img align = "right" src="inst/extdata/Ramf3.png" height="200">
 
 A package for arbuscular mycorrhyzal fungi colonization
 
