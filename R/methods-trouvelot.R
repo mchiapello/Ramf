@@ -168,15 +168,9 @@ am_stat.trouvelot <- function(x, ...){
 														  length)),1)),
 								"_", sls[[1]]$samples),
 						 method = "bh", table = T), file='NULL')
-        if (1 - pchisq(tmp$chi2, length(levels(as.factor(sls[[1]]$samples))) -1) <= 0.05){
-			stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))
-			stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
-            stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
-		} else {
-			stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = 1))
-			stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
-            stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
-		}
+		stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))
+		stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
+        stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
     }
 	stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11)]
 	names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:6], ".pval"))
