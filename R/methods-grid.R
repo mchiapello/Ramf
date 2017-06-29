@@ -196,6 +196,7 @@ am_stat.grid <- function(x, ...){
 	names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:7], ".pval"))
 	stat$group1 <- gsub("^\\d+_", "", stat$group1)
 	stat$group2 <- gsub("^\\d+_", "", stat$group2)
+	class(stat) <- c("am_stat", class(stat))
     return(stat)
 }
 

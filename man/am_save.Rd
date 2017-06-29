@@ -7,7 +7,7 @@
 am_save(x, filename, ...)
 }
 \arguments{
-\item{x}{summary or plot data from Trouvelot or Grid dataset}
+\item{x}{summary, statistics or plot data from Trouvelot or Grid dataset}
 
 \item{filename}{path where save the file}
 
