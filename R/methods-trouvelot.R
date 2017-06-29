@@ -155,6 +155,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 
 #' @export
 am_stat.trouvelot <- function(x){
+	V1 <- NULL
 	sls <- am_summary(x)
 	stat <- list()
 	for(i in 3:6){

@@ -174,7 +174,8 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 }
 
 #' @export
-stat.grid <- function(sl){
+am_stat.grid <- function(sl){
+	V1 <- NULL
 	sls <- am_summary(sl)
 	stat <- list()
 	for(i in 3:7){
