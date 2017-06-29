@@ -31,9 +31,15 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- means <- se <- num <- NULL
-	#     stat <- am_stat(x)
-	#     stat_l <- ifelse(as.numeric(as.matrix(stat[, 3:6])) < 0.05, "*", "") 
 	y <- trouvelot_summary(x)
+	stat <- am_stat(x)
+	stat_ctr <- stat[stat$group1 == y$samples[1], ]
+	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
+	ll <- split(stat_l, rep(1:4, each = 2))
+	d <- NULL
+	for (i in seq_along(ll)){
+		d <- append(d, c("", ll[[i]]))
+	}
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
 		  mutate(num = n()) %>%
@@ -62,7 +68,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			annotate("text", x = seq(length(unique(final$samples)) * .5 + .5, length(unique(final$samples)) * 5 + .5,
 									 length(unique(final$samples)))[1:4],
 					 y = 110, label = c("F%", "M%", "a%", "A%")) +
-#             annotate("text", x = 1:12, y = 105, label = stat_l) +
+			annotate("text", x = 1:12, y = -Inf, vjust = -1, label = d) +
 			scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 			scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
 					min(final$means - final$se), 0), 110), breaks = seq(0, 110, 20)) +
