@@ -75,6 +75,18 @@ am_boxplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) U
 #' @import tidyr ggplot2
 am_dotplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) UseMethod("am_dotplot")
 
+#' am_stat object.
+#' 
+#' @usage am_stat(x, ...)
+#' @param x dataset containing Trouvelot or Grid data
+#' @param ... ignored
+#' @examples
+#' am_stat(example_grid)
+#' am_stat(example_trouvelot)
+#' @export
+#' @import tidyr dplyr conover.test
+am_stat <- function(x, ...) UseMethod("am_stat")
+
 #' am_save object.
 #' 
 #' @param x summary or plot data from Trouvelot or Grid dataset
