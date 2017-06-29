@@ -154,13 +154,19 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 }
 
 #' @export
-am_stat.trouvelot <- function(x){
+am_stat.trouvelot <- function(x, ...){
 	V1 <- NULL
 	sls <- am_summary(x)
 	stat <- list()
 	for(i in 3:6){
         capture.output(tmp <-
-			conover.test(pull(sls[[1]], i), paste0(rep(1:length(unique(sls[[1]]$samples)), rep(as.numeric(tapply(sls[[1]]$replicates, factor(sls[[1]]$samples, levels = unique(sls[[1]]$samples)), length)),1)), "_", sls[[1]]$samples),
+			conover.test(pull(sls[[1]], i),
+						 paste0(rep(1:length(unique(sls[[1]]$samples)),
+									rep(as.numeric(tapply(sls[[1]]$replicates,
+														  factor(sls[[1]]$samples,
+																 levels = unique(sls[[1]]$samples)),
+														  length)),1)),
+								"_", sls[[1]]$samples),
 						 method = "bh", table = T), file='NULL')
         if (1 - pchisq(tmp$chi2, length(levels(as.factor(sls[[1]]$samples))) -1) <= 0.05){
 			stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))

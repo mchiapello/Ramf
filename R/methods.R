@@ -16,6 +16,8 @@
 #' @importFrom dplyr tibble
 #' @importFrom dplyr left_join
 #' @importFrom dplyr inner_join
+#' @importFrom dplyr pull
+#' @importFrom dplyr tbl_df
 am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
@@ -84,7 +86,7 @@ am_dotplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) U
 #' am_stat(example_grid)
 #' am_stat(example_trouvelot)
 #' @export
-#' @import tidyr dplyr conover.test
+#' @import conover.test
 am_stat <- function(x, ...) UseMethod("am_stat")
 
 #' am_save object.
