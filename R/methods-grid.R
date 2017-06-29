@@ -60,13 +60,14 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
-		ylim(ifelse(min(final$means - final$se) < 0,
-					min(final$means - final$se), 0), max(z$values) + max(z$values) / 10) +
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
+					min(final$means - final$se), 0), max(z$values) + max(z$values) / 10),
+						   breaks = seq(0, 110, 20)) +
 		scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
 	class(a1) <- c("am_plot", class(a1))
 	return(a1)
@@ -107,13 +108,14 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
-		ylim(-0.5, max(z$values) + max(z$values) / 10) +
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
 								 length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_y_continuous(limits = c(-0.5, max(z$values) + max(z$values) / 10),
+						   breaks = seq(0, 110, 20))+ 
 		scale_colour_manual(values = cbPalette, 
 							breaks = levels(factor(z$features,
 												   levels = c("Total", "Hyphopodia",
@@ -158,13 +160,14 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			 #              subtitle = "Grid method",
 			 x = "",
 			 y = "") +
-		ylim(-0.5, max(z$values) + max(z$values) / 10) +
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
 								 length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_y_continuous(limits = c(-0.5, max(z$values) + max(z$values) / 10),
+						   breaks = seq(0, 110, 20))+ 
 		scale_colour_manual(values = cbPalette, 
 							breaks = levels(factor(z$features,
 												   levels = c("Total", "Hyphopodia",

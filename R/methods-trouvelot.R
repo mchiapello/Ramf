@@ -31,6 +31,8 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- means <- se <- num <- NULL
+	#     stat <- am_stat(x)
+	#     stat_l <- ifelse(as.numeric(as.matrix(stat[, 3:6])) < 0.05, "*", "") 
 	y <- trouvelot_summary(x)
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
@@ -57,12 +59,13 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 				 #                  subtitle = "Trouvelot method",
 				 x = "",
 				 y = "") +
-			ylim(ifelse(min(final$means - final$se) < 0,
-					min(final$means - final$se), 0), 110) +
 			annotate("text", x = seq(length(unique(final$samples)) * .5 + .5, length(unique(final$samples)) * 5 + .5,
 									 length(unique(final$samples)))[1:4],
 					 y = 110, label = c("F%", "M%", "a%", "A%")) +
+#             annotate("text", x = 1:12, y = 105, label = stat_l) +
 			scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+			scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
+					min(final$means - final$se), 0), 110), breaks = seq(0, 110, 20)) +
 			scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
 	class(a1) <- c("am_plot", class(a1))
 	return(a1)
@@ -100,11 +103,11 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			 #              subtitle = "Trouvelot method",
 			 x = "",
 			 y = "") +
-		ylim(-0.5, 110) +
 		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
 								 length(unique(fin$samples)))[1:4],
 				 y = 110, label = c("F%", "M%", "a%", "A%")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
 	class(a2) <- c("am_plot", class(a2))
 	return(a2)
@@ -143,11 +146,11 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			 #              subtitle = "Trouvelot method",
 			 x = "",
 			 y = "") +
-		ylim(-0.5, 110) +
 		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
 								 length(unique(fin$samples)))[1:4],
 				 y = 110, label = c("F%", "M%", "a%", "A%")) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+		scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
 	class(a2) <- c("am_plot", class(a2))
 	return(a2)

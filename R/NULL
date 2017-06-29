@@ -1,0 +1,17 @@
+  Kruskal-Wallis rank sum test
+
+data: x and group
+Kruskal-Wallis chi-squared = 4.3556, df = 2, p-value = 0.11
+
+
+                           Comparison of x by group                            
+                             (Benjamini-Hochberg)                              
+Col Mean-|
+Row Mean |   1_Lys 11       2_TM
+---------+----------------------
+    2_TM |   0.382546
+         |     0.3576
+         |
+  3_Gifu |  -2.104003  -2.486549
+         |     0.0600     0.0711
+
