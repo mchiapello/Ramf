@@ -32,20 +32,22 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- means <- se <- num <- NULL
-	y <- trouvelot_summary(x)
+	leg <- match.arg(leg)
+	tmp <- trouvelot_summary(x)
 	if (ctr == FALSE){
-		d <- rep("", length(unique(y$samples)) * 4)
-	} else {
+		d <- rep("", length(unique(tmp$samples)) * 4)
+	}
+	if (ctr == TRUE){
     	stat <- am_stat(x)
-    	stat_ctr <- stat[stat$group1 == y$samples[1], ]
+    	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
-    	ll <- split(stat_l, rep(1:4, each = length(unique(y$samples)) - 1))
+    	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
 	}
-	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+	z <- tmp %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
 		  mutate(num = n()) %>%
 		  summarize(means = mean(values, na.rm = TRUE),
@@ -62,7 +64,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
 			  panel.grid.minor.x = element_blank(),
-			  legend.position = leg[1]) +
+			  legend.position = leg) +
 		geom_vline(xintercept = seq(length(unique(final$samples)) + .5, length(unique(final$samples)) * 3 + .5,
 									length(unique(final$samples))), colour = "lightgrey") +
 					  #         geom_hline(yintercept = 105, colour = "lightgrey") +
@@ -73,7 +75,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			annotate("text", x = seq(length(unique(final$samples)) * .5 + .5, length(unique(final$samples)) * 5 + .5,
 									 length(unique(final$samples)))[1:4],
 					 y = 110, label = c("F%", "M%", "a%", "A%")) +
-			annotate("text", x = 1:(length(unique(y$samples)) * 4), y = -Inf, vjust = -1, label = d) +
+			annotate("text", x = 1:(length(unique(tmp$samples)) * 4), y = -Inf, vjust = -1, label = d) +
 			scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 			scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
 					min(final$means - final$se), 0), 110), breaks = seq(0, 110, 20)) +
@@ -87,11 +89,26 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
 								 leg = c("none", "right", "left", "bottom", "top"),
-								 main = "Colonization", ...){
+								 main = "Colonization",
+								 ctr = FALSE, ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
+	leg <- match.arg(leg)
 	tmp <- trouvelot_summary(x)
+	if (ctr == FALSE){
+		d <- rep("", length(unique(tmp$samples)) * 4)
+	}
+	if (ctr == TRUE){
+    	stat <- am_stat(x)
+    	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
+    	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+    	d <- NULL
+    	for (i in seq_along(ll)){
+    		d <- append(d, c("", ll[[i]]))
+    	}
+	}
 	fin <- tmp %>% gather(feature, value, -samples, -replicates)
 	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
 											  factor(fin$feature, levels = c("F", "A", "a", "M")),
@@ -106,7 +123,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
 			  panel.grid.minor.x = element_blank(),
-			  legend.position = leg[1]) +
+			  legend.position = leg) +
 		geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
 									length(unique(fin$samples))), colour = "lightgrey") +
 					  #     geom_hline(yintercept = 105, colour = "lightgrey") +
@@ -117,6 +134,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
 								 length(unique(fin$samples)))[1:4],
 				 y = 110, label = c("F%", "M%", "a%", "A%")) +
+		annotate("text", x = 1:(length(unique(tmp$samples)) * 4), y = -Inf, vjust = -1, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
@@ -130,11 +148,25 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
 								 leg = c("none", "right", "left", "bottom", "top"),
-								 main = "Colonization", ...){
+								 main = "Colonization", ctr = FALSE, ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
+	leg <- match.arg(leg)
 	tmp <- trouvelot_summary(x)
+	if (ctr == FALSE){
+		d <- rep("", length(unique(tmp$samples)) * 4)
+	} 
+	if (ctr == TRUE){
+    	stat <- am_stat(x)
+    	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
+    	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+    	d <- NULL
+    	for (i in seq_along(ll)){
+    		d <- append(d, c("", ll[[i]]))
+    	}
+	}
 	fin <- tmp %>% gather(feature, value, -samples, -replicates)
 	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
 											  factor(fin$feature, levels = c("F", "A", "a", "M")),
@@ -149,7 +181,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
 			  panel.grid.minor.x = element_blank(),
-			  legend.position = leg[1]) +
+			  legend.position = leg) +
 		geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
 									length(unique(fin$samples))), colour = "lightgrey") +
 					  #     geom_hline(yintercept = 105, colour = "lightgrey") +
@@ -160,6 +192,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
 								 length(unique(fin$samples)))[1:4],
 				 y = 110, label = c("F%", "M%", "a%", "A%")) +
+		annotate("text", x = 1:(length(unique(tmp$samples)) * 4), y = -Inf, vjust = -1, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))

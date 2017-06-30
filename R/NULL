@@ -1,23 +1,17 @@
   Kruskal-Wallis rank sum test
 
 data: x and group
-Kruskal-Wallis chi-squared = 48.2184, df = 4, p-value = 0
+Kruskal-Wallis chi-squared = 4.3556, df = 2, p-value = 0.11
 
 
                            Comparison of x by group                            
                              (Benjamini-Hochberg)                              
 Col Mean-|
-Row Mean |      1_bav      2_cam      3_cal      4_cav
----------+--------------------------------------------
-   2_cam |   2.545759
-         |    0.0091*
+Row Mean |   1_Lys 11       2_TM
+---------+----------------------
+    2_TM |   0.382546
+         |     0.3576
          |
-   3_cal |   7.801597   4.115210
-         |    0.0000*    0.0001*
-         |
-   4_cav |   1.748855  -1.022527  -5.986724
-         |     0.0526     0.1720    0.0000*
-         |
-   5_bal |   8.154487   4.556703   0.660714   6.405631
-         |    0.0000*    0.0000*     0.2553    0.0000*
+  3_Gifu |  -2.104003  -2.486549
+         |     0.0600     0.0711
 

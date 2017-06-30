@@ -46,7 +46,7 @@ am_barplot <- function(x, cbPalette, leg = "none", main = "Colonization", ctr = 
 
 #' am_boxplot object.
 #' 
-#' @usage am_boxplot(x, cbPalette, leg = "none", main = "Colonization", ...)
+#' @usage am_boxplot(x, cbPalette, leg = "none", main = "Colonization", ctr = FALSE, ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -54,6 +54,10 @@ am_barplot <- function(x, cbPalette, leg = "none", main = "Colonization", ctr = 
 #' 					design nice color palettes.
 #' @param leg this parameter allows to set the legend. Default is "none". The other
 #' 			  possible parameters are: "left", "right", "top", "bottom".
+#' @param ctr logic. Default is FALSE. If it is TRUE on the plot asterisks appear
+#'            below the sample statistically different from the control. The control
+#'            is the first sample in the input file. For statistical analysis check
+#'            `am_stat` function.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
 #' @examples
@@ -61,7 +65,7 @@ am_barplot <- function(x, cbPalette, leg = "none", main = "Colonization", ctr = 
 #' am_boxplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_boxplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) UseMethod("am_boxplot")
+am_boxplot <- function(x, cbPalette, leg = "none", main = "Colonization", ctr = FALSE, ...) UseMethod("am_boxplot")
 
 #' am_dotplot object.
 #' 
