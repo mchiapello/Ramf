@@ -4,7 +4,8 @@
 \alias{am_dotplot}
 \title{am_dotplot object.}
 \usage{
-am_dotplot(x, cbPalette, leg = "none", main = "Colonization", ...)
+am_dotplot(x, cbPalette,  main = "Colonization",
+                  stats = c("none", "asterisks", "letters"),...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
@@ -14,10 +15,12 @@ am_dotplot(x, cbPalette, leg = "none", main = "Colonization", ...)
     Colorbrewer and Colorgorical are website where is possible
     design nice color palettes.}
 
-\item{leg}{this parameter allows to set the legend. Default is "none". The other
-possible parameters are: "left", "right", "top", "bottom".}
-
 \item{main}{Plot title. Default "Colonization".}
+
+\item{stats}{Default is "none". If it is "asterisks" on the plot asterisks appear
+below the sample statistically different from the control. The control
+is the first sample in the input file. For statistical analysis check
+`am_stat` function.}
 
 \item{...}{ignored}
 }
