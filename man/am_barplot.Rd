@@ -4,7 +4,7 @@
 \alias{am_barplot}
 \title{am_barplot object.}
 \usage{
-am_barplot(x, cbPalette, leg = "none", main = "Colonization", ...)
+am_barplot(x, cbPalette, leg = "none", main = "Colonization", ctr = FALSE, ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
@@ -18,6 +18,11 @@ am_barplot(x, cbPalette, leg = "none", main = "Colonization", ...)
 possible parameters are: "left", "right", "top", "bottom".}
 
 \item{main}{Plot title. Default "Colonization".}
+
+\item{ctr}{logic. Default is FALSE. If it is TRUE on the plot asterisks appear
+below the sample statistically different from the control. The control
+is the first sample in the input file. For statistical analysis check
+`am_stat` function.}
 
 \item{...}{ignored}
 }

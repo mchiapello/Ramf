@@ -22,7 +22,7 @@ am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
 #' 
-#' @usage am_barplot(x, cbPalette, leg = "none", main = "Colonization", ...)
+#' @usage am_barplot(x, cbPalette, leg = "none", main = "Colonization", ctr = FALSE, ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -31,13 +31,18 @@ am_summary <- function(x) UseMethod("am_summary")
 #' @param leg this parameter allows to set the legend. Default is "none". The other
 #' 			  possible parameters are: "left", "right", "top", "bottom".
 #' @param main Plot title. Default "Colonization".
+#' @param ctr logic. Default is FALSE. If it is TRUE on the plot asterisks appear
+#'            below the sample statistically different from the control. The control
+#'            is the first sample in the input file. For statistical analysis check
+#'            `am_stat` function.
 #' @param ... ignored
 #' @examples
 #' am_barplot(example_grid)
 #' am_barplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_barplot <- function(x, cbPalette, leg = "none", main = "Colonization", ...) UseMethod("am_barplot")
+am_barplot <- function(x, cbPalette, leg = "none", main = "Colonization", ctr = FALSE,
+					   ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
