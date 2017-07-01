@@ -28,12 +28,26 @@ am_summary.grid <- function(x){
 am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
-							leg = c("none", "right", "left", "bottom", "top"),
+							stats = c("none", "asterisks", "letters"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
+	stats <- match.arg(stats)
 	# Create summary table
 	y <- grid_summary(x)
+	if (stats == "none" | stats == "letters"){
+		d <- rep("", length(unique(y$samples)) * 5)
+	}
+	if (stats == "asterisks"){
+    	stat <- am_stat(x)
+    	stat_ctr <- stat[stat$group1 == y$samples[1], ]
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
+    	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
+    	d <- NULL
+    	for (i in seq_along(ll)){
+    		d <- append(d, c("", ll[[i]]))
+    	}
+	}
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
@@ -52,8 +66,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank(),
-			  legend.position = leg[1]) +
+			  panel.grid.minor.x = element_blank()) +
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5, length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
 		labs(title = main, 
@@ -64,6 +77,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
 					min(final$means - final$se), 0), max(z$values) + max(z$values) / 10),
@@ -77,12 +91,26 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
-							leg = c("none", "right", "left", "bottom", "top"),
+							stats = c("none", "asterisks", "letters"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
+	stats <- match.arg(stats)
 	# Create summary table
 	y <- grid_summary(x)
+	if (stats == "none" | stats == "letters"){
+		d <- rep("", length(unique(y$samples)) * 5)
+	}
+	if (stats == "asterisks"){
+    	stat <- am_stat(x)
+    	stat_ctr <- stat[stat$group1 == y$samples[1], ]
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
+    	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
+    	d <- NULL
+    	for (i in seq_along(ll)){
+    		d <- append(d, c("", ll[[i]]))
+    	}
+	}
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	g <- ggplot(data = z,
@@ -90,17 +118,16 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 									factor(z$features, levels = c("Total", "Hyphopodia",
 																  "IntrHyphae", "Arbuscule", "Vesicles")),
 										  sep = ": "),
-						  y = values))
+						  y = values, color = samples))
 	a2 <- g +
-		geom_boxplot(colour = "lightgrey", alpha = 0) +
+		geom_boxplot() +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
 			  plot.title = element_text(size = 19),
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank(),
-			  legend.position = leg[1]) +
+			  panel.grid.minor.x = element_blank()) +
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
 									length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
@@ -113,6 +140,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, max(z$values) + max(z$values) / 10),
 						   breaks = seq(0, 110, 20))+ 
@@ -128,12 +156,26 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
-							leg = c("none", "right", "left", "bottom", "top"),
+							stats = c("none", "asterisks", "letters"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
+	stats <- match.arg(stats)
 	# Create summary table
 	y <- grid_summary(x)
+	if (stats == "none" | stats == "letters"){
+		d <- rep("", length(unique(y$samples)) * 5)
+	}
+	if (stats == "asterisks"){
+    	stat <- am_stat(x)
+    	stat_ctr <- stat[stat$group1 == y$samples[1], ]
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
+    	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
+    	d <- NULL
+    	for (i in seq_along(ll)){
+    		d <- append(d, c("", ll[[i]]))
+    	}
+	}
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
 	g <- ggplot(data = z,
@@ -141,18 +183,16 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 									factor(z$features, levels = c("Total", "Hyphopodia",
 																  "IntrHyphae", "Arbuscule", "Vesicles")),
 										  sep = ": "),
-						  y = values))
+						  y = values, color = samples))
 	a2 <- g +
-		geom_point(aes(color = samples),
-				   position = position_jitter(width = 0.2)) +
+		geom_point(position = position_jitter(width = 0.2)) +
 		theme_bw() +
 		theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
 			  plot.title = element_text(size = 19),
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank(),
-			  legend.position = leg[1]) +
+			  panel.grid.minor.x = element_blank()) +
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
 									length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
@@ -165,6 +205,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)))[1:5],
 				 y = max(z$values) + max(z$values) / 10, label = c("Total", "Hyphopodia",
 																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, max(z$values) + max(z$values) / 10),
 						   breaks = seq(0, 110, 20))+ 
@@ -190,7 +231,7 @@ am_stat.grid <- function(x, ...){
 																 levels = unique(sls[[1]]$samples)),
 														  length)),1)),
 								"_", sls[[1]]$samples),
-						 method = "bh", table = T), file='NULL')
+						 method = "bh", table = T), file=NULL)
 		stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))
 		stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
         stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
