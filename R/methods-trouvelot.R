@@ -26,8 +26,8 @@ am_summary.trouvelot <- function(x){
 am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
-								 main = "Colonization",
-								 stats = c("none", "asterisks", "letters"), ...){
+								 stats = c("none", "asterisks", "letters"),
+								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- means <- se <- num <- NULL
@@ -87,8 +87,8 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
-								 main = "Colonization",
-								 stats = c("none", "asterisks", "letters"), ...){
+								 stats = c("none", "asterisks", "letters"),
+								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
@@ -144,8 +144,8 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
-								 main = "Colonization",
-								 stats = c("none", "asterisks", "letters"), ...){
+								 stats = c("none", "asterisks", "letters"),
+								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
@@ -212,8 +212,7 @@ am_stat.trouvelot <- function(x, method = c("none", "bonferroni", "sidak",
 																 levels = unique(sls[[1]]$samples)),
 														  length)),1)),
 								"_", sls[[1]]$samples),
-						 method = method, table = T), file='NULL')
-		file.remove("NULL")
+						 method = method, table = T), file=NULL)
 		stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))
 		stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
         stat[[c(1, 1, 1:5)[i]]] <- stat_tmp

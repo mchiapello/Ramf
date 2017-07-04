@@ -234,7 +234,6 @@ am_stat.grid <- function(x, method = c("none", "bonferroni", "sidak",
 														  length)),1)),
 								"_", sls[[1]]$samples),
 						 method = method, table = T), file=NULL)
-		file.remove("NULL")
 		stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))
 		stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
         stat[[c(1, 1, 1:5)[i]]] <- stat_tmp

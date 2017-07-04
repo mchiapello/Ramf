@@ -22,32 +22,31 @@ am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
 #' 
-#' @usage am_barplot(x, cbPalette,  main = "Colonization",
-#'                   stats = c("none", "asterisks", "letters"), ...)
+#' @usage am_barplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
+#'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
 #' 					Colorbrewer and Colorgorical are website where is possible
 #' 					design nice color palettes.
-#' @param main Plot title. Default "Colonization".
 #' @param stats Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. For statistical analysis check
 #'            `am_stat` function.
+#' @param main Plot title. Default "Colonization".
 #' @param ... ignored
 #' @examples
 #' am_barplot(example_grid)
 #' am_barplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_barplot <- function(x, cbPalette,  main = "Colonization",
-					   stats = c("none", "asterisks", "letters"),
-					   ...) UseMethod("am_barplot")
+am_barplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
+					   main = "Colonization", ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
-#' @usage am_boxplot(x, cbPalette,  main = "Colonization",
-#'                   stats = c("none", "asterisks", "letters"), ...)
+#' @usage am_boxplot(x, cbPalette, stats = c("none", "asterisks", "letters"), 
+#'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -64,14 +63,13 @@ am_barplot <- function(x, cbPalette,  main = "Colonization",
 #' am_boxplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_boxplot <- function(x, cbPalette,  main = "Colonization",
-					   stats = c("none", "asterisks", "letters"),
-					   ...) UseMethod("am_boxplot")
+am_boxplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
+					   main = "Colonization", ...) UseMethod("am_boxplot")
 
 #' am_dotplot object.
 #' 
-#' @usage am_dotplot(x, cbPalette,  main = "Colonization",
-#'                   stats = c("none", "asterisks", "letters"),...)
+#' @usage am_dotplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
+#'                    main = "Colonization",...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -88,9 +86,8 @@ am_boxplot <- function(x, cbPalette,  main = "Colonization",
 #' am_dotplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_dotplot <- function(x, cbPalette,  main = "Colonization",
-					   stats = c("none", "asterisks", "letters"),
-					   ...) UseMethod("am_dotplot")
+am_dotplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
+					   main = "Colonization", ...) UseMethod("am_dotplot")
 
 #' am_stat object.
 #' 
@@ -108,7 +105,7 @@ am_dotplot <- function(x, cbPalette,  main = "Colonization",
 #' @export
 #' @import conover.test
 am_stat <- function(x, method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
-#'                              ...) UseMethod("am_stat")
+                                  ...) UseMethod("am_stat")
 
 #' am_save object.
 #' 

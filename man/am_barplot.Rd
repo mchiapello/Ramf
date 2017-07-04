@@ -4,8 +4,8 @@
 \alias{am_barplot}
 \title{am_barplot object.}
 \usage{
-am_barplot(x, cbPalette,  main = "Colonization",
-                  stats = c("none", "asterisks", "letters"), ...)
+am_barplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
+                  main = "Colonization", ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
@@ -15,12 +15,12 @@ am_barplot(x, cbPalette,  main = "Colonization",
     Colorbrewer and Colorgorical are website where is possible
     design nice color palettes.}
 
-\item{main}{Plot title. Default "Colonization".}
-
 \item{stats}{Default is "none". If it is "asterisks" on the plot asterisks appear
 below the sample statistically different from the control. The control
 is the first sample in the input file. For statistical analysis check
 `am_stat` function.}
+
+\item{main}{Plot title. Default "Colonization".}
 
 \item{...}{ignored}
 }
