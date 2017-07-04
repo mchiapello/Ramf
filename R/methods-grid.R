@@ -218,7 +218,9 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 }
 
 #' @export
-am_stat.grid <- function(x, ...){
+am_stat.grid <- function(x, method = c("none", "bonferroni", "sidak",
+									   "hs", "bh", "by"), ...){
+	method <- match.arg(method)
 	V1 <- NULL
 	sls <- am_summary(x)
 	stat <- list()
@@ -231,7 +233,8 @@ am_stat.grid <- function(x, ...){
 																 levels = unique(sls[[1]]$samples)),
 														  length)),1)),
 								"_", sls[[1]]$samples),
-						 method = "bh", table = T), file=NULL)
+						 method = method, table = T), file=NULL)
+		file.remove("NULL")
 		stat_tmp <- tbl_df(cbind(V1 = tmp$comparisons, pval = round(tmp$P.adjusted * 2, 3)))
 		stat_tmp <- stat_tmp %>% separate(V1, c("group1", "group2"), " - ")
         stat[[c(1, 1, 1:5)[i]]] <- stat_tmp

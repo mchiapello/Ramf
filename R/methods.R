@@ -94,15 +94,21 @@ am_dotplot <- function(x, cbPalette,  main = "Colonization",
 
 #' am_stat object.
 #' 
-#' @usage am_stat(x, ...)
+#' @usage am_stat(x, method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+#'                              ...)
 #' @param x dataset containing Trouvelot or Grid data
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
+#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
+#'               (see conover.test package for more details).
+#'               The default is no adjustment for multiple comparisons.
 #' @param ... ignored
 #' @examples
 #' am_stat(example_grid)
 #' am_stat(example_trouvelot)
 #' @export
 #' @import conover.test
-am_stat <- function(x, ...) UseMethod("am_stat")
+am_stat <- function(x, method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+#'                              ...) UseMethod("am_stat")
 
 #' am_save object.
 #' 
