@@ -23,6 +23,7 @@ am_summary <- function(x) UseMethod("am_summary")
 #' am_barplot object.
 #' 
 #' @usage am_barplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
+#'                   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 #'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
@@ -33,6 +34,10 @@ am_summary <- function(x) UseMethod("am_summary")
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. For statistical analysis check
 #'            `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
+#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
+#'               (see conover.test package for more details).
+#'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
 #' @examples
@@ -41,11 +46,13 @@ am_summary <- function(x) UseMethod("am_summary")
 #' @export
 #' @import tidyr ggplot2
 am_barplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
+					   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 					   main = "Colonization", ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
 #' @usage am_boxplot(x, cbPalette, stats = c("none", "asterisks", "letters"), 
+#'                   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 #'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
@@ -56,6 +63,10 @@ am_barplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. For statistical analysis check
 #'            `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
+#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
+#'               (see conover.test package for more details).
+#'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
 #' @examples
@@ -64,12 +75,14 @@ am_barplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 #' @export
 #' @import tidyr ggplot2
 am_boxplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
+					   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 					   main = "Colonization", ...) UseMethod("am_boxplot")
 
 #' am_dotplot object.
 #' 
 #' @usage am_dotplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
-#'                    main = "Colonization",...)
+#'                   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+#'                   main = "Colonization",...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -79,6 +92,10 @@ am_boxplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. For statistical analysis check
 #'            `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
+#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
+#'               (see conover.test package for more details).
+#'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
 #' @examples
@@ -87,6 +104,7 @@ am_boxplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 #' @export
 #' @import tidyr ggplot2
 am_dotplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
+					   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 					   main = "Colonization", ...) UseMethod("am_dotplot")
 
 #' am_stat object.

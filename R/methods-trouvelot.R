@@ -27,17 +27,19 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
 								 stats = c("none", "asterisks", "letters"),
+								 method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- means <- se <- num <- NULL
 	stats <- match.arg(stats)
+	method <- match.arg(method)
 	tmp <- trouvelot_summary(x)
 	if (stats == "none" | stats == "letters"){
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
 	if (stats == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- am_stat(x, method = method)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
@@ -88,17 +90,19 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
 								 stats = c("none", "asterisks", "letters"),
+								 method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
 	stats <- match.arg(stats)
+	method <- match.arg(method)
 	tmp <- trouvelot_summary(x)
 	if (stats == "none" | stats == "letters"){
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
 	if (stats == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- am_stat(x, method = method)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
@@ -145,17 +149,19 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
 								 stats = c("none", "asterisks", "letters"),
+								 method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
 	stats <- match.arg(stats)
+	method <- match.arg(method)
 	tmp <- trouvelot_summary(x)
 	if (stats == "none" | stats == "letters"){
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	} 
 	if (stats == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- am_stat(x, method = method)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))

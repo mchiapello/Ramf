@@ -29,17 +29,19 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
 							stats = c("none", "asterisks", "letters"),
+							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
 	stats <- match.arg(stats)
+	method <- match.arg(method)
 	# Create summary table
 	y <- grid_summary(x)
 	if (stats == "none" | stats == "letters"){
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
 	if (stats == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- am_stat(x, method = method)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
@@ -66,7 +68,8 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 			  panel.grid.major.y = element_blank(),
 			  panel.grid.minor.y = element_blank(),
 			  panel.grid.major.x = element_blank(),
-			  panel.grid.minor.x = element_blank()) +
+			  panel.grid.minor.x = element_blank(),
+			  legend.position = "none") +
 		geom_vline(xintercept = seq(length(unique(z$samples)) + .5, length(unique(z$samples)) * 4 + .5,
 									length(unique(z$samples))), colour = "lightgrey") +
 		labs(title = main, 
@@ -92,6 +95,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
 							stats = c("none", "asterisks", "letters"),
+							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
@@ -157,6 +161,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
 							stats = c("none", "asterisks", "letters"),
+							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL

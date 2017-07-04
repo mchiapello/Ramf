@@ -5,7 +5,8 @@
 \title{am_dotplot object.}
 \usage{
 am_dotplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
-                   main = "Colonization",...)
+                  method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+                  main = "Colonization",...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
@@ -19,6 +20,11 @@ am_dotplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
 below the sample statistically different from the control. The control
 is the first sample in the input file. For statistical analysis check
 `am_stat` function.}
+
+\item{method}{adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
+Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
+(see conover.test package for more details).
+The default is no adjustment for multiple comparisons.}
 
 \item{main}{Plot title. Default "Colonization".}
 
