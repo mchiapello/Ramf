@@ -42,8 +42,12 @@ gr <- readData(f)
 # Trouvelot
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "trouvelot.csv")
 tr <- readData(f) 
-
+tr
 ```
+
+It is very important the order of the samples in the csv file. The first sample will
+be considered the control.
+
 
 ### Summarize data
 
@@ -61,9 +65,42 @@ grs
 trs
 ```
 
+### Statistical analysis
+
+The statistical analysis is performed using the `conover.test` package. To read more
+about the statatical framework, refer to this [link](https://cran.r-project.org/web/packages/conover.test/).
+
+> am_stat
+
+
+#### Example
+```{r stat}
+grst <- am_stat(gr)
+trst <- am_stat(tr)
+grst
+trst
+```
+
+By default, the correction method is "none", but it is possible to select between:
+ Bonferroni, Šidák, Holm,
+ Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment. 
+ For more details refer to [conover.test package](https://cran.r-project.org/web/packages/conover.test/conover.test.pdf).
+
+#### Example
+```{r stat2}
+am_stat(gr, method = "bh")
+am_stat(tr, method = "sidak")
+```
+
+conover.test outputs both t-test-statistics for each pairwise comparison and the p-value = P(T ≥
+|t|) for each, so one would reject Ho if p ≤ α/2. IMPORTANT NOTE: the p-values just described
+are sometimes called "one-sided,", Ramf package transform them into "two-sided" p-values.
+
+(notice that p ≤ α/2 and 2p ≤ α are equivalent rejection decisions).
+
 ### Plot data
 
-To summarise the data in a graphical way the package provide 2 plot types:
+To summarise the data in a graphical way the package provide 3 plot types:
 
 - barplot
 
@@ -73,13 +110,39 @@ To summarise the data in a graphical way the package provide 2 plot types:
 
   >am_boxplot
 
+- dotplot
+
+  >am_dotplot
+
+It is possible to plot a simple plot.
+
 #### Example
 ```{r plot}
-p1 <- am_barplot(gr)
-p2 <- am_boxplot(gr)
-p3 <- am_barplot(tr)
-p4 <- am_boxplot(tr)
+am_barplot(gr)
+am_boxplot(gr)
+am_dotplot(gr)
+am_barplot(tr)
+am_boxplot(tr)
+am_dotplot(tr)
 ```
+
+The plot fuctions take a set of option to customize your plot.
+
+#### Example
+```{r plot2}
+am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'))
+am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid")
+# Plot with statistical information
+am_barplot(gr, cbPalette = c('#ca0020', '#f4a582', '#92c5de', '#0571b0'), main = "Grid",
+		   stats = "asterisks")
+# Statistical test corrected
+am_barplot(gr, cbPalette = c('#ca0020', '#f4a582', '#92c5de', '#0571b0'), main = "Grid",
+		   stats = "asterisks", method = "bh")
+```
+
+The asterisks below the plot show which sample is significant different from the control. 
+The control is always the first element of the list.
+
 
 ### Save data
 
@@ -89,10 +152,22 @@ csv files.
 
 #### Example
 ```{r save}
-am_save(grs)
-am_save(trs)
-am_save(p1, "barplor_grid.pdf")
-am_save(p4, "boxplor_trouvelot.pdf")
+# Save the summary
+am_save(grs) # Two files will be saved: Summary_per_Replicate.csv and Summary_per_Sample.csv
+am_save(trs, "Trouvelot") # Two files will be saved: Trouvelot_per_Replicate.csv and Trouvelot_per_Sample.csv
+
+# Save the statisticas
+am_save(am_stat(gr)) # One file called Summary_Stat.csv will be saved
+am_save(am_stat(tr, method = "bh"), "Trouvelot") # One file called Trouvelot_stat.csv will be saved
+
+# Save the plots
+am_save(am_barplot(gr), "barplor_grid.pdf")
+p1 <- am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Trouvelot",
+		   stats = "asterisks", method = "bh")
+am_save(p1, "dotplor_trouvelot.pdf", width = 21, height = 21, units = "cm", dpi = 300)
+
+# Save jpg plot
+am_save(p1, "dotplor_trouvelot.jpg")
 ```
 
 
