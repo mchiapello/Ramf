@@ -22,11 +22,47 @@ All the functions of the package work independently of the colonization scoring 
 
 #### Grid scoring system
 
-...
+The data should be provided in a **csv table** like the follow one:
+
+| replicates |  samples  | Total | Hyphopodia | IntrHyphae | Arbuscule | Vesicle |
+|:----------:|:---------:|:-----:|:----------:|:----------:|:---------:|:-------:|
+|      A     |     WT    |   30  |      3     |     30     |     30    |    10   |
+|      A     |     WT    |   24  |      5     |     24     |     24    |    7    |
+|      B     |     WT    |   20  |      2     |     20     |     20    |    5    |
+|      B     |     WT    |   15  |      2     |     15     |     15    |    3    |
+|      A     | cyclops-3 |   18  |      6     |     18     |     9     |    0    |
+|      A     | cyclops-3 |   16  |     10     |     10     |     0     |    0    |
+|      B     | cyclops-3 |   20  |     12     |     20     |     0     |    0    |
+|      B     | cyclops-3 |   14  |      4     |     14     |     0     |    0    |
+|     ...    |    ...    |  ...  |     ...    |     ...    |    ...    |   ...   |
+
+The table contains:
+
+- 7 columns with **specific headers**
+
+  - If the headers are not the same of the ones in the example table the software will not be able to read the table
+
+- As many row as you need
+
+- The **first element of column "samples" will be used as control** for the statistical analysis (in this example "WT" will be used as control)
 
 #### Trouvelot scoring system
 
-...
+| scoring | replicates | samples |
+|:-------:|:----------:|:-------:|
+|   1A3   |      A     |  Lys11  |
+|   5A3   |      A     |  Lys11  |
+|   0A0   |      A     |  Lys11  |
+|   3A2   |      B     |  Lys11  |
+|   3A3   |      B     |  Lys11  |
+|   4A3   |      B     |  Lys11  |
+|   0A0   |      A     |   GiFu  |
+|   0A0   |      A     |   GiFu  |
+|   1A3   |      A     |   GiFu  |
+|   3A3   |      B     |   GiFu  |
+|   0A0   |      B     |   GiFu  |
+|   0A0   |      B     |   GiFu  |
+|   ...   |     ...    |   ...   |
 
 ### Loading the data 
 
@@ -42,7 +78,6 @@ gr <- readData(f)
 # Trouvelot
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "trouvelot.csv")
 tr <- readData(f) 
-tr
 ```
 
 It is very important the order of the samples in the csv file. The first sample will
@@ -129,26 +164,60 @@ am_dotplot(tr)
 The plot fuctions take a set of option to customize your plot.
 
 #### Example
+
+The plot can use different color palettes. We advise to use [Colorbrewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) or
+[Colorgorical](http://vrl.cs.brown.edu/color).
 ```{r plot2}
 am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'))
-am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid")
-# Plot with statistical information
-am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid",
-		   stats = "asterisks")
-# Statistical test corrected
-am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid",
-		   stats = "asterisks", method = "bh")
+am_dotplot(gr, cbPalette = rep("black", 4))
+am_barplot(gr, cbPalette = c('#ca0020', '#f4a582', '#92c5de', '#0571b0'))
+am_boxplot(gr, cbPalette = c("#b4ddd4", "#02531d", "#34debb", "#d10f55"))
+```
+
+The title of the plot can be changed
+```{r title}
+am_barplot(gr, main = "Grid plot")
+am_barplot(tr, main = "Trouvelot plot")
+```
+
+The plotting system is based on [ggplot2](http://ggplot2.org/), 
+so is possible to change some parameters
+
+```{r title.position}
+library(ggplot2)
+am_barplot(gr, main = "Grid plot") + theme(plot.title = element_text(hjust = .5))
+am_barplot(tr, main = "Trouvelot plot") + theme(plot.title = element_text(hjust = 1))
+am_barplot(gr, main = "Grid plot") + theme(panel.grid.major.y = element_line(size = 3, colour = "grey80"))
+am_barplot(gr, main = "Grid plot") + theme(text=element_text(family="Avenir"))
+am_barplot(gr, main = "Grid plot") + theme(axis.text = element_text(size = 18))
+```
+
+It is also possible to include the statistical results under the plot
+
+```{r stat.plot}
+am_barplot(gr, stats = "asterisks")
+am_dotplot(tr, stats = "asterisks")
 ```
 
 The asterisks below the plot show which sample is significant different from the control. 
 The control is always the first element of the list.
 
+It is also possible to include the statistical correction for the pvalues.
+
+```{r stat.plot2}
+am_barplot(gr, stats = "asterisks", method = "bh")
+```
 
 ### Save data
 
-To export the summary data, a "save data" function is provided. The function 
-exports both the summary per replicate and the summary per sample in two distinct
-csv files.
+To export the data, a "save data" function is provided. 
+
+- **Summary data**: the function exports both the summary per replicate and the summary per sample in two distinct csv files.
+
+- **Statistical data**: the function exports a csv file
+
+- **Plots**: the function exports the plots and useful options can be used to export a pubblication ready image.
+
 
 #### Example
 ```{r save}

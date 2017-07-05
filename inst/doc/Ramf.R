@@ -9,7 +9,6 @@ gr <- readData(f)
 # Trouvelot
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "trouvelot.csv")
 tr <- readData(f) 
-tr
 
 ## ----summary-------------------------------------------------------------
 grs <- am_summary(gr)
@@ -37,13 +36,28 @@ am_dotplot(tr)
 
 ## ----plot2---------------------------------------------------------------
 am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'))
-am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid")
-# Plot with statistical information
-am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid",
-		   stats = "asterisks")
-# Statistical test corrected
-am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Grid",
-		   stats = "asterisks", method = "bh")
+am_dotplot(gr, cbPalette = rep("black", 4))
+am_barplot(gr, cbPalette = c('#ca0020', '#f4a582', '#92c5de', '#0571b0'))
+am_boxplot(gr, cbPalette = c("#b4ddd4", "#02531d", "#34debb", "#d10f55"))
+
+## ----title---------------------------------------------------------------
+am_barplot(gr, main = "Grid plot")
+am_barplot(tr, main = "Trouvelot plot")
+
+## ----title.position------------------------------------------------------
+library(ggplot2)
+am_barplot(gr, main = "Grid plot") + theme(plot.title = element_text(hjust = .5))
+am_barplot(tr, main = "Trouvelot plot") + theme(plot.title = element_text(hjust = 1))
+am_barplot(gr, main = "Grid plot") + theme(panel.grid.major.y = element_line(size = 3, colour = "grey80"))
+am_barplot(gr, main = "Grid plot") + theme(text=element_text(family="Avenir"))
+am_barplot(gr, main = "Grid plot") + theme(axis.text = element_text(size = 18))
+
+## ----stat.plot-----------------------------------------------------------
+am_barplot(gr, stats = "asterisks")
+am_dotplot(tr, stats = "asterisks")
+
+## ----stat.plot2----------------------------------------------------------
+am_barplot(gr, stats = "asterisks", method = "bh")
 
 ## ----save----------------------------------------------------------------
 # Save the summary
