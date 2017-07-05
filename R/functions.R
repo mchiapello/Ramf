@@ -1,7 +1,7 @@
 ## SUMMARY
 # Grid
 grid_summary <- function(x){
-	Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicles <- comp <- NULL
+	Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	# Create summary table
 	y <- x %>% 
@@ -10,7 +10,7 @@ grid_summary <- function(x){
 					  Hyphopodia = round(mean(Hyphopodia, na.rm = TRUE), 2),
 					  IntrHyphae = round(mean(IntrHyphae, na.rm = TRUE), 2),
 					  Arbuscule = round(mean(Arbuscule, na.rm = TRUE), 2),
-					  Vesicles = round(mean(Vesicles, na.rm = TRUE),2)) %>%
+					  Vesicle = round(mean(Vesicle, na.rm = TRUE),2)) %>%
 			ungroup
 	y <- y %>% arrange(factor(samples, levels = unique(x$samples)), replicates)
 	return(y)

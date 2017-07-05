@@ -14,7 +14,7 @@
 ##'   \item{- Hyphopodia:}{Number of hypopodia identified}
 ##'   \item{- IntrHyphae:}{Number of interanl hyphae identified}
 ##'   \item{- Arbuscule:}{Number of arbuscules identified}
-##'   \item{- Vesicles:}{Number of vesicles identified}
+##'   \item{- Vesicle:}{Number of vesicles identified}
 ##' }
 ##' A Trouvelot dataset should have 3 variables:
 ##' \describe{
@@ -79,7 +79,7 @@ readData <- function(infile){
 	}
 	## Grid specific checks
 	gnames <- c("replicates", "samples", "Total", "Hyphopodia", "IntrHyphae",
-				"Arbuscule", "Vesicles")
+				"Arbuscule", "Vesicle")
 	if (dim(x)[2] == 7){
 		if(all(names(x) == gnames)){
 			x$replicates <- as.character(x$replicates)
@@ -88,7 +88,7 @@ readData <- function(infile){
 			x$Hyphopodia <- as.numeric(x$Hyphopodia)
 			x$IntrHyphae <-  as.numeric(x$IntrHyphae)
 			x$Arbuscule <- as.numeric(x$Arbuscule)
-			x$Vesicles <- as.numeric(x$Vesicles)
+			x$Vesicle <- as.numeric(x$Vesicle)
 			class(x) <- c("grid", class(x))
 		} else {
 			gtmp <- which(names(x) != gnames)
