@@ -1,6 +1,6 @@
 #' @export
 am_summary.grid <- function(x){
-	Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicles <- comp <- NULL
+	Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- num <- n <- NULL
 	tmp <- grid_summary(x)
 	final <- tmp %>%
@@ -14,8 +14,8 @@ am_summary.grid <- function(x){
 			  `Standard error IntrHyphae` = round(sd(IntrHyphae, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
 			  `Mean Arbuscule` = round(mean(Arbuscule, na.rm = TRUE), 2),
 			  `Standard error Arbuscule` = round(sd(Arbuscule, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
-			  `Mean Vesicles` = round(mean(Vesicles, na.rm = TRUE), 2),
-			  `Standard error Vesicles` = round(sd(Vesicles, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
+			  `Mean Vesicle` = round(mean(Vesicle, na.rm = TRUE), 2),
+			  `Standard error Vesicle` = round(sd(Vesicle, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
 			  )
 	final <- final[match(unique(x$samples), final$samples), ]
 	l <- list(tmp, final)
@@ -31,7 +31,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 							stats = c("none", "asterisks", "letters"),
 							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 							main = "Colonization", ...){
-	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
 	stats <- match.arg(stats)
 	method <- match.arg(method)
@@ -58,7 +58,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 					se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
 	g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
 											  factor(final$features, levels = c("Total", "Hyphopodia",
-																		   "IntrHyphae", "Arbuscule", "Vesicles"))),
+																		   "IntrHyphae", "Arbuscule", "Vesicle"))),
 											  y = means, fill = samples))
 	a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
 		geom_errorbar(aes(ymin = means - se, ymax = means + se), width = .1) +
@@ -79,7 +79,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = 110, label = c("Total", "Hyphopodia",
-																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+																   "IntrHyphae", "Arbuscule", "Vesicle")) +
 		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
@@ -97,7 +97,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 							stats = c("none", "asterisks", "letters"),
 							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 							main = "Colonization", ...){
-	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	stats <- match.arg(stats)
 	# Create summary table
@@ -120,7 +120,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 	g <- ggplot(data = z,
 				aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
 									factor(z$features, levels = c("Total", "Hyphopodia",
-																  "IntrHyphae", "Arbuscule", "Vesicles")),
+																  "IntrHyphae", "Arbuscule", "Vesicle")),
 										  sep = ": "),
 						  y = values, color = samples))
 	a2 <- g +
@@ -143,7 +143,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = 110, label = c("Total", "Hyphopodia",
-																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+																   "IntrHyphae", "Arbuscule", "Vesicle")) +
 		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110),
@@ -151,7 +151,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		scale_colour_manual(values = cbPalette, 
 							breaks = levels(factor(z$features,
 												   levels = c("Total", "Hyphopodia",
-															  "IntrHyphae", "Arbuscule", "Vesicles"))))
+															  "IntrHyphae", "Arbuscule", "Vesicle"))))
 	class(a2) <- c("am_plot", class(a2))
 	return(a2)
 }
@@ -163,7 +163,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 							stats = c("none", "asterisks", "letters"),
 							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
 							main = "Colonization", ...){
-	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicles <- comp <- NULL
+	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
 	stats <- match.arg(stats)
 	# Create summary table
@@ -186,7 +186,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 	g <- ggplot(data = z,
 				aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
 									factor(z$features, levels = c("Total", "Hyphopodia",
-																  "IntrHyphae", "Arbuscule", "Vesicles")),
+																  "IntrHyphae", "Arbuscule", "Vesicle")),
 										  sep = ": "),
 						  y = values, color = samples))
 	a2 <- g +
@@ -209,7 +209,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = 110, label = c("Total", "Hyphopodia",
-																   "IntrHyphae", "Arbuscule", "Vesicles")) +
+																   "IntrHyphae", "Arbuscule", "Vesicle")) +
 		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110),
@@ -217,7 +217,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		scale_colour_manual(values = cbPalette, 
 							breaks = levels(factor(z$features,
 												   levels = c("Total", "Hyphopodia",
-															  "IntrHyphae", "Arbuscule", "Vesicles"))))
+															  "IntrHyphae", "Arbuscule", "Vesicle"))))
 	class(a2) <- c("am_plot", class(a2))
 	return(a2)
 }
