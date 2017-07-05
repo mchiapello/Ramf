@@ -34,6 +34,12 @@ barx <- am_barplot(x)
 boxx <- am_boxplot(x)
 dotx <- am_dotplot(x)
 
+## Statisticas
+sx <- am_stat(x)
+
+## Plot with statistics
+am_barplot(x, stats = "asterisks")
+
 ## Save summary data
 am_save(sx, "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"
 
