@@ -109,20 +109,20 @@ am_dotplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 
 #' am_stat object.
 #' 
-#' @usage am_stat(x, method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
-#'                              ...)
+#' @usage am_stat(x, method = c("none","holm","hommel", "hochberg",
+#'								"bonferroni", "BH", "BY", "fdr"),
+#'                ...)
 #' @param x dataset containing Trouvelot or Grid data
-#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
-#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
-#'               (see conover.test package for more details).
+#' @param method adjusts the p-value for multiple comparisons  (see p.adjust)
 #'               The default is no adjustment for multiple comparisons.
 #' @param ... ignored
 #' @examples
 #' am_stat(example_grid)
 #' am_stat(example_trouvelot)
 #' @export
-#' @import conover.test
-am_stat <- function(x, method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+#' @import agricolae
+am_stat <- function(x, method = c("none","holm","hommel", "hochberg",
+								  "bonferroni", "BH", "BY", "fdr"),
                                   ...) UseMethod("am_stat")
 
 #' am_save object.

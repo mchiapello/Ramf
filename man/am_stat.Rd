@@ -4,15 +4,14 @@
 \alias{am_stat}
 \title{am_stat object.}
 \usage{
-am_stat(x, method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
-                             ...)
+am_stat(x, method = c("none","holm","hommel", "hochberg",
+							"bonferroni", "BH", "BY", "fdr"),
+               ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
 
-\item{method}{adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
-Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
-(see conover.test package for more details).
+\item{method}{adjusts the p-value for multiple comparisons  (see p.adjust)
 The default is no adjustment for multiple comparisons.}
 
 \item{...}{ignored}
