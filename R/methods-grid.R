@@ -227,29 +227,8 @@ am_stat.grid <- function(x, method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
 						 ...){
 	method <- match.arg(method)
-	V1 <- NULL
-	sls <- am_summary(x)
-	sls[[1]]$samples <- paste0(rep(1:length(unique(sls[[1]]$samples)),
-						rep(as.numeric(tapply(sls[[1]]$replicates, factor(sls[[1]]$samples,
-						levels = unique(sls[[1]]$samples)), length)),1)), "_", sls[[1]]$samples)
-	stat <- list()
-	for(i in 3:7){
-		tmp <- kruskal(pull(sls[[1]], i),
-				pull(sls[[1]], 1),
-				p.adj = method,
-				group = FALSE,
-				console = FALSE)
-		tmp2 <- tmp$comparison
-		tmp2$V1 <- rownames(tmp2)
-		stat_tmp <- tmp2 %>% separate(V1, c("group1", "group2"), " - ") %>%
-			select("group1", "group2", "pvalue")
-		rownames(stat_tmp) <- NULL
-		stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
-	}
-	stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11, 13, 14)]
-	names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:7], ".pval"))
-	stat$group1 <- gsub("^\\d+_", "", stat$group1)
-	stat$group2 <- gsub("^\\d+_", "", stat$group2)
+	gr <- FALSE
+	stat <- .grid_stat(x, method = method, group = gr) 
     return(stat)
 }
 
