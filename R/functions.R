@@ -109,26 +109,43 @@ trouvelot_summary <- function(x){
 						rep(as.numeric(tapply(sls[[1]]$replicates, factor(sls[[1]]$samples,
 						levels = unique(sls[[1]]$samples)), length)),1)), "_", sls[[1]]$samples)
 	stat <- list()
-	for(i in 3:7){
-		tmp <- kruskal(pull(sls[[1]], i),
-				pull(sls[[1]], 1),
-				p.adj = method,
-				group = group,
-				console = FALSE)
-		tmp2 <- tmp$comparison
-		tmp2$V1 <- rownames(tmp2)
-		stat_tmp <- tmp2 %>% separate(V1, c("group1", "group2"), " - ") %>%
-			select("group1", "group2", "pvalue")
-		rownames(stat_tmp) <- NULL
-		stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
+	if (group == FALSE){
+		for(i in 3:7){
+			tmp <- kruskal(pull(sls[[1]], i),
+					pull(sls[[1]], 1),
+					p.adj = method,
+					group = group,
+					console = FALSE)
+			tmp2 <- tmp$comparison
+			tmp2$V1 <- rownames(tmp2)
+			stat_tmp <- tmp2 %>% separate(V1, c("group1", "group2"), " - ") %>%
+				select("group1", "group2", "pvalue")
+			rownames(stat_tmp) <- NULL
+			stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
+		}
+		stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11, 13, 14)]
+		names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:7], ".pval"))
+		stat$group1 <- gsub("^\\d+_", "", stat$group1)
+		stat$group2 <- gsub("^\\d+_", "", stat$group2)
+		class(stat) <- c("am_stat", class(stat))
+		return(stat)
+	} else {
+		for(i in 3:7){
+			tmp <- kruskal(pull(sls[[1]], i),
+					pull(sls[[1]], 1),
+					alpha = 0.05,
+					p.adj = method,
+					group = group,
+					console = FALSE)
+			tmp2 <- tmp$groups[, c(1, 3)]
+			tmp2 <- tmp2[order(tmp2$trt), ]
+			stat[[c(1, 1, 1:5)[i]]] <- tmp2
+		}
+		stat <- do.call(cbind, stat)[, -c(3, 5, 7, 9)]
+		names(stat) <- c("sample", paste0(names(sls[[1]])[3:7], ".group"))
+		stat$sample <- gsub("^\\d+_", "", stat$sample)
+		return(stat)
 	}
-	stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11, 13, 14)]
-	names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:7], ".pval"))
-	stat$group1 <- gsub("^\\d+_", "", stat$group1)
-	stat$group2 <- gsub("^\\d+_", "", stat$group2)
-	class(stat) <- c("am_stat", class(stat))
-    return(stat)
-}
 
 
 .trouvelot_stat <- function(x, group = gr, method = method, ...){
@@ -138,25 +155,43 @@ trouvelot_summary <- function(x){
 						rep(as.numeric(tapply(sls[[1]]$replicates, factor(sls[[1]]$samples,
 						levels = unique(sls[[1]]$samples)), length)),1)), "_", sls[[1]]$samples)
 	stat <- list()
-	for(i in 3:6){
-		tmp <- kruskal(pull(sls[[1]], i),
-				pull(sls[[1]], 1),
-				alpha = 0.05,
-				p.adj = method,
-				group = group,
-				console = FALSE)
-		tmp2 <- tmp$comparison
-		tmp2$V1 <- rownames(tmp2)
-		stat_tmp <- tmp2 %>% separate(V1, c("group1", "group2"), " - ") %>%
-			select("group1", "group2", "pvalue")
-		rownames(stat_tmp) <- NULL
-		stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
-    }
-	stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11)]
-	names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:6], ".pval"))
-	stat$group1 <- gsub("^\\d+_", "", stat$group1)
-	stat$group2 <- gsub("^\\d+_", "", stat$group2)
-	class(stat) <- c("am_stat", class(stat))
-    return(stat)
-}	
+	if (group == FALSE){
+		for(i in 3:6){
+			tmp <- kruskal(pull(sls[[1]], i),
+					pull(sls[[1]], 1),
+					alpha = 0.05,
+					p.adj = method,
+					group = group,
+					console = FALSE)
+			tmp2 <- tmp$comparison
+			tmp2$V1 <- rownames(tmp2)
+			stat_tmp <- tmp2 %>% separate(V1, c("group1", "group2"), " - ") %>%
+				select("group1", "group2", "pvalue")
+			rownames(stat_tmp) <- NULL
+			stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
+		}
+		stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11)]
+		names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:6], ".pval"))
+		stat$group1 <- gsub("^\\d+_", "", stat$group1)
+		stat$group2 <- gsub("^\\d+_", "", stat$group2)
+		class(stat) <- c("am_stat", class(stat))
+		return(stat)
+	} else {
+		for(i in 3:6){
+			tmp <- kruskal(pull(sls[[1]], i),
+					pull(sls[[1]], 1),
+					alpha = 0.05,
+					p.adj = method,
+					group = group,
+					console = FALSE)
+			tmp2 <- tmp$groups[, c(1, 3)]
+			tmp2 <- tmp2[order(tmp2$trt), ]
+			stat[[c(1, 1, 1:5)[i]]] <- tmp2
+		}
+		stat <- do.call(cbind, stat)[, -c(3, 5, 7)]
+		names(stat) <- c("sample", paste0(names(sls[[1]])[3:6], ".group"))
+		stat$sample <- gsub("^\\d+_", "", stat$sample)
+		return(stat)
+	}
+}
 
