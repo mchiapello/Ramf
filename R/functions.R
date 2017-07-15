@@ -102,7 +102,7 @@ trouvelot_summary <- function(x){
 	return(tmp)
 }
 
-.grid_stat <- function(x, group = gr, method = method, ...){
+.grid_stat <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
 	V1 <- NULL
 	sls <- am_summary(x)
 	sls[[1]]$samples <- paste0(rep(1:length(unique(sls[[1]]$samples)),
@@ -133,7 +133,7 @@ trouvelot_summary <- function(x){
 		for(i in 3:7){
 			tmp <- kruskal(pull(sls[[1]], i),
 					pull(sls[[1]], 1),
-					alpha = 0.05,
+					alpha = alpha,
 					p.adj = method,
 					group = group,
 					console = FALSE)
@@ -146,9 +146,10 @@ trouvelot_summary <- function(x){
 		stat$sample <- gsub("^\\d+_", "", stat$sample)
 		return(stat)
 	}
+}
 
 
-.trouvelot_stat <- function(x, group = gr, method = method, ...){
+.trouvelot_stat <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
 	V1 <- NULL
 	sls <- am_summary(x)
 	sls[[1]]$samples <- paste0(rep(1:length(unique(sls[[1]]$samples)),
@@ -159,7 +160,6 @@ trouvelot_summary <- function(x){
 		for(i in 3:6){
 			tmp <- kruskal(pull(sls[[1]], i),
 					pull(sls[[1]], 1),
-					alpha = 0.05,
 					p.adj = method,
 					group = group,
 					console = FALSE)
@@ -180,7 +180,7 @@ trouvelot_summary <- function(x){
 		for(i in 3:6){
 			tmp <- kruskal(pull(sls[[1]], i),
 					pull(sls[[1]], 1),
-					alpha = 0.05,
+					alpha = alpha,
 					p.adj = method,
 					group = group,
 					console = FALSE)

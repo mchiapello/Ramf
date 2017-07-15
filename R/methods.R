@@ -22,21 +22,27 @@ am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
 #' 
-#' @usage am_barplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
-#'                   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+#' @usage am_barplot(x, cbPalette,
+#'					alpha = 0.05,
+#'					annot = c("none", "asterisks", "letters"),
+#'					method = c("none","holm","hommel", "hochberg",
+#'							   "bonferroni", "BH", "BY", "fdr"),
 #'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
 #' 					Colorbrewer and Colorgorical are website where is possible
 #' 					design nice color palettes.
-#' @param stats Default is "none". If it is "asterisks" on the plot asterisks appear
+#' @param alpha Significant threshold
+#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
-#'            is the first sample in the input file. For statistical analysis check
-#'            `am_stat` function.
-#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
-#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
-#'               (see conover.test package for more details).
+#'            is the first sample in the input file. If is is "letters" on the plot
+#'            letters appear below the samples groupping the samples based on the 
+#'            statistical test. For statistical tests check `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+#'               adjustment
+#'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
@@ -45,27 +51,36 @@ am_summary <- function(x) UseMethod("am_summary")
 #' am_barplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_barplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
-					   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+am_barplot <- function(x, cbPalette,
+					   alpha = 0.05,
+					   annot = c("none", "asterisks", "letters"),
+					   method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 					   main = "Colonization", ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
-#' @usage am_boxplot(x, cbPalette, stats = c("none", "asterisks", "letters"), 
-#'                   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+#' @usage am_boxplot(x, cbPalette,
+#'					alpha = 0.05,
+#'					annot = c("none", "asterisks", "letters"),
+#'					method = c("none","holm","hommel", "hochberg",
+#'							   "bonferroni", "BH", "BY", "fdr"),
 #'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
 #' 					Colorbrewer and Colorgorical are website where is possible
 #' 					design nice color palettes.
-#' @param stats Default is "none". If it is "asterisks" on the plot asterisks appear
+#' @param alpha Significant threshold
+#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
-#'            is the first sample in the input file. For statistical analysis check
-#'            `am_stat` function.
-#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
-#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
-#'               (see conover.test package for more details).
+#'            is the first sample in the input file. If is is "letters" on the plot
+#'            letters appear below the samples groupping the samples based on the 
+#'            statistical test. For statistical tests check `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+#'               adjustment
+#'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
@@ -74,27 +89,36 @@ am_barplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 #' am_boxplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_boxplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
-					   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+am_boxplot <- function(x, cbPalette,
+					   alpha = 0.05,
+					   annot = c("none", "asterisks", "letters"),
+					   method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 					   main = "Colonization", ...) UseMethod("am_boxplot")
 
 #' am_dotplot object.
 #' 
-#' @usage am_dotplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
-#'                   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
-#'                   main = "Colonization",...)
+#' @usage am_dotplot(x, cbPalette,
+#'					alpha = 0.05,
+#'					annot = c("none", "asterisks", "letters"),
+#'					method = c("none","holm","hommel", "hochberg",
+#'							   "bonferroni", "BH", "BY", "fdr"),
+#'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
 #' 					Colorbrewer and Colorgorical are website where is possible
 #' 					design nice color palettes.
-#' @param stats Default is "none". If it is "asterisks" on the plot asterisks appear
+#' @param alpha Significant threshold
+#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
-#'            is the first sample in the input file. For statistical analysis check
-#'            `am_stat` function.
-#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
-#'               Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
-#'               (see conover.test package for more details).
+#'            is the first sample in the input file. If is is "letters" on the plot
+#'            letters appear below the samples groupping the samples based on the 
+#'            statistical test. For statistical tests check `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+#'               adjustment
+#'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
@@ -103,8 +127,11 @@ am_boxplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
 #' am_dotplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_dotplot <- function(x, cbPalette, stats = c("none", "asterisks", "letters"),
-					   method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+am_dotplot <- function(x, cbPalette,
+					   alpha = 0.05,
+					   annot = c("none", "asterisks", "letters"),
+					   method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 					   main = "Colonization", ...) UseMethod("am_dotplot")
 
 #' am_stat object.

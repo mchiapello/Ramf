@@ -26,27 +26,38 @@ am_summary.trouvelot <- function(x){
 am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
-								 stats = c("none", "asterisks", "letters"),
-								 method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+							alpha = 0.05,
+							annot = c("none", "asterisks", "letters"),
+							method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
 	values <- means <- se <- num <- NULL
-	stats <- match.arg(stats)
+	dimen <- 0
+	alpha <- alpha
+	annot <- match.arg(annot)
 	method <- match.arg(method)
+	# Create summary table
 	tmp <- trouvelot_summary(x)
-	if (stats == "none" | stats == "letters"){
+	if (annot == "none"){
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
-	if (stats == "asterisks"){
-    	stat <- am_stat(x, method = method)
+	if (annot == "asterisks"){
+    	stat <- am_stat(x)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
-    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
+		dimen <- 5
+	}
+	if (annot == "letters"){
+    	stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
+		d <- as.vector(as.matrix(stat[,2:5]))
+		dimen <- 3
 	}
 	z <- tmp %>% tidyr::gather(features, values, -samples, -replicates)
 	final <- z %>% group_by(samples, features) %>%
@@ -76,7 +87,8 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 			annotate("text", x = seq(length(unique(final$samples)) * .5 + .5, length(unique(final$samples)) * 5 + .5,
 									 length(unique(final$samples)))[1:4],
 					 y = 110, label = c("F%", "M%", "a%", "A%")) +
-			annotate("text", x = 1:(length(unique(tmp$samples)) * 4), y = -Inf, vjust = -0.5, label = d) +
+		annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
+				 y = -Inf, vjust = -0.5, label = d, size = dimen) +
 			scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 			scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
 					min(final$means - final$se), 0), 110), breaks = seq(0, 110, 20)) +
@@ -89,27 +101,38 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
-								 stats = c("none", "asterisks", "letters"),
-								 method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+							alpha = 0.05,
+							annot = c("none", "asterisks", "letters"),
+							method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
-	stats <- match.arg(stats)
+	dimen <- 0
+	alpha <- alpha
+	annot <- match.arg(annot)
 	method <- match.arg(method)
+	# Create summary table
 	tmp <- trouvelot_summary(x)
-	if (stats == "none" | stats == "letters"){
+	if (annot == "none"){
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
-	if (stats == "asterisks"){
-    	stat <- am_stat(x, method = method)
+	if (annot == "asterisks"){
+    	stat <- am_stat(x)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
-    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
+		dimen <- 5
+	}
+	if (annot == "letters"){
+    	stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
+		d <- as.vector(as.matrix(stat[,2:5]))
+		dimen <- 3
 	}
 	fin <- tmp %>% gather(feature, value, -samples, -replicates)
 	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
@@ -135,7 +158,8 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
 								 length(unique(fin$samples)))[1:4],
 				 y = 110, label = c("F%", "M%", "a%", "A%")) +
-		annotate("text", x = 1:(length(unique(tmp$samples)) * 4), y = -Inf, vjust = -0.5, label = d) +
+		annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
+				 y = -Inf, vjust = -0.5, label = d, size = dimen) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
@@ -148,27 +172,38 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 												  "#009E73", "#F0E442", "#0072B2",
 												  "#D55E00", "#CC79A7"),
-								 stats = c("none", "asterisks", "letters"),
-								 method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+							alpha = 0.05,
+							annot = c("none", "asterisks", "letters"),
+							method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 								 main = "Colonization", ...){
 	A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
 	mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
 	values <- NULL
-	stats <- match.arg(stats)
+	dimen <- 0
+	alpha <- alpha
+	annot <- match.arg(annot)
 	method <- match.arg(method)
+	# Create summary table
 	tmp <- trouvelot_summary(x)
-	if (stats == "none" | stats == "letters"){
+	if (annot == "none"){
 		d <- rep("", length(unique(tmp$samples)) * 4)
-	} 
-	if (stats == "asterisks"){
-    	stat <- am_stat(x, method = method)
+	}
+	if (annot == "asterisks"){
+    	stat <- am_stat(x)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
-    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < 0.05, "*", "") 
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
+		dimen <- 5
+	}
+	if (annot == "letters"){
+    	stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
+		d <- as.vector(as.matrix(stat[,2:5]))
+		dimen <- 3
 	}
 	fin <- tmp %>% gather(feature, value, -samples, -replicates)
 	g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
@@ -194,7 +229,8 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
 								 length(unique(fin$samples)))[1:4],
 				 y = 110, label = c("F%", "M%", "a%", "A%")) +
-		annotate("text", x = 1:(length(unique(tmp$samples)) * 4), y = -Inf, vjust = -0.5, label = d) +
+		annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
+				 y = -Inf, vjust = -0.5, label = d, size = dimen) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
 		scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
@@ -206,8 +242,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 am_stat.trouvelot <- function(x, method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"), ...){
 	method <- match.arg(method)
-	gr <- FALSE
-	stat <- .trouvelot_stat(x, method = method, group = gr)
+	stat <- .trouvelot_stat(x, method = method)
 	return(stat)
 }
 

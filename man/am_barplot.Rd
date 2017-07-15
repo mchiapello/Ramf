@@ -4,8 +4,11 @@
 \alias{am_barplot}
 \title{am_barplot object.}
 \usage{
-am_barplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
-                  method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+am_barplot(x, cbPalette,
+				alpha = 0.05,
+				annot = c("none", "asterisks", "letters"),
+				method = c("none","holm","hommel", "hochberg",
+						   "bonferroni", "BH", "BY", "fdr"),
                   main = "Colonization", ...)
 }
 \arguments{
@@ -16,14 +19,18 @@ am_barplot(x, cbPalette, stats = c("none", "asterisks", "letters"),
     Colorbrewer and Colorgorical are website where is possible
     design nice color palettes.}
 
-\item{stats}{Default is "none". If it is "asterisks" on the plot asterisks appear
-below the sample statistically different from the control. The control
-is the first sample in the input file. For statistical analysis check
-`am_stat` function.}
+\item{alpha}{Significant threshold}
 
-\item{method}{adjusts the p-value for multiple comparisons using the Bonferroni, Šidák, Holm,
-Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment
-(see conover.test package for more details).
+\item{annot}{Default is "none". If it is "asterisks" on the plot asterisks appear
+below the sample statistically different from the control. The control
+is the first sample in the input file. If is is "letters" on the plot
+letters appear below the samples groupping the samples based on the 
+statistical test. For statistical tests check `am_stat` function.}
+
+\item{method}{adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+adjustment
+(see agricolae package for more details).
 The default is no adjustment for multiple comparisons.}
 
 \item{main}{Plot title. Default "Colonization".}

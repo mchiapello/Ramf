@@ -28,27 +28,37 @@ am_summary.grid <- function(x){
 am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
-							stats = c("none", "asterisks", "letters"),
-							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+							alpha = 0.05,
+							annot = c("none", "asterisks", "letters"),
+							method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
-	stats <- match.arg(stats)
+	dimen <- 0
+	alpha <- alpha
+	annot <- match.arg(annot)
 	method <- match.arg(method)
 	# Create summary table
 	y <- grid_summary(x)
-	if (stats == "none" | stats == "letters"){
+	if (annot == "none"){
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
-	if (stats == "asterisks"){
-    	stat <- am_stat(x, method = method)
+	if (annot == "asterisks"){
+    	stat <- am_stat(x)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
-    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
+		dimen <- 5
+	}
+	if (annot == "letters"){
+    	stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
+		d <- as.vector(as.matrix(stat[,2:6]))
+		dimen <- 3
 	}
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
@@ -79,8 +89,9 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = 110, label = c("Total", "Hyphopodia",
-																   "IntrHyphae", "Arbuscule", "Vesicle")) +
-		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
+								   "IntrHyphae", "Arbuscule", "Vesicle")) +
+		annotate("text", x = 1:(length(unique(y$samples)) * 5),
+				 y = -Inf, vjust = -0.5, label = d, size = dimen) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
 					min(final$means - final$se), 0), 110),
@@ -94,26 +105,37 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
-							stats = c("none", "asterisks", "letters"),
-							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+							alpha = 0.05,
+							annot = c("none", "asterisks", "letters"),
+							method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
-	stats <- match.arg(stats)
+	dimen <- 0
+	alpha <- alpha
+	annot <- match.arg(annot)
+	method <- match.arg(method)
 	# Create summary table
 	y <- grid_summary(x)
-	if (stats == "none" | stats == "letters"){
+	if (annot == "none"){
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
-	if (stats == "asterisks"){
+	if (annot == "asterisks"){
     	stat <- am_stat(x)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
-    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
+		dimen <- 5
+	}
+	if (annot == "letters"){
+    	stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
+		d <- as.vector(as.matrix(stat[,2:6]))
+		dimen <- 3
 	}
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
@@ -143,8 +165,9 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = 110, label = c("Total", "Hyphopodia",
-																   "IntrHyphae", "Arbuscule", "Vesicle")) +
-		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
+								   "IntrHyphae", "Arbuscule", "Vesicle")) +
+		annotate("text", x = 1:(length(unique(y$samples)) * 5),
+				 y = -Inf, vjust = -0.5, label = d, size = dimen) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110),
 						   breaks = seq(0, 110, 20))+ 
@@ -160,26 +183,37 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 											 "#009E73", "#F0E442", "#0072B2",
 											 "#D55E00", "#CC79A7"),
-							stats = c("none", "asterisks", "letters"),
-							method = c("none", "bonferroni", "sidak", "hs", "bh", "by"),
+							alpha = 0.05,
+							annot = c("none", "asterisks", "letters"),
+							method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
 							main = "Colonization", ...){
 	Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
 	features <- replicates <- samples <- values <- NULL
-	stats <- match.arg(stats)
+	dimen <- 0
+	alpha <- alpha
+	annot <- match.arg(annot)
+	method <- match.arg(method)
 	# Create summary table
 	y <- grid_summary(x)
-	if (stats == "none" | stats == "letters"){
+	if (annot == "none"){
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
-	if (stats == "asterisks"){
+	if (annot == "asterisks"){
     	stat <- am_stat(x)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
-    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < 0.05, "*", "") 
+    	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
     	d <- NULL
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
+		dimen <- 5
+	}
+	if (annot == "letters"){
+    	stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
+		d <- as.vector(as.matrix(stat[,2:6]))
+		dimen <- 3
 	}
 	# Change table shape
 	z <- y %>% tidyr::gather(features, values, -samples, -replicates)
@@ -209,8 +243,9 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 								 length(unique(z$samples)) * 5 + .5,
 								 length(unique(z$samples)))[1:5],
 				 y = 110, label = c("Total", "Hyphopodia",
-																   "IntrHyphae", "Arbuscule", "Vesicle")) +
-		annotate("text", x = 1:(length(unique(y$samples)) * 5), y = -Inf, vjust = -0.5, label = d) +
+								   "IntrHyphae", "Arbuscule", "Vesicle")) +
+		annotate("text", x = 1:(length(unique(y$samples)) * 5),
+				 y = -Inf, vjust = -0.5, label = d, size = dimen) +
 		scale_x_discrete(labels = rep(unique(x$samples), 5)) +
 		scale_y_continuous(limits = c(-0.5, 110),
 						   breaks = seq(0, 110, 20))+ 
@@ -227,8 +262,7 @@ am_stat.grid <- function(x, method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
 						 ...){
 	method <- match.arg(method)
-	gr <- FALSE
-	stat <- .grid_stat(x, method = method, group = gr) 
+	stat <- .grid_stat(x, method = method) 
     return(stat)
 }
 
