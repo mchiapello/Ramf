@@ -1,0 +1,242 @@
+--- 
+title: "Arbuscular mycorrhizal fungi colonization" 
+author: "Marco Chiapello"
+output:  
+  BiocStyle::html_document
+vignette: >
+  %\VignetteIndexEntry{Ramf colonization analysis} 
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r env, echo=FALSE, warnings=FALSE}
+library("Ramf")
+library("BiocStyle")
+```
+### Introduction
+
+The package is meant to help scientists to compute the degree of arbuscular
+mycorrhizal fungi.
+
+All the functions of the package work independently of the colonization scoring system.
+
+#### Grid scoring system
+
+The data should be provided in a **csv table** like the follow one:
+
+| replicates |  samples  | Total | Hyphopodia | IntrHyphae | Arbuscule | Vesicle |
+|:----------:|:---------:|:-----:|:----------:|:----------:|:---------:|:-------:|
+|      A     |     WT    |   30  |      3     |     30     |     30    |    10   |
+|      A     |     WT    |   24  |      5     |     24     |     24    |    7    |
+|      B     |     WT    |   20  |      2     |     20     |     20    |    5    |
+|      B     |     WT    |   15  |      2     |     15     |     15    |    3    |
+|      A     | cyclops-3 |   18  |      6     |     18     |     9     |    0    |
+|      A     | cyclops-3 |   16  |     10     |     10     |     0     |    0    |
+|      B     | cyclops-3 |   20  |     12     |     20     |     0     |    0    |
+|      B     | cyclops-3 |   14  |      4     |     14     |     0     |    0    |
+|     ...    |    ...    |  ...  |     ...    |     ...    |    ...    |   ...   |
+
+The table contains:
+
+- 7 columns with **specific headers**
+
+  - If the headers are not the same of the ones in the example table the software will not be able to read the table
+
+- As many row as you need
+
+- The **first element of column "samples" will be used as control** for the statistical analysis (in this example "WT" will be used as control)
+
+#### Trouvelot scoring system
+
+| scoring | replicates | samples |
+|:-------:|:----------:|:-------:|
+|   1A3   |      A     |  Lys11  |
+|   5A3   |      A     |  Lys11  |
+|   0A0   |      A     |  Lys11  |
+|   3A2   |      B     |  Lys11  |
+|   3A3   |      B     |  Lys11  |
+|   4A3   |      B     |  Lys11  |
+|   0A0   |      A     |   GiFu  |
+|   0A0   |      A     |   GiFu  |
+|   1A3   |      A     |   GiFu  |
+|   3A3   |      B     |   GiFu  |
+|   0A0   |      B     |   GiFu  |
+|   0A0   |      B     |   GiFu  |
+|   ...   |     ...    |   ...   |
+
+### Loading the data 
+
+To load data in, use the follow command: 
+
+>readData
+
+#### Example
+```{r loadData}
+# Grid
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
+gr <- readData(f)
+# Trouvelot
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "trouvelot.csv")
+tr <- readData(f) 
+```
+
+It is very important the order of the samples in the csv file. The first sample will
+be considered the control.
+
+
+### Summarize data
+
+To summarise the data and export the scoring results in a tabular format use the
+follow command:
+
+> am_summary
+
+
+#### Example
+```{r summary}
+grs <- am_summary(gr)
+trs <- am_summary(tr)
+grs
+trs
+```
+
+### Statistical analysis
+
+The statistical analysis is performed using the `conover.test` package. To read more
+about the statatical framework, refer to this [link](https://cran.r-project.org/web/packages/conover.test/).
+
+> am_stat
+
+
+#### Example
+```{r stat}
+grst <- am_stat(gr)
+trst <- am_stat(tr)
+grst
+trst
+```
+
+By default, the correction method is "none", but it is possible to select between:
+ Bonferroni, Šidák, Holm,
+ Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment. 
+ For more details refer to [conover.test package](https://cran.r-project.org/web/packages/conover.test/conover.test.pdf).
+
+#### Example
+```{r stat2}
+am_stat(gr, method = "bh")
+am_stat(tr, method = "sidak")
+```
+
+conover.test outputs both t-test-statistics for each pairwise comparison and the p-value = P(T ≥
+|t|) for each, so one would reject Ho if p ≤ α/2. IMPORTANT NOTE: the p-values just described
+are sometimes called "one-sided,", Ramf package transform them into "two-sided" p-values.
+
+(notice that p ≤ α/2 and 2p ≤ α are equivalent rejection decisions).
+
+### Plot data
+
+To summarise the data in a graphical way the package provide 3 plot types:
+
+- barplot
+
+  >am_barplot
+
+- boxplot
+
+  >am_boxplot
+
+- dotplot
+
+  >am_dotplot
+
+It is possible to plot a simple plot.
+
+#### Example
+```{r plot}
+am_barplot(gr)
+am_boxplot(gr)
+am_dotplot(gr)
+am_barplot(tr)
+am_boxplot(tr)
+am_dotplot(tr)
+```
+
+The plot fuctions take a set of option to customize your plot.
+
+#### Example
+
+The plot can use different color palettes. We advise to use [Colorbrewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) or
+[Colorgorical](http://vrl.cs.brown.edu/color).
+```{r plot2}
+am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'))
+am_dotplot(gr, cbPalette = rep("black", 4))
+am_barplot(gr, cbPalette = c('#ca0020', '#f4a582', '#92c5de', '#0571b0'))
+am_boxplot(gr, cbPalette = c("#b4ddd4", "#02531d", "#34debb", "#d10f55"))
+```
+
+The title of the plot can be changed
+```{r title}
+am_barplot(gr, main = "Grid plot")
+am_barplot(tr, main = "Trouvelot plot")
+```
+
+The plotting system is based on [ggplot2](http://ggplot2.org/), 
+so is possible to change some parameters
+
+```{r title.position}
+library(ggplot2)
+am_barplot(gr, main = "Grid plot") + theme(plot.title = element_text(hjust = .5))
+am_barplot(tr, main = "Trouvelot plot") + theme(plot.title = element_text(hjust = 1))
+am_barplot(gr, main = "Grid plot") + theme(panel.grid.major.y = element_line(size = 3, colour = "grey80"))
+am_barplot(gr, main = "Grid plot") + theme(text=element_text(family="Avenir"))
+am_barplot(gr, main = "Grid plot") + theme(axis.text = element_text(size = 18))
+```
+
+It is also possible to include the statistical results under the plot
+
+```{r stat.plot}
+am_barplot(gr, stats = "asterisks")
+am_dotplot(tr, stats = "asterisks")
+```
+
+The asterisks below the plot show which sample is significant different from the control. 
+The control is always the first element of the list.
+
+It is also possible to include the statistical correction for the pvalues.
+
+```{r stat.plot2}
+am_barplot(gr, stats = "asterisks", method = "bh")
+```
+
+### Save data
+
+To export the data, a "save data" function is provided. 
+
+- **Summary data**: the function exports both the summary per replicate and the summary per sample in two distinct csv files.
+
+- **Statistical data**: the function exports a csv file
+
+- **Plots**: the function exports the plots and useful options can be used to export a pubblication ready image.
+
+
+#### Example
+```{r save}
+# Save the summary
+am_save(grs) # Two files will be saved: Summary_per_Replicate.csv and Summary_per_Sample.csv
+am_save(trs, "Trouvelot") # Two files will be saved: Trouvelot_per_Replicate.csv and Trouvelot_per_Sample.csv
+
+# Save the statisticas
+am_save(am_stat(gr)) # One file called Summary_Stat.csv will be saved
+am_save(am_stat(tr, method = "bh"), "Trouvelot") # One file called Trouvelot_stat.csv will be saved
+
+# Save the plots
+am_save(am_barplot(gr), "barplor_grid.pdf")
+p1 <- am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Trouvelot",
+		   stats = "asterisks", method = "bh")
+am_save(p1, "dotplor_trouvelot.pdf", width = 21, height = 21, units = "cm", dpi = 300)
+
+# Save jpg plot
+am_save(p1, "dotplor_trouvelot.jpg")
+```
+
+
