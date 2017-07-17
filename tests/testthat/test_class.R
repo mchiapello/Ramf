@@ -52,3 +52,12 @@ test_that("Trouvelot_plot", {
   expect_equal(class(am_boxplot(example_trouvelot))[2], "gg")
   expect_equal(class(am_boxplot(example_trouvelot))[3], "ggplot")
 })
+
+context("Class stat")
+
+test_that("am_stat", {
+  expect_equal(class(am_stat(example_trouvelot))[1], "am_stat")
+  expect_equal(class(am_stat(example_trouvelot))[2], "data.frame")
+  expect_equal(class(am_stat(example_grid))[1], "am_stat")
+  expect_equal(class(am_stat(example_grid))[2], "data.frame")
+})
