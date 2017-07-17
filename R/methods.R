@@ -137,7 +137,7 @@ am_dotplot <- function(x, cbPalette,
 #' am_stat object.
 #' 
 #' @usage am_stat(x, method = c("none","holm","hommel", "hochberg",
-#'								"bonferroni", "BH", "BY", "fdr"),
+#'                "bonferroni", "BH", "BY", "fdr"),
 #'                ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param method adjusts the p-value for multiple comparisons  (see p.adjust)
@@ -149,14 +149,14 @@ am_dotplot <- function(x, cbPalette,
 #' @export
 #' @import agricolae
 am_stat <- function(x, method = c("none","holm","hommel", "hochberg",
-								  "bonferroni", "BH", "BY", "fdr"),
+                                  "bonferroni", "BH", "BY", "fdr"),
                                   ...) UseMethod("am_stat")
 
 #' am_save object.
 #' 
 #' @param x summary, statistics or plot data from Trouvelot or Grid dataset
 #' @param filename path where save the file
-#' @param ... ignored
+#' @param ... arguments from ggsave function from ggplot2 package
 #' @details
 #'    If you save the summary, two files will be saved corresponding to the
 #'    summary two tables. The user can name the file but the save function

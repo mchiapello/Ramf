@@ -5,7 +5,7 @@
 \title{am_stat object.}
 \usage{
 am_stat(x, method = c("none","holm","hommel", "hochberg",
-							"bonferroni", "BH", "BY", "fdr"),
+               "bonferroni", "BH", "BY", "fdr"),
                ...)
 }
 \arguments{

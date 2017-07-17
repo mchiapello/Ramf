@@ -102,8 +102,8 @@ trs
 
 ### Statistical analysis
 
-The statistical analysis is performed using the `conover.test` package. To read more
-about the statatical framework, refer to this [link](https://cran.r-project.org/web/packages/conover.test/).
+The statistical analysis is performed using the `kruskal` function from `agricolae` package.
+To read more about the statatical framework, refer to this [link]().
 
 > am_stat
 
@@ -117,21 +117,15 @@ trst
 ```
 
 By default, the correction method is "none", but it is possible to select between:
- Bonferroni, Šidák, Holm,
- Holm-Šidák, Hochberg, Benjamini-Hochberg, or Benjamini-Yekutieli adjustment. 
- For more details refer to [conover.test package](https://cran.r-project.org/web/packages/conover.test/conover.test.pdf).
+Bonferroni, Holm, Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+adjustment.
+ For more details refer to [agricolae package]().
 
 #### Example
 ```{r stat2}
-am_stat(gr, method = "bh")
-am_stat(tr, method = "sidak")
+am_stat(gr, method = "BH")
+am_stat(tr, method = "fdr")
 ```
-
-conover.test outputs both t-test-statistics for each pairwise comparison and the p-value = P(T ≥
-|t|) for each, so one would reject Ho if p ≤ α/2. IMPORTANT NOTE: the p-values just described
-are sometimes called "one-sided,", Ramf package transform them into "two-sided" p-values.
-
-(notice that p ≤ α/2 and 2p ≤ α are equivalent rejection decisions).
 
 ### Plot data
 
@@ -192,11 +186,12 @@ am_barplot(gr, main = "Grid plot") + theme(text=element_text(family="Avenir"))
 am_barplot(gr, main = "Grid plot") + theme(axis.text = element_text(size = 18))
 ```
 
-It is also possible to include the statistical results under the plot
+It is also possible to include the statistical results under the plot with the 
+appropriate alpha
 
 ```{r stat.plot}
-am_barplot(gr, stats = "asterisks")
-am_dotplot(tr, stats = "asterisks")
+am_barplot(gr, annot = "asterisks", alpha = 0.05)
+am_dotplot(tr, annot = "asterisks", alpha = 0.01)
 ```
 
 The asterisks below the plot show which sample is significant different from the control. 
@@ -205,8 +200,19 @@ The control is always the first element of the list.
 It is also possible to include the statistical correction for the pvalues.
 
 ```{r stat.plot2}
-am_barplot(gr, stats = "asterisks", method = "bh")
+am_barplot(gr, annot = "asterisks", method = "BH")
 ```
+
+The asterisks allow to grafically dispay the statistical difference between the
+control sample and the other samples. If you want show the statistical difference
+between all the samples, you can add "letters" to the plot. Letters group the
+samples accordingly to they statistical difference.
+
+```{r stat.plot3}
+am_barplot(gr, annot = "letters", alpha = 0.05)
+am_dotplot(tr, annot = "letters", alpha = 0.01)
+```
+
 
 ### Save data
 
@@ -227,12 +233,11 @@ am_save(trs, "Trouvelot") # Two files will be saved: Trouvelot_per_Replicate.csv
 
 # Save the statisticas
 am_save(am_stat(gr)) # One file called Summary_Stat.csv will be saved
-am_save(am_stat(tr, method = "bh"), "Trouvelot") # One file called Trouvelot_stat.csv will be saved
+am_save(am_stat(tr, method = "BH"), "Trouvelot") # One file called Trouvelot_stat.csv will be saved
 
 # Save the plots
 am_save(am_barplot(gr), "barplor_grid.pdf")
-p1 <- am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Trouvelot",
-		   stats = "asterisks", method = "bh")
+p1 <- am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Trouvelot", annot = "letters", method = "BH")
 am_save(p1, "dotplor_trouvelot.pdf", width = 21, height = 21, units = "cm", dpi = 300)
 
 # Save jpg plot

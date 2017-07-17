@@ -23,8 +23,8 @@ grst
 trst
 
 ## ----stat2---------------------------------------------------------------
-am_stat(gr, method = "bh")
-am_stat(tr, method = "sidak")
+am_stat(gr, method = "BH")
+am_stat(tr, method = "fdr")
 
 ## ----plot----------------------------------------------------------------
 am_barplot(gr)
@@ -53,11 +53,15 @@ am_barplot(gr, main = "Grid plot") + theme(text=element_text(family="Avenir"))
 am_barplot(gr, main = "Grid plot") + theme(axis.text = element_text(size = 18))
 
 ## ----stat.plot-----------------------------------------------------------
-am_barplot(gr, stats = "asterisks")
-am_dotplot(tr, stats = "asterisks")
+am_barplot(gr, annot = "asterisks", alpha = 0.05)
+am_dotplot(tr, annot = "asterisks", alpha = 0.01)
 
 ## ----stat.plot2----------------------------------------------------------
-am_barplot(gr, stats = "asterisks", method = "bh")
+am_barplot(gr, annot = "asterisks", method = "BH")
+
+## ----stat.plot3----------------------------------------------------------
+am_barplot(gr, annot = "letters", alpha = 0.05)
+am_dotplot(tr, annot = "letters", alpha = 0.01)
 
 ## ----save----------------------------------------------------------------
 # Save the summary
@@ -66,12 +70,11 @@ am_save(trs, "Trouvelot") # Two files will be saved: Trouvelot_per_Replicate.csv
 
 # Save the statisticas
 am_save(am_stat(gr)) # One file called Summary_Stat.csv will be saved
-am_save(am_stat(tr, method = "bh"), "Trouvelot") # One file called Trouvelot_stat.csv will be saved
+am_save(am_stat(tr, method = "BH"), "Trouvelot") # One file called Trouvelot_stat.csv will be saved
 
 # Save the plots
 am_save(am_barplot(gr), "barplor_grid.pdf")
-p1 <- am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Trouvelot",
-		   stats = "asterisks", method = "bh")
+p1 <- am_barplot(gr, cbPalette = c('#f7f7f7', '#d9d9d9', '#bdbdbd', '#969696'), main = "Trouvelot", annot = "letters", method = "BH")
 am_save(p1, "dotplor_trouvelot.pdf", width = 21, height = 21, units = "cm", dpi = 300)
 
 # Save jpg plot

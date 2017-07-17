@@ -11,7 +11,7 @@ am_save(x, filename, ...)
 
 \item{filename}{path where save the file}
 
-\item{...}{ignored}
+\item{...}{arguments from ggsave function from ggplot2 package}
 }
 \description{
 am_save object.
