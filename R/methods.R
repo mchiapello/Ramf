@@ -1,5 +1,6 @@
 #' am_summary object.
 #' 
+#' @usage am_summary(x)
 #' @param x dataset containing Trouvelot or Grid data
 #' @examples
 #' am_summary(example_grid)
@@ -160,10 +161,10 @@ am_stat <- function(x, method = c("none","holm","hommel", "hochberg",
 #' @details
 #'    If you save the summary, two files will be saved corresponding to the
 #'    summary two tables. The user can name the file but the save function
-#'    will append '_per_Replicate.csv' and '_per_Sample.csv'.
+#'    will append "_per_Replicate.csv" and "_per_Sample.csv".
 #'
 #'    If you save the statistical summary one file will be saved with the
-#'    '_Stat.csv' extention.
+#'    "_Stat.csv" extention.
 #' @seealso `ggsave` from ggplot2 package
 #' @examples
 #' am_save(am_summary(example_grid))
