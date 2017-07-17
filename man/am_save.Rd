@@ -19,10 +19,10 @@ am_save object.
 \details{
 If you save the summary, two files will be saved corresponding to the
    summary two tables. The user can name the file but the save function
-   will append '_per_Replicate.csv' and '_per_Sample.csv'.
+   will append "_per_Replicate.csv" and "_per_Sample.csv".
 
    If you save the statistical summary one file will be saved with the
-   '_Stat.csv' extention.
+   "_Stat.csv" extention.
 }
 \examples{
 am_save(am_summary(example_grid))
