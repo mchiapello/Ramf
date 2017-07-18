@@ -40,6 +40,9 @@ sx <- am_stat(x)
 ## Plot with statistics
 am_barplot(x, stats = "asterisks")
 
+## Plot with statistics
+am_barplot(x, stats = "letters")
+
 ## Save summary data
 am_save(sx, "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"
 
