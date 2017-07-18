@@ -36,12 +36,13 @@ dotx <- am_dotplot(x)
 
 ## Statisticas
 sx <- am_stat(x)
+sxc <- am_stat(x, methods = "BH")
 
 ## Plot with statistics
-am_barplot(x, stats = "asterisks")
+am_barplot(x, annots = "asterisks")
 
 ## Plot with statistics
-am_barplot(x, stats = "letters")
+am_barplot(x, annot = "letters")
 
 ## Save summary data
 am_save(sx, "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"
