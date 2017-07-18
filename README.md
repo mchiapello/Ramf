@@ -26,6 +26,8 @@ source("https://bioconductor.org/biocLite.R")
 biocLite("BiocStyle")
 ```
 
+Repeat the Ramf package installation command.
+
 ## Usage
 
 
