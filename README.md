@@ -15,6 +15,17 @@ A package for arbuscular mycorrhyzal fungi colonization
 devtools::install_github("mchiapello/Ramf")
 ```
 
+If you get this error:
+
+"ERROR: dependency 'BiocStyle' is not avalilable for package 'Ramf'"
+
+Please, install the package from [Bioconductor](http://bioconductor.org/):
+
+```r
+source("https://bioconductor.org/biocLite.R")
+biocLite("BiocStyle")
+```
+
 ## Usage
 
 
