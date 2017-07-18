@@ -16,7 +16,8 @@ library("BiocStyle")
 ### Introduction
 
 The package is meant to help scientists to compute the degree of arbuscular
-mycorrhizal fungi.
+mycorrhizal colonization, producing tables, robust statistics and different
+kind of plots.
 
 All the functions of the package work independently of the colonization scoring system.
 

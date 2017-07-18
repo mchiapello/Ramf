@@ -22,6 +22,9 @@ devtools::install_github("mchiapello/Ramf")
 ## Load library
 library(Ramf)
 
+## Read vignette
+vignette("Ramf")
+
 ## Read data in
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
 x <- readData(f)
