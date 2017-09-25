@@ -137,11 +137,14 @@ trouvelot_summary <- function(x){
 					p.adj = method,
 					group = group,
 					console = FALSE)
-			tmp2 <- tmp$groups[, c(1, 3)]
+			tmp2 <- tmp$groups[, 1:2]
+			tmp2$trt <- rownames(tmp2)
 			tmp2 <- tmp2[order(tmp2$trt), ]
-			stat[[c(1, 1, 1:5)[i]]] <- tmp2
+			stat[[c(1, 1, 1:5)[i]]] <- tmp2[2]
 		}
-		stat <- do.call(cbind, stat)[, -c(3, 5, 7, 9)]
+		stat <- do.call(cbind, stat)
+		stat$sample <- rownames(stat)
+		stat <- stat[, c(6, 1:5)]
 		names(stat) <- c("sample", paste0(names(sls[[1]])[3:7], ".group"))
 		stat$sample <- gsub("^\\d+_", "", stat$sample)
 		return(stat)
@@ -160,6 +163,7 @@ trouvelot_summary <- function(x){
 		for(i in 3:6){
 			tmp <- kruskal(pull(sls[[1]], i),
 					pull(sls[[1]], 1),
+					alpha = alpha,
 					p.adj = method,
 					group = group,
 					console = FALSE)
@@ -184,11 +188,14 @@ trouvelot_summary <- function(x){
 					p.adj = method,
 					group = group,
 					console = FALSE)
-			tmp2 <- tmp$groups[, c(1, 3)]
+			tmp2 <- tmp$groups[, 1:2]
+			tmp2$trt <- rownames(tmp2)
 			tmp2 <- tmp2[order(tmp2$trt), ]
-			stat[[c(1, 1, 1:5)[i]]] <- tmp2
+			stat[[c(1, 1, 1:5)[i]]] <- tmp2[2]
 		}
-		stat <- do.call(cbind, stat)[, -c(3, 5, 7)]
+		stat <- do.call(cbind, stat)
+		stat$sample <- rownames(stat)
+		stat <- stat[, c(5, 1:4)]
 		names(stat) <- c("sample", paste0(names(sls[[1]])[3:6], ".group"))
 		stat$sample <- gsub("^\\d+_", "", stat$sample)
 		return(stat)
