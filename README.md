@@ -50,7 +50,7 @@ barx <- am_barplot(x)
 boxx <- am_boxplot(x)
 dotx <- am_dotplot(x)
 
-## Statisticas
+## Statistics
 sx <- am_stat(x)
 sxc <- am_stat(x, methods = "BH")
 
@@ -66,7 +66,7 @@ am_save(sx, "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_
 ## Save plot data
 am_save(boxx, "RPlot.jpg")
 am_save(barx, "RPlot.pdf", unit = "cm", width = 20, height = 20, dpi = 300) # set image unit, dimention and quality
-am_save(dotx, "RPlot.png", width = 7, heighy = 7)
+am_save(dotx, "RPlot.png", width = 7, height = 7)
 ```
 
 
