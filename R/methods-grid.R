@@ -45,7 +45,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
 	if (annot == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
@@ -53,7 +53,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
-		dimen <- 5
+		dimen <- 3
 	}
 	if (annot == "letters"){
     	stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -122,7 +122,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
 	if (annot == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
@@ -130,7 +130,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
-		dimen <- 5
+		dimen <- 3
 	}
 	if (annot == "letters"){
     	stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -200,7 +200,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 		d <- rep("", length(unique(y$samples)) * 5)
 	}
 	if (annot == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
     	stat_ctr <- stat[stat$group1 == y$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
@@ -208,7 +208,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     	for (i in seq_along(ll)){
     		d <- append(d, c("", ll[[i]]))
     	}
-		dimen <- 5
+		dimen <- 3
 	}
 	if (annot == "letters"){
     	stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
