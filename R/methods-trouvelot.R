@@ -44,7 +44,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
 	if (annot == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
@@ -119,7 +119,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
 	if (annot == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
@@ -190,7 +190,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 		d <- rep("", length(unique(tmp$samples)) * 4)
 	}
 	if (annot == "asterisks"){
-    	stat <- am_stat(x)
+    	stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
     	stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
     	stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
     	ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
