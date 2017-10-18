@@ -41,12 +41,12 @@ readData <- function(infile){
 	if (any(is.na(x))) {
 			stop("The datasets contains NAs")
 	}
-	if (dim(x)[2] != 3 & dim(x)[2] != 7){
+	if (dim(x)[2] < 3){
 		x <- NULL
-		stop("Incorrect dimentions")
+		stop("Incorrect dimentions: the dataset should contain at least 3 columns")
 	}
 	## Trouvelot specific checks
-	tnames <- c("scoring", "replicates", "samples")
+	tnames <- c("samples", "replicates", "scoring")
 	snames <- c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3", "1A2", "2A2", "3A2",
 			   "4A2", "5A2", "1A1", "2A1", "3A1", "4A1", "5A1", "1A0", "2A0",
 			   "3A0", "4A0", "5A0", "0") 
@@ -56,7 +56,7 @@ readData <- function(infile){
 				message(paste("This term in column scoring is wrong:\n",
 							  setdiff(x$scoring, snames), "\n", sep = ""))
 				message("The only allowed terms are:")
-				message(paste(snames, "", sep = ","))
+				message(paste(snames, "", sep = ", "))
 				#                 message("\n")
 			x <- NULL
 			stop("The dataset has not been imported")
