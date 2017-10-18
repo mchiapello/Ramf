@@ -4,6 +4,10 @@
 ##' 
 ##' @title Read colonization files in.
 ##' @param infile the name of the file which the data are to be read from.
+##' @param type: grid or trouvelot
+##' @examples
+##' f <- dirsystem.file"extdata", package = "Ramf", full.names = TRUE, pattern = "grid.csv"
+##' x <- readData(f, type = "grid")
 ##' @return an object of class \code{grid} or \code{trouvelot}.
 ##' @format A grid dataset should have 7 variables:
 ##' \describe{
@@ -38,9 +42,7 @@
 readData <- function(infile, type = c("none", "trouvelot", "grid")){
     type <- match.arg(type)
     if (type == "none"){
-        stop('You need to specify the data type! Use type = "trouvelot" or
-             type = "grid"')
-        
+        stop('You need to specify the data type! Use type = "trouvelot" or type = "grid"')
     }
     x <- suppressMessages(read_csv(infile))
     ## Genaral checks
@@ -88,7 +90,7 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
         gnames <- c("samples", "replicates", "Total", "Hyphopodia", "IntrHyphae",
                     "Arbuscule", "Vesicle")
         if(all(names(x)[1:2] == gnames[1:2]) & 
-           all(names(x)[3:length(names(x))] %in% gnames[3:7]){
+           all(names(x)[3:length(names(x))] %in% gnames[3:7])){
             x$samples <- as.character(x$samples)
             x$replicates <- as.character(x$replicates)
             if(any(names(x) == "Total")){
@@ -120,14 +122,3 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
     }
     return(x)
 }
-
-
-# it is nor working!!! do a nested if statement
-# if (dim == 3){
-#     if (names){
-#         grid
-#     } else {
-#         message header
-#         x <- NULL
-#         stop
-#     }

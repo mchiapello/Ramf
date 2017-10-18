@@ -26,13 +26,15 @@ A Trouvelot dataset should have 3 variables:
   \item{- samples:}{Sample names}
 }
 
-		 The order of the samples (in the "samples" column) is the order used for plot display. So,
-		 if you like to have a specific order, please sort the original data accordingly}
+         The order of the samples (in the "samples" column) is the order used for plot display. So,
+         if you like to have a specific order, please sort the original data accordingly}
 \usage{
-readData(infile)
+readData(infile, type = c("none", "trouvelot", "grid"))
 }
 \arguments{
 \item{infile}{the name of the file which the data are to be read from.}
+
+\item{type:}{grid or trouvelot}
 }
 \value{
 an object of class \code{grid} or \code{trouvelot}.
@@ -42,6 +44,10 @@ Reads data
 }
 \details{
 This funtion reads trouvelot and grid data
+}
+\examples{
+f <- dirsystem.file"extdata", package = "Ramf", full.names = TRUE, pattern = "grid.csv"
+x <- readData(f, type = "grid")
 }
 \author{
 Marco Chiapello <mc983@cam.ac.uk>
