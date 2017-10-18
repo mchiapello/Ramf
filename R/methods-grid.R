@@ -3,10 +3,28 @@ am_summary.grid <- function(x){
     Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- num <- n <- NULL
     tmp <- grid_summary(x)
-    final <- tmp %>%
-    group_by(samples) %>%
-    mutate(num = n()) %>%
-	summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE)
+#############################################################################
+#############################################################################
+### THIS PART IS NOT WORKING YET
+	final2 <- tmp %>%
+		group_by(samples) %>%
+		mutate(num = n()) %>%
+		#         summarise(`Mean Total` = round(mean(Total, na.rm = TRUE), 2),
+		#                   `Standard error Total` = round(sd(Total, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+		#                   `Mean Hyphopodia` = round(mean(Hyphopodia, na.rm = TRUE), 2),
+		#                   `Standard error Hyphopodia` = round(sd(Hyphopodia, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+		#                   `Mean IntrHyphae` = round(mean(IntrHyphae, na.rm = TRUE), 2),
+		#                   `Standard error IntrHyphae` = round(sd(IntrHyphae, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+		#                   `Mean Arbuscule` = round(mean(Arbuscule, na.rm = TRUE), 2),
+		#                   `Standard error Arbuscule` = round(sd(Arbuscule, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+		#                   `Mean Vesicle` = round(mean(Vesicle, na.rm = TRUE), 2),
+		#                   `Standard error Vesicle` = round(sd(Vesicle, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
+		#                   )
+		summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE) %>%
+		mutate_at(vars(contains("_sd")), funs(. / sqrt(num_mean))) %>%
+		select(-contains("num"))
+#############################################################################
+#############################################################################
     final <- final[match(unique(x$samples), final$samples), ]
     l <- list(tmp, final)
     names(l) <- c("Summary per Replicate", "Summary per Sample")
