@@ -100,10 +100,11 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         annotate("text", x = 1:(length(unique(y$samples)) * num),
                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
         scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-        scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
-                    min(final$means - final$se), 0), 110),
-                           breaks = seq(0, 110, 20)) +
-        scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
+        scale_y_continuous(limits = c(-0.5, 110),
+                           breaks = seq(0, 110, 20))+ 
+        scale_fill_manual(values = cbPalette,
+						  breaks = levels(factor(final$samples,
+												 levels = unique(x$samples))))
     class(a1) <- c("am_plot", class(a1))
     return(a1)
 }
@@ -125,14 +126,15 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     method <- match.arg(method)
     # Create summary table
     y <- grid_summary(x)
+	num <- ncol(y)-2
     if (annot == "none"){
-        d <- rep("", length(unique(y$samples)) * 5)
+        d <- rep("", length(unique(y$samples)) * num)
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
         stat_ctr <- stat[stat$group1 == y$samples[1], ]
-        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
-        ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:ncol(y)])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:num, each = length(unique(y$samples)) - 1))
         d <- NULL
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
@@ -141,7 +143,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
-        d <- as.vector(as.matrix(stat[,2:6]))
+        d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
         dimen <- 3
     }
     # Change table shape
@@ -162,18 +164,28 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank()) +
         geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-                                    length(unique(z$samples)) * 4 + .5,
-                                    length(unique(z$samples))), colour = "lightgrey") +
+									(length(unique(z$samples)) + .5) * (num - 1),
+									length(unique(z$samples))),
+				   colour = "lightgrey") +
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
              y = "") +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
-                                 length(unique(z$samples)) * 5 + .5,
-                                 length(unique(z$samples)))[1:5],
-                 y = 110, label = c("Total", "Hyphopodia",
-                                   "IntrHyphae", "Arbuscule", "Vesicle")) +
-        annotate("text", x = 1:(length(unique(y$samples)) * 5),
+								 length(unique(z$samples)) * num + .5,
+                                 length(unique(z$samples))),
+                 y = 110, label = unique(z$features[order(match(z$features,
+														factor(c("Total",
+																 "Hyphopodia",
+																 "IntrHyphae",
+																 "Arbuscule",
+																 "Vesicle"),
+															   levels = c("Total",
+																		  "Hyphopodia",
+																		  "IntrHyphae",
+																		  "Arbuscule",
+																		  "Vesicle"))))])) +
+        annotate("text", x = 1:(length(unique(y$samples)) * num),
                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
         scale_x_discrete(labels = rep(unique(x$samples), 5)) +
         scale_y_continuous(limits = c(-0.5, 110),
