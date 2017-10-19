@@ -22,6 +22,7 @@
 #' @importFrom dplyr summarise_if
 #' @importFrom dplyr mutate_at
 #' @importFrom dplyr funs
+#' @importFrom dplyr vars
 am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
