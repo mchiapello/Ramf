@@ -3,19 +3,14 @@ am_summary.grid <- function(x){
     Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- num <- n <- NULL
     tmp <- grid_summary(x)
-#############################################################################
-#############################################################################
-### THIS PART IS NOT WORKING YET
-	final <- tmp %>%
-		group_by(samples) %>%
-		mutate(num = n()) %>%
-		summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE) %>%
-		mutate_at(vars(contains("_sd")), funs(. / sqrt(num_mean))) %>%
-		select(-contains("num"))
-	names(final)[grepl("_sd", names(final))] <- gsub("_sd", "_se",
-													 names(final)[grepl("_sd", names(final))])
-#############################################################################
-#############################################################################
+    final <- tmp %>%
+        group_by(samples) %>%
+        mutate(num = n()) %>%
+        summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE) %>%
+        mutate_at(vars(contains("_sd")), funs(. / sqrt(num_mean))) %>%
+        select(-contains("num"))
+    names(final)[grepl("_sd", names(final))] <- gsub("_sd", "_se",
+                                                     names(final)[grepl("_sd", names(final))])
     final <- final[match(unique(x$samples), final$samples), ]
     l <- list(tmp, final)
     names(l) <- c("Summary per Replicate", "Summary per Sample")
@@ -38,16 +33,17 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
+	num <- ncol(y)-2
     # Create summary table
     y <- grid_summary(x)
     if (annot == "none"){
-        d <- rep("", length(unique(y$samples)) * 5)
+        d <- rep("", length(unique(y$samples)) * num)
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
         stat_ctr <- stat[stat$group1 == y$samples[1], ]
-        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:7])) < alpha, "*", "") 
-        ll <- split(stat_l, rep(1:5, each = length(unique(y$samples)) - 1))
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:ncol(y)])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:num, each = length(unique(y$samples)) - 1))
         d <- NULL
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
