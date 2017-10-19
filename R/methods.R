@@ -23,6 +23,7 @@
 #' @importFrom dplyr mutate_at
 #' @importFrom dplyr funs
 #' @importFrom dplyr vars
+#' @importFrom dplyr contains
 am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
