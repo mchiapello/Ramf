@@ -19,6 +19,7 @@
 #' @importFrom dplyr inner_join
 #' @importFrom dplyr pull
 #' @importFrom dplyr tbl_df
+#' @importFrom dplyr summarise_if
 am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
