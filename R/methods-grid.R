@@ -33,9 +33,9 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
-	num <- ncol(y)-2
     # Create summary table
     y <- grid_summary(x)
+	num <- ncol(y)-2
     if (annot == "none"){
         d <- rep("", length(unique(y$samples)) * num)
     }
@@ -52,7 +52,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
-        d <- as.vector(as.matrix(stat[,2:6]))
+        d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
         dimen <- 3
     }
     # Change table shape
@@ -76,19 +76,28 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
               panel.grid.minor.x = element_blank(),
               legend.position = "none") +
         geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-									(length(unique(z$samples)) + .5) * 
-										(length(table(z$features)) - 1),
-									num -1),
+									(length(unique(z$samples)) + .5) * (num - 1),
+									length(unique(z$samples))),
 				   colour = "lightgrey") +
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
              y = "") +
-        annotate("text", x = seq(length(unique(z$samples)) * .5 + .5, length(unique(z$samples)) * 5 + .5,
-                                 length(unique(z$samples)))[1:5],
-                 y = 110, label = c("Total", "Hyphopodia",
-                                   "IntrHyphae", "Arbuscule", "Vesicle")) +
-        annotate("text", x = 1:(length(unique(y$samples)) * 5),
+        annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
+								 length(unique(z$samples)) * num + .5,
+                                 length(unique(z$samples))),
+                 y = 110, label = unique(final$features[order(match(final$features,
+														factor(c("Total",
+																 "Hyphopodia",
+																 "IntrHyphae",
+																 "Arbuscule",
+																 "Vesicle"),
+															   levels = c("Total",
+																		  "Hyphopodia",
+																		  "IntrHyphae",
+																		  "Arbuscule",
+																		  "Vesicle"))))])) +
+        annotate("text", x = 1:(length(unique(y$samples)) * num),
                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
         scale_x_discrete(labels = rep(unique(x$samples), 5)) +
         scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
