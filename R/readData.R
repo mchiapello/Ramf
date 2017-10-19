@@ -120,6 +120,11 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
             x <- NULL
             stop("The dataset has not been imported")
             }
+			if(all(names(x)[1:2] != c("samples", "replicates"))){
+                message(paste("The column headers ('samples' or 'replicates') are not in the correct order!"))
+            x <- NULL
+            stop("The dataset has not been imported")
+			}
         }
     }
     return(x)
