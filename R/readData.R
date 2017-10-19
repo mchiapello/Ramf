@@ -1,43 +1,45 @@
-##' Reads data
-##'
-##' This funtion reads trouvelot and grid data
-##' 
-##' @title Read colonization files in.
-##' @param infile the name of the file which the data are to be read from.
-##' @param type: grid or trouvelot
-##' @examples
-##' f <- dirsystem.file"extdata", package = "Ramf", full.names = TRUE, pattern = "grid.csv"
-##' x <- readData(f, type = "grid")
-##' @return an object of class \code{grid} or \code{trouvelot}.
-##' @format A grid dataset should have 7 variables:
-##' \describe{
-##'   It is mandatory that the dataset is formatted as follow
-##'   \item{- replicates:}{Sample replicates}
-##'   \item{- samples:}{Sample names}
-##'   \item{- Total:}{Number of total fungal structures identified}
-##'   \item{- Hyphopodia:}{Number of hypopodia identified}
-##'   \item{- IntrHyphae:}{Number of interanl hyphae identified}
-##'   \item{- Arbuscule:}{Number of arbuscules identified}
-##'   \item{- Vesicle:}{Number of vesicles identified}
-##' }
-##' A Trouvelot dataset should have 3 variables:
-##' \describe{
-##'   It is mandatory that the dataset is formatted as follow
-##'   \item{- scoring:}{Scoring value.
-##'                     The only possible terms in this column are:
-##'                     0A0,1A3,2A3,3A3,4A3,5A3,1A2,2A2,3A2,4A2,5A2,1A1,2A1,
-##'                     3A1,4A1,5A1,1A0,2A0,3A0,4A0,5A0.
-##'                     If 0 is present, it will be converted into 0A0}
-##'   \item{- replicates:}{Sample replicates}
-##'   \item{- samples:}{Sample names}
-##' }
-##'
-##'          The order of the samples (in the "samples" column) is the order used for plot display. So,
-##'          if you like to have a specific order, please sort the original data accordingly
-##' @export
-##' @author Marco Chiapello <mc983@cam.ac.uk>
-##' @keywords IO, file
-##' @import methods utils stats readr
+#' Reads data
+#'
+#' This funtion reads trouvelot and grid data
+#' 
+#' @title Read colonization files in.
+#' @usage readData(infile, type = c("none", "trouvelot", "grid"))
+#' @param infile the name of the file which the data are to be read from.
+#' @param type grid or trouvelot
+#' @examples
+#' f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
+#' x <- readData(f, type = "grid")
+#' @return an object of class \code{grid} or \code{trouvelot}.
+#' @format A grid dataset should have 7 variables:
+#' \describe{
+#'   It is mandatory that the dataset is formatted as follow
+#'   \item{- replicates:}{Sample replicates}
+#'   \item{- samples:}{Sample names}
+#'   \item{- Total:}{Number of total fungal structures identified}
+#'   \item{- Hyphopodia:}{Number of hypopodia identified}
+#'   \item{- IntrHyphae:}{Number of interanl hyphae identified}
+#'   \item{- Arbuscule:}{Number of arbuscules identified}
+#'   \item{- Vesicle:}{Number of vesicles identified}
+#' }
+#' A Trouvelot dataset should have 3 variables:
+#' \describe{
+#'   It is mandatory that the dataset is formatted as follow
+#'   \item{- scoring:}{Scoring value.
+#'                     The only possible terms in this column are:
+#'                     0A0,1A3,2A3,3A3,4A3,5A3,1A2,2A2,3A2,4A2,5A2,1A1,2A1,
+#'                     3A1,4A1,5A1,1A0,2A0,3A0,4A0,5A0.
+#'                     If 0 is present, it will be converted into 0A0}
+#'   \item{- replicates:}{Sample replicates}
+#'   \item{- samples:}{Sample names}
+#' }
+#'
+#'          The order of the samples (in the "samples" column) is the order used for plot display. So,
+#'          if you like to have a specific order, please sort the original data accordingly
+#' @export
+#' @author Marco Chiapello <mc983@cam.ac.uk>
+#' @keywords IO, file
+#' @import methods utils stats readr
+readData <- function(infile, type = c("none", "trouvelot", "grid")) UseMethod("readData")
 
 readData <- function(infile, type = c("none", "trouvelot", "grid")){
     type <- match.arg(type)

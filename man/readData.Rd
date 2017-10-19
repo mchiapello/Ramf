@@ -34,7 +34,7 @@ readData(infile, type = c("none", "trouvelot", "grid"))
 \arguments{
 \item{infile}{the name of the file which the data are to be read from.}
 
-\item{type:}{grid or trouvelot}
+\item{type}{grid or trouvelot}
 }
 \value{
 an object of class \code{grid} or \code{trouvelot}.
@@ -46,7 +46,7 @@ Reads data
 This funtion reads trouvelot and grid data
 }
 \examples{
-f <- dirsystem.file"extdata", package = "Ramf", full.names = TRUE, pattern = "grid.csv"
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
 x <- readData(f, type = "grid")
 }
 \author{

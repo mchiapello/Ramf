@@ -1,7 +1,7 @@
 #' @export
 am_summary.grid <- function(x){
     Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
-    features <- replicates <- samples <- values <- num <- n <- NULL
+    features <- replicates <- samples <- values <- num <- n <- num_mean <- NULL
     tmp <- grid_summary(x)
     final <- tmp %>%
         group_by(samples) %>%
