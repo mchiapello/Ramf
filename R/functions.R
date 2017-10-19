@@ -106,8 +106,9 @@ trouvelot_summary <- function(x){
                         rep(as.numeric(tapply(sls[[1]]$replicates, factor(sls[[1]]$samples,
                         levels = unique(sls[[1]]$samples)), length)),1)), "_", sls[[1]]$samples)
     stat <- list()
+    num <- ncol(sls[[1]])
     if (group == FALSE){
-        for(i in 3:7){
+        for(i in 3:num){
             tmp <- kruskal(pull(sls[[1]], i),
                     pull(sls[[1]], 1),
                     p.adj = method,
@@ -121,13 +122,13 @@ trouvelot_summary <- function(x){
             stat[[c(1, 1, 1:5)[i]]] <- stat_tmp
         }
         stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11, 13, 14)]
-        names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:7], ".pval"))
+        names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:num], ".pval"))
         stat$group1 <- gsub("^\\d+_", "", stat$group1)
         stat$group2 <- gsub("^\\d+_", "", stat$group2)
         class(stat) <- c("am_stat", class(stat))
         return(stat)
     } else {
-        for(i in 3:7){
+        for(i in 3:num){
             tmp <- kruskal(pull(sls[[1]], i),
                     pull(sls[[1]], 1),
                     alpha = alpha,
@@ -141,8 +142,8 @@ trouvelot_summary <- function(x){
         }
         stat <- do.call(cbind, stat)
         stat$sample <- rownames(stat)
-        stat <- stat[, c(6, 1:5)]
-        names(stat) <- c("sample", paste0(names(sls[[1]])[3:7], ".group"))
+        stat <- stat[, c(ncol(stat), 1:(num-2))]
+        names(stat) <- c("sample", paste0(names(sls[[1]])[3:num], ".group"))
         stat$sample <- gsub("^\\d+_", "", stat$sample)
         return(stat)
     }
