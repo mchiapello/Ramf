@@ -20,6 +20,7 @@
 #' @importFrom dplyr pull
 #' @importFrom dplyr tbl_df
 #' @importFrom dplyr summarise_if
+#' @importFrom dplyr funs
 am_summary <- function(x) UseMethod("am_summary")
 
 #' am_barplot object.
