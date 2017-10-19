@@ -75,8 +75,11 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               legend.position = "none") +
-        geom_vline(xintercept = seq(length(unique(z$samples)) + .5, length(unique(z$samples)) * 4 + .5,
-                                    length(unique(z$samples))), colour = "lightgrey") +
+        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
+									(length(unique(z$samples)) + .5) * 
+										(length(table(z$features)) - 1),
+									num -1),
+				   colour = "lightgrey") +
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
