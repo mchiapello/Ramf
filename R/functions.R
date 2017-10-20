@@ -200,3 +200,61 @@ trouvelot_summary <- function(x){
     }
 }
 
+###############################################################################
+## TIME
+
+.grid_statime <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
+    V1 <- NULL
+    sls <- am_summary(x)[[1]]
+    num <- ncol(sls)
+    sls$comb <- paste(pull(sls, samples), pull(sls, time), sep = "_")
+    #     sls$samples <- paste0(rep(1:length(unique(sls$samples)),
+    #                         rep(as.numeric(tapply(factor(sls$samples,
+    #                         levels = unique(sls$samples)), sls$comb, length)),1)), "_", sls$samples)
+    stat <- list()
+    if (group == FALSE){
+        for(i in 4:num){
+            tmp <- kruskal(pull(sls, i),
+                    pull(sls, comb),
+                    p.adj = method,
+                    group = group,
+                    console = FALSE)
+            tmp2 <- tmp$comparison
+            tmp2$V1 <- rownames(tmp2)
+            stat_tmp <- tmp2 %>% separate(V1, c("group1", "group2"), " - ") %>%
+                select("group1", "group2", "pvalue")
+            rownames(stat_tmp) <- NULL
+            stat[[c(1, 1, 1, 1:5)[i]]] <- stat_tmp
+        }
+        stat <- do.call(cbind, stat)[,-c(4, 5, 7, 8, 10, 11, 13, 14)]
+        names(stat) <- c("group1", "group2", paste0(names(sls)[4:num], ".pval"))
+        # Split comparison: replicates / time
+        tf <- list()
+        tf[[1]] <- stat[which(gsub("_\\d", "", stat$group1) ==
+                              gsub("_\\d", "", stat$group2)), ]
+        tf[[2]] <- stat[which(gsub(".*(_\\d)", "\\1", stat$group1) ==
+                              gsub(".*(_\\d)", "\\1", stat$group2)), ]
+        names(tf) <- c("Stat per sample", "Stat per time point")
+        class(tf) <- c("am_statime", "list")
+        return(tf)
+    } else {
+        for(i in 4:num){
+            tmp <- kruskal(pull(sls, i),
+                    pull(sls, comb),
+                    alpha = alpha,
+                    p.adj = method,
+                    group = group,
+                    console = FALSE)
+            tmp2 <- tmp$groups[, 1:2]
+            tmp2$trt <- rownames(tmp2)
+            stat[[c(1, 1, 1, 1:5)[i]]] <- tmp2[2]
+        }
+        stat <- do.call(cbind, stat)
+        stat$sample <- rownames(stat)
+        stat <- stat[, c(ncol(stat), 1:(num-3))]
+        names(stat) <- c("sample", paste0(names(sls)[4:num], ".group"))
+        class(stat) <- c("am_statime", class(stat))
+        return(stat)
+    }
+}
+

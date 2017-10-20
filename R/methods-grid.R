@@ -296,4 +296,36 @@ am_stat.grid <- function(x, method = c("none","holm","hommel", "hochberg",
     return(stat)
 }
 
+###############################################################################
 
+#' @export
+am_summary.gridTime <- function(x){
+    Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
+    features <- replicates <- samples <- values <- num <- n <- num_mean <- NULL
+    y <- x %>% 
+            group_by(samples, time, replicates) %>%
+            summarise_if(is.numeric, mean, na.rm = TRUE) %>%
+            ungroup
+    final <- y %>%
+        group_by(samples, time) %>%
+        mutate(num = n()) %>%
+        summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE) %>%
+        mutate_at(vars(contains("_sd")), funs(. / sqrt(num_mean))) %>%
+        select(-contains("num"))
+    names(final)[grepl("_sd", names(final))] <- gsub("_sd", "_se",
+                                                     names(final)[grepl("_sd", names(final))])
+	#     final <- final[match(unique(x$samples), final$samples), ]
+    l <- list(y, final)
+    names(l) <- c("Summary per Replicate", "Summary per Sample")
+    class(l) <- c("am_summary", "list")
+    return(l)
+}
+
+#' @export
+am_stat.gridTime <- function(x, method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                         ...){
+    method <- match.arg(method)
+    stat <- .grid_statime(x, method = method) 
+    return(stat)
+}

@@ -318,6 +318,10 @@ readDataTime <- function(infile, type = c("none", "trouvelot", "grid")){
     if (any(is.na(x))) {
             stop("The datasets contains NAs")
     }
+    if (names(x)[3] != "time"){
+        x <- NULL
+        stop("Incorrect dimentions: the 3th column of dataset should be labeled: 'time'")
+    }
     if (dim(x)[2] < 4){
         x <- NULL
         stop("Incorrect dimentions: the dataset should contain at least 3 columns")
@@ -344,7 +348,7 @@ readDataTime <- function(infile, type = c("none", "trouvelot", "grid")){
             x$replicates <- as.character(x$replicates)
             x$samples <- as.character(x$samples)
             x$scoring <- gsub("^0$", "0A0", x$scoring)
-            class(x) <- c("trouvelot", class(x))
+            class(x) <- c("trouvelotTime", class(x))
         } else {
             ttmp <- which(names(x) != tnames)
             if (length(ttmp) != 0){
@@ -381,7 +385,7 @@ readDataTime <- function(infile, type = c("none", "trouvelot", "grid")){
             if(any(names(x) == "Vescicle")){
                 x$Vesicle <- as.numeric(x$Vesicle)
             }
-                class(x) <- c("grid", class(x))
+                class(x) <- c("gridTime", class(x))
         } else {
             gtmp <- which(!(names(x) %in% gnames))
             if (length(gtmp) != 0){
