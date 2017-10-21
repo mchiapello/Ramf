@@ -330,3 +330,117 @@ am_stat.gridTime <- function(x, method = c("none","holm","hommel", "hochberg",
     stat <- .grid_statime(x, method = method) 
     return(stat)
 }
+
+#' @export
+am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+                                             "#009E73", "#F0E442", "#0072B2",
+                                             "#D55E00", "#CC79A7"),
+                            alpha = 0.05,
+                            annot = c("none", "asterisks", "letters"),
+                            method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                            main = "Colonization", ...){
+    Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
+    features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
+    dimen <- 0
+    alpha <- alpha
+    annot <- match.arg(annot)
+    method <- match.arg(method)
+    # Create summary table
+    y <- grid_summary(x)
+	num <- ncol(y)-2
+#     if (annot == "none"){
+#         d <- rep("", length(unique(y$samples)) * num)
+#     }
+#     if (annot == "asterisks"){
+#         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
+#         stat_ctr <- stat[stat$group1 == y$samples[1], ]
+#         stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:ncol(y)])) < alpha, "*", "") 
+#         ll <- split(stat_l, rep(1:num, each = length(unique(y$samples)) - 1))
+#         d <- NULL
+#         for (i in seq_along(ll)){
+#             d <- append(d, c("", ll[[i]]))
+#         }
+#         dimen <- 3
+#     }
+#     if (annot == "letters"){
+#         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
+#         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
+#         dimen <- 3
+#     }
+    # Change table shape
+#     if (annot == "none"){
+	final <- am_summary(x)[[2]]
+	tmp <- final %>%
+		select("samples", "time", contains("_mean")) %>%
+		gather(features, means, -samples, -time) %>%
+		separate(features, c("features", "math")) %>% select(-math)
+	tmp2 <- final %>%
+		select("samples", "time", contains("_se")) %>%
+		gather(features, sterr, -samples, -time) %>%
+		separate(features, c("features", "math")) %>% select(-math)
+	final <- inner_join(tmp, tmp2, by = c("samples", "time", "features")) %>%
+		mutate(group = paste(samples, features, time, sep = "_"))
+	final <- final[order(final$time,
+					     match(final$features, c("Total", "Hyphopodia", "IntrHyphae",
+						                         "Arbuscule", "Vesicle")),
+						 match(final$samples,unique(x$samples ))), ]
+	final$order <- 1:nrow(final)
+	num <- ncol(x)-3
+
+
+
+
+
+    g <- ggplot(data = final, aes(x = order, y = means, fill = features))
+
+		g + geom_col() +# facet_wrap(~time, scale = "free_x") +
+		theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
+        geom_errorbar(aes(ymin = means - sterr, ymax = means + sterr), width = .1) +
+        theme_bw() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+              plot.title = element_text(size = 19),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank()) +
+        geom_vline(xintercept = seq(length(unique(final$samples)) + .5,
+									(length(unique(final$samples)) + .5) * 
+									((length(unique(final$features)) * length(unique(final$samples))) - 2),
+									length(unique(final$samples))),
+				   colour = "lightgrey") +
+        labs(title = main, 
+             #              subtitle = "Grid method",
+             x = "",
+             y = "") +
+        scale_x_continuous(breaks = 1:36, labels = rep(unique(final$samples), 12)) 
+
+		+
+        geom_text(aes(x = seq(length(unique(final$samples)) * .5 + .5,
+								 length(unique(final$samples)) * num + .5,
+                                 length(unique(final$samples))),
+                 y = 110, label = rep(unique(final$samples), 3)))
+
+
+
+
+
+        annotate("text", x = rep(seq(length(unique(final$samples)) * .5 + .5,
+								 length(unique(final$samples)) * num + .5,
+                                 length(unique(final$samples))), length(unique(final$time))),
+                 y = 110, label = rep(unique(final$samples), 3))
+		
+		+
+        annotate("text", x = 1:(length(unique(y$samples)) * num),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
+        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+        scale_y_continuous(limits = c(-0.5, 110),
+                           breaks = seq(0, 110, 20))+ 
+        scale_fill_manual(values = cbPalette,
+						  breaks = levels(factor(final$samples,
+												 levels = unique(x$samples))))
+
+    class(a1) <- c("am_plot", class(a1))
+    return(a1)
+}
+
