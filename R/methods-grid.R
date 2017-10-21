@@ -325,6 +325,7 @@ am_summary.gridTime <- function(x){
 am_stat.gridTime <- function(x, method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                          ...){
+	samples <- comb <- NULL
     method <- match.arg(method)
     stat <- .grid_statime(x, method = method) 
     return(stat)
