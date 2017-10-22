@@ -234,6 +234,7 @@ trouvelot_summary <- function(x){
                               gsub("_\\d", "", stat$group2)), ]
         tf[[2]] <- stat[which(gsub(".*(_\\d)", "\\1", stat$group1) ==
                               gsub(".*(_\\d)", "\\1", stat$group2)), ]
+        tf[[2]] <- tf[[2]][order(gsub(".*(_\\d)", "\\1", tf[[2]]$group1)), ]
         names(tf) <- c("Stat per sample", "Stat per time point")
         class(tf) <- c("am_statime", "list")
         return(tf)
