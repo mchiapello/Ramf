@@ -368,7 +368,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 		d <- rep("", nrow(final))
 	}
 	if (annot == "asterisks"){
-		stop("Asterisks do not with an object of class gridTime")
+		stop("Asterisks do not work with an object of class gridTime")
 	}
 	if (annot == "letters"){
 		stat <- .grid_statime(x, method = method, group = TRUE, alpha = alpha)
@@ -466,7 +466,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
         d <- rep("", length(unique(y$samples)) * num)
     }
     if (annot == "asterisks"){
-		stop("Asterisks do not with an object of class gridTime")
+		stop("Asterisks do not work with an object of class gridTime")
     }
 	#     if (annot == "letters"){
 	#         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
