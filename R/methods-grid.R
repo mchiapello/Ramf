@@ -493,37 +493,62 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank()) +
-        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-									(length(unique(z$samples)) + .5) * (num - 1),
-									length(unique(z$samples))),
+        geom_vline(xintercept = c(0.5, seq(length(unique(z$samples)) + .5,
+									(length(unique(z$samples)) + .5) * 
+									((length(unique(z$features)) * length(unique(z$samples))) - 1),
+									length(unique(z$samples)))),
 				   colour = "lightgrey") +
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
              y = "") +
+        scale_x_discrete(labels = rep(unique(z$samples), 
+									((length(unique(z$features)) *
+									  length(unique(z$samples)))))) +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
-								 length(unique(z$samples)) * num + .5,
+								 (length(unique(z$samples)) *
+								  length(unique(z$features)) *
+								  length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 110, label = unique(z$features[order(match(z$features,
-														factor(c("Total",
-																 "Hyphopodia",
-																 "IntrHyphae",
-																 "Arbuscule",
-																 "Vesicle"),
-															   levels = c("Total",
-																		  "Hyphopodia",
-																		  "IntrHyphae",
-																		  "Arbuscule",
-																		  "Vesicle"))))])) +
-        annotate("text", x = 1:(length(unique(y$samples)) * num),
-                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
-        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+                 y = 105, label = rep(unique(z$features), each = 3)) +
+        annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
+								 (length(unique(z$samples)) *
+								  length(unique(z$features)) *
+								  length(unique(z$time)) + .5),
+                                 length(unique(z$samples))),
+                 y = 110, label = rep(unique(z$time), length(unique(z$features)))) +
         scale_y_continuous(limits = c(-0.5, 110),
-                           breaks = seq(0, 110, 20))+ 
-        scale_colour_manual(values = cbPalette, 
-                            breaks = levels(factor(z$features,
-                                                   levels = c("Total", "Hyphopodia",
-                                                              "IntrHyphae", "Arbuscule", "Vesicle"))))
+                           breaks = seq(0, 110, 20)) + 
+        scale_fill_manual(values = cbPalette,
+						  breaks = levels(factor(z$samples,
+												 levels = unique(x$samples)))) +
+		annotate("text", x = 0, y = c(105, 110), label = c("Feature:", "Time:"),
+				 size = 3, hjust = 1) +
+        annotate("text", x = 1:nrow(z),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen)
+#         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
+# 								 length(unique(z$samples)) * num + .5,
+#                                  length(unique(z$samples))),
+#                  y = 110, label = unique(z$features[order(match(z$features,
+# 														factor(c("Total",
+# 																 "Hyphopodia",
+# 																 "IntrHyphae",
+# 																 "Arbuscule",
+# 																 "Vesicle"),
+# 															   levels = c("Total",
+# 																		  "Hyphopodia",
+# 																		  "IntrHyphae",
+# 																		  "Arbuscule",
+# 																		  "Vesicle"))))])) +
+#         annotate("text", x = 1:(length(unique(y$samples)) * num),
+#                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
+#         scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+#         scale_y_continuous(limits = c(-0.5, 110),
+#                            breaks = seq(0, 110, 20))+ 
+#         scale_colour_manual(values = cbPalette, 
+#                             breaks = levels(factor(z$features,
+#                                                    levels = c("Total", "Hyphopodia",
+#                                                               "IntrHyphae", "Arbuscule", "Vesicle"))))
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
