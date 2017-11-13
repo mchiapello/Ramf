@@ -475,11 +475,14 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 	#     }
     # Change table shape
     z <- final %>% tidyr::gather(features, values, -samples, -time, -replicates)
+	z$group <- paste(z$samples, z$time, z$features, sep = "_")
+	z <- z[order(match(z$features, c("Total", "Hyphopodia", "IntrHyphae",
+						                         "Arbuscule", "Vesicle")),
+						 z$time,
+						 match(z$samples,unique(x$samples ))), ]
+	z$order <- rep(1:length(table(z$group)), table(z$group))
     g <- ggplot(data = z,
-                aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
-                                    factor(z$features, levels = c("Total", "Hyphopodia",
-                                                                  "IntrHyphae", "Arbuscule", "Vesicle")),
-                                          sep = ": "),
+                aes(x = as.factor(z$order),
                           y = values, color = samples))
     a2 <- g +
         geom_boxplot() +
