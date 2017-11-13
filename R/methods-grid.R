@@ -463,7 +463,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 	#     final$order <- 1:nrow(final)
 	num <- ncol(x)-3
     if (annot == "none"){
-        d <- rep("", length(unique(y$samples)) * num)
+		d <- rep("", nrow(final))
     }
     if (annot == "asterisks"){
 		stop("Asterisks do not work with an object of class gridTime")
@@ -482,7 +482,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 						 match(z$samples,unique(x$samples ))), ]
 	z$order <- rep(1:length(table(z$group)), table(z$group))
     g <- ggplot(data = z,
-                aes(x = as.factor(z$order),
+                aes(x = factor(z$group, levels=unique(z$group)),
                           y = values, color = samples))
     a2 <- g +
         geom_boxplot() +
