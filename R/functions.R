@@ -204,7 +204,7 @@ trouvelot_summary <- function(x){
 ## TIME
 
 .grid_statime <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
-    V1 <- NULL
+    V1 <- samples <- comb <- NULL
     sls <- am_summary(x)[[1]]
     num <- ncol(sls)
     sls$comb <- paste(pull(sls, samples), pull(sls, time), sep = "_")

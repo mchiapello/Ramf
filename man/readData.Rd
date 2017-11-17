@@ -2,7 +2,6 @@
 % Please edit documentation in R/readData.R
 \name{readData}
 \alias{readData}
-\alias{readData}
 \title{Read colonization files in.}
 \format{A grid dataset should have 7 variables:
 \describe{
@@ -31,42 +30,26 @@ A Trouvelot dataset should have 3 variables:
          if you like to have a specific order, please sort the original data accordingly}
 \usage{
 readData(infile, type = c("none", "trouvelot", "grid"))
-
-readData(infile, type = c("none", "trouvelot", "grid"))
 }
 \arguments{
-\item{infile}{the name of the file which the data are to be read from.}
-
-\item{type}{grid or trouvelot}
-
 \item{infile}{the name of the file which the data are to be read from.}
 
 \item{type}{grid or trouvelot}
 }
 \value{
 an object of class \code{grid} or \code{trouvelot}.
-
-an object of class \code{grid} or \code{trouvelot}.
 }
 \description{
 Reads data
-
-Reads data
 }
 \details{
-This funtion reads trouvelot and grid data
-
 This funtion reads trouvelot and grid data
 }
 \examples{
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
 x <- readData(f, type = "grid")
-f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
-x <- readData(f, type = "grid")
 }
 \author{
-Marco Chiapello <mc983@cam.ac.uk>
-
 Marco Chiapello <mc983@cam.ac.uk>
 }
 \keyword{IO,}

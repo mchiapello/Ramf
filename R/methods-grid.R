@@ -342,7 +342,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                             main = "Colonization", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
-    dimen <- 0
+    dimen <- math <- sterr <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -463,7 +463,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     #     final$order <- 1:nrow(final)
     num <- ncol(x)-3
     if (annot == "none"){
-        d <- rep("", nrow(final))
+        d <- rep("", length(table(z$group)))
     }
     if (annot == "asterisks"){
         stop("Asterisks do not work with an object of class gridTime")
