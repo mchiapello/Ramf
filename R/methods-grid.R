@@ -437,7 +437,8 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization", ...){
+                            main = "Colonization",
+                            lab = "days", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
     dimen <- 0
@@ -496,10 +497,11 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               legend.position = "none") +
-        geom_vline(xintercept = c(0.5, seq(length(unique(z$samples)) + .5,
-                                    (length(unique(z$samples)) + .5) * 
-                                    ((length(unique(z$features)) * length(unique(z$samples))) - 1),
-                                    length(unique(z$samples)))),
+        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
+                                    length(unique(z$features)) *
+                                    length(unique(z$samples)) * 
+                                    length(unique(z$time)),
+                                length(unique(z$samples))),
                    colour = "lightgrey") +
         labs(title = main,
              #              subtitle = "Grid method",
@@ -519,7 +521,9 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 110, label = rep(unique(z$time), length(unique(z$features)))) +
+                 y = 110, label = paste0(rep(unique(z$time),
+                                            length(unique(z$features))),
+                                        " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20)) + 
         scale_colour_manual(values = cbPalette,
