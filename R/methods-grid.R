@@ -415,7 +415,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(final$features)) *
                                   length(unique(final$time)) + .5),
                                  length(unique(final$samples))),
-                 y = 105, label = paste0(rep(unique(final$time),
+                 y = 106.5, label = paste0(rep(unique(final$time),
                                              length(unique(final$features))),
                                          " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),
@@ -428,7 +428,6 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     class(a1) <- c("am_plot", class(a1))
     return(a1)
 }
-
 
 #' @export
 am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
@@ -448,24 +447,9 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     method <- match.arg(method)
     # Create summary table
     final <- am_summary(x)[[1]]
-    #     tmp <- final %>%
-    #         select("samples", "time", contains("_mean")) %>%
-    #         gather(features, means, -samples, -time) %>%
-    #         separate(features, c("features", "math")) %>% select(-math)
-    #     tmp2 <- final %>%
-    #         select("samples", "time", contains("_se")) %>%
-    #         gather(features, sterr, -samples, -time) %>%
-    #         separate(features, c("features", "math")) %>% select(-math)
-    #     final <- inner_join(tmp, tmp2, by = c("samples", "time", "features")) %>%
-    #         mutate(group = paste(samples, features, time, sep = "_"))
-    #     final <- final[order(match(final$features, c("Total", "Hyphopodia", "IntrHyphae",
-    #                                                  "Arbuscule", "Vesicle")),
-    #                          final$time,
-    #                          match(final$samples,unique(x$samples ))), ]
-    #     final$order <- 1:nrow(final)
     num <- ncol(x)-3
     if (annot == "none"){
-        d <- rep("", length(table(z$group)))
+        d <- rep("", length(table(paste(final$samples, final$time))) * num)
     }
     if (annot == "asterisks"){
         stop("Asterisks do not work with an object of class gridTime")
@@ -522,7 +506,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 105, label = paste0(rep(unique(z$time),
+                 y = 106.5, label = paste0(rep(unique(z$time),
                                             length(unique(z$features))),
                                         " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),
@@ -556,7 +540,7 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     final <- am_summary(x)[[1]]
     num <- ncol(x)-3
     if (annot == "none"){
-        d <- rep("", length(table(z$group)))
+        d <- rep("", length(table(paste(final$samples, final$time))) * num)
     }
     if (annot == "asterisks"){
         stop("Asterisks do not work with an object of class gridTime")
@@ -614,9 +598,9 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 105, label = paste0(rep(unique(z$time),
+                 y = 106.5, label = paste0(rep(unique(z$time),
                                             length(unique(z$features))),
-                                        " ", lab)) +
+                                        " ", lab), size = 3) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20)) + 
         scale_colour_manual(values = cbPalette,
