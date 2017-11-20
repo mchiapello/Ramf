@@ -380,7 +380,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     }
     # Change table shape
 #     if (annot == "none"){
-    g <- ggplot(data = final, aes(x = order, y = means, fill = samples))
+    g <- ggplot(data = final, aes(x = as.factor(order), y = means, fill = samples))
     a1 <- g + geom_col() +
         theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
         geom_errorbar(aes(ymin = means - sterr, ymax = means + sterr), width = .1) +
@@ -393,23 +393,28 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
               panel.grid.minor.x = element_blank(),
               legend.position = "none") +
         geom_vline(xintercept = seq(length(unique(final$samples)) + .5,
-                                    (length(unique(final$samples)) + .5) * 
-                                    ((length(unique(final$features)) * length(unique(final$samples))) - 1),
+                                    ((length(unique(final$samples)) + .5) * 
+                                    ((length(unique(final$features)) *
+                                      length(unique(final$time))) - 1)) -1,
                                     length(unique(final$samples))),
                    colour = "lightgrey") +
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
              y = "") +
-        scale_x_continuous(breaks = 1:nrow(final), labels = rep(unique(final$samples), 
-                                    ((length(unique(final$features)) *
-                                      length(unique(final$samples)))))) +
+        scale_x_discrete(labels = rep(unique(final$samples),
+                                      length(unique(final$time)) *
+                                      length(unique(final$features)))) +
+#         scale_x_continuous(breaks = 1:nrow(final), labels = rep(unique(final$samples), 
+#                                     ((length(unique(final$features)) *
+#                                       length(unique(final$samples)))))) +
         annotate("text", x = seq(length(unique(final$samples)) * .5 + .5,
                                  (length(unique(final$samples)) *
                                   length(unique(final$features)) *
                                   length(unique(final$time)) + .5),
                                  length(unique(final$samples))),
-                 y = 110, label = rep(unique(final$features), each = 3)) +
+                 y = 110, label = rep(unique(final$features),
+                                      each = length(unique(final$features)))) +
         annotate("text", x = seq(length(unique(final$samples)) * .5 + .5,
                                  (length(unique(final$samples)) *
                                   length(unique(final$features)) *
@@ -417,7 +422,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                  length(unique(final$samples))),
                  y = 106.5, label = paste0(rep(unique(final$time),
                                              length(unique(final$features))),
-                                         " ", lab)) +
+                                         " ", lab), size = 3) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20)) + 
         scale_fill_manual(values = cbPalette,
