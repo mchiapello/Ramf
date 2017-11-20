@@ -339,7 +339,8 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization", ...){
+                            main = "Colonization",
+                            lab = "days", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
     dimen <- math <- sterr <- 0
@@ -391,10 +392,10 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               legend.position = "none") +
-        geom_vline(xintercept = c(0.5, seq(length(unique(final$samples)) + .5,
+        geom_vline(xintercept = seq(length(unique(final$samples)) + .5,
                                     (length(unique(final$samples)) + .5) * 
                                     ((length(unique(final$features)) * length(unique(final$samples))) - 1),
-                                    length(unique(final$samples)))),
+                                    length(unique(final$samples))),
                    colour = "lightgrey") +
         labs(title = main, 
              #              subtitle = "Grid method",
@@ -414,14 +415,16 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(final$features)) *
                                   length(unique(final$time)) + .5),
                                  length(unique(final$samples))),
-                 y = 110, label = rep(unique(final$time), length(unique(final$features)))) +
+                 y = 110, label = paste0(rep(unique(final$time),
+                                             length(unique(final$features))),
+                                         " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20)) + 
         scale_fill_manual(values = cbPalette,
                           breaks = levels(factor(final$samples,
                                                  levels = unique(x$samples)))) +
-        annotate("text", x = 0, y = c(105, 110), label = c("Feature:", "Time:"),
-                 size = 3, hjust = 1) +
+#         annotate("text", x = 0, y = c(105, 110), label = c("Feature:", "Time:"),
+#                  size = 3, hjust = 1) +
         annotate("text", x = 1:nrow(final),
                  y = -Inf, vjust = -0.5, label = d, size = dimen)
     class(a1) <- c("am_plot", class(a1))
@@ -555,21 +558,6 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     method <- match.arg(method)
     # Create summary table
     final <- am_summary(x)[[1]]
-    #     tmp <- final %>%
-    #         select("samples", "time", contains("_mean")) %>%
-    #         gather(features, means, -samples, -time) %>%
-    #         separate(features, c("features", "math")) %>% select(-math)
-    #     tmp2 <- final %>%
-    #         select("samples", "time", contains("_se")) %>%
-    #         gather(features, sterr, -samples, -time) %>%
-    #         separate(features, c("features", "math")) %>% select(-math)
-    #     final <- inner_join(tmp, tmp2, by = c("samples", "time", "features")) %>%
-    #         mutate(group = paste(samples, features, time, sep = "_"))
-    #     final <- final[order(match(final$features, c("Total", "Hyphopodia", "IntrHyphae",
-    #                                                  "Arbuscule", "Vesicle")),
-    #                          final$time,
-    #                          match(final$samples,unique(x$samples ))), ]
-    #     final$order <- 1:nrow(final)
     num <- ncol(x)-3
     if (annot == "none"){
         d <- rep("", length(table(z$group)))
@@ -587,11 +575,13 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
     # Change table shape
     z <- final %>% tidyr::gather(features, values, -samples, -time, -replicates)
     z$group <- paste(z$samples, z$time, z$features, sep = "_")
+    # Order
     z <- z[order(match(z$features, c("Total", "Hyphopodia", "IntrHyphae",
                                                  "Arbuscule", "Vesicle")),
                          z$time,
                          match(z$samples,unique(x$samples ))), ]
     z$order <- rep(1:length(table(z$group)), table(z$group))
+    # Plot
     g <- ggplot(data = z,
                 aes(x = factor(z$group, levels=unique(z$group)),
                           y = values, color = samples))
@@ -612,7 +602,6 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                 length(unique(z$samples))),
                    colour = "lightgrey") +
         labs(title = main,
-             #              subtitle = "Grid method",
              x = "",
              y = "") +
         scale_x_discrete(labels = rep(unique(z$samples), 
@@ -637,8 +626,6 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
         scale_colour_manual(values = cbPalette,
                           breaks = levels(factor(z$samples,
                                                  levels = unique(x$samples)))) +
-#         annotate("text", x = 2, y = c(105, 110), label = c("Feature:", "Time:"),
-#                  size = 3, hjust = 1) +
         annotate("text", x = 1:length(table(z$group)),
                  y = -Inf, vjust = -0.5, label = d, size = dimen)
     class(a2) <- c("am_plot", class(a2))

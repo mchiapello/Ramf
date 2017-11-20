@@ -99,6 +99,8 @@ trouvelot_summary <- function(x){
 }
 
 
+###############################################################################
+## REGULAR
 .grid_stat <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
     V1 <- NULL
     sls <- am_summary(x)
@@ -148,7 +150,6 @@ trouvelot_summary <- function(x){
         return(stat)
     }
 }
-
 
 .trouvelot_stat <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
     V1 <- NULL
