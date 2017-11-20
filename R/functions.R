@@ -248,6 +248,7 @@ trouvelot_summary <- function(x){
                     console = FALSE)
             tmp2 <- tmp$groups[, 1:2]
             tmp2$trt <- rownames(tmp2)
+            tmp2 <- tmp2[order(rownames(tmp2)), ]
             stat[[c(1, 1, 1, 1:5)[i]]] <- tmp2[2]
         }
         stat <- do.call(cbind, stat)
