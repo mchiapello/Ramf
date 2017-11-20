@@ -33,7 +33,7 @@ am_summary <- function(x) UseMethod("am_summary")
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", ...)
+#'                   main = "Colonization", lab = "days",...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -51,6 +51,8 @@ am_summary <- function(x) UseMethod("am_summary")
 #'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
+#' @param lab Parameter used in time series plots. It specified the label to write
+#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_barplot(example_grid)
@@ -62,7 +64,7 @@ am_barplot <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", ...) UseMethod("am_barplot")
+					   main = "Colonization", lab = "days", ...) UseMethod("am_barplot")
 
 #' am_boxplot object.
 #' 
@@ -71,7 +73,7 @@ am_barplot <- function(x, cbPalette,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", ...)
+#'                   main = "Colonization", lab = "days", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -89,6 +91,8 @@ am_barplot <- function(x, cbPalette,
 #'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
+#' @param lab Parameter used in time series plots. It specified the label to write
+#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_boxplot(example_grid)
@@ -100,7 +104,7 @@ am_boxplot <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", ...) UseMethod("am_boxplot")
+					   main = "Colonization", lab = "days", ...) UseMethod("am_boxplot")
 
 #' am_dotplot object.
 #' 
@@ -109,7 +113,7 @@ am_boxplot <- function(x, cbPalette,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", ...)
+#'                   main = "Colonization", lab = "days", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -127,6 +131,8 @@ am_boxplot <- function(x, cbPalette,
 #'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
+#' @param lab Parameter used in time series plots. It specified the label to write
+#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_dotplot(example_grid)
@@ -138,7 +144,7 @@ am_dotplot <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", ...) UseMethod("am_dotplot")
+					   main = "Colonization", lab = "days", ...) UseMethod("am_dotplot")
 
 #' am_stat object.
 #' 
