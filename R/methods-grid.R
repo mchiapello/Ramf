@@ -409,13 +409,13 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(final$features)) *
                                   length(unique(final$time)) + .5),
                                  length(unique(final$samples))),
-                 y = 105, label = rep(unique(final$features), each = 3)) +
+                 y = 110, label = rep(unique(final$features), each = 3)) +
         annotate("text", x = seq(length(unique(final$samples)) * .5 + .5,
                                  (length(unique(final$samples)) *
                                   length(unique(final$features)) *
                                   length(unique(final$time)) + .5),
                                  length(unique(final$samples))),
-                 y = 110, label = paste0(rep(unique(final$time),
+                 y = 105, label = paste0(rep(unique(final$time),
                                              length(unique(final$features))),
                                          " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),
@@ -423,8 +423,6 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
         scale_fill_manual(values = cbPalette,
                           breaks = levels(factor(final$samples,
                                                  levels = unique(x$samples)))) +
-#         annotate("text", x = 0, y = c(105, 110), label = c("Feature:", "Time:"),
-#                  size = 3, hjust = 1) +
         annotate("text", x = 1:nrow(final),
                  y = -Inf, vjust = -0.5, label = d, size = dimen)
     class(a1) <- c("am_plot", class(a1))
@@ -518,13 +516,13 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 105, label = rep(unique(z$features), each = 3)) +
+                 y = 110, label = rep(unique(z$features), each = 3)) +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  (length(unique(z$samples)) *
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 110, label = paste0(rep(unique(z$time),
+                 y = 105, label = paste0(rep(unique(z$time),
                                             length(unique(z$features))),
                                         " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),
@@ -532,8 +530,6 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
         scale_colour_manual(values = cbPalette,
                           breaks = levels(factor(z$samples,
                                                  levels = unique(x$samples)))) +
-#         annotate("text", x = 2, y = c(105, 110), label = c("Feature:", "Time:"),
-#                  size = 3, hjust = 1) +
         annotate("text", x = 1:length(table(z$group)),
                  y = -Inf, vjust = -0.5, label = d, size = dimen)
     class(a2) <- c("am_plot", class(a2))
@@ -612,13 +608,13 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 105, label = rep(unique(z$features), each = 3)) +
+                 y = 110, label = rep(unique(z$features), each = 3)) +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  (length(unique(z$samples)) *
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 110, label = paste0(rep(unique(z$time),
+                 y = 105, label = paste0(rep(unique(z$time),
                                             length(unique(z$features))),
                                         " ", lab)) +
         scale_y_continuous(limits = c(-0.5, 110),

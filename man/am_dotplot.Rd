@@ -9,7 +9,7 @@ am_dotplot(x, cbPalette,
 				annot = c("none", "asterisks", "letters"),
 				method = c("none","holm","hommel", "hochberg",
 						   "bonferroni", "BH", "BY", "fdr"),
-                  main = "Colonization", ...)
+                  main = "Colonization", lab = "days", ...)
 }
 \arguments{
 \item{x}{dataset containing Trouvelot or Grid data}
@@ -34,6 +34,9 @@ adjustment
 The default is no adjustment for multiple comparisons.}
 
 \item{main}{Plot title. Default "Colonization".}
+
+\item{lab}{Parameter used in time series plots. It specified the label to write
+close the time on the plot. Default is "days".}
 
 \item{...}{ignored}
 }
