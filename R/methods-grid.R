@@ -414,7 +414,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(final$time)) + .5),
                                  length(unique(final$samples))),
                  y = 110, label = rep(unique(final$features),
-                                      each = length(unique(final$features)))) +
+                                      each = length(unique(final$time)))) +
         annotate("text", x = seq(length(unique(final$samples)) * .5 + .5,
                                  (length(unique(final$samples)) *
                                   length(unique(final$features)) *
@@ -505,7 +505,8 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 110, label = rep(unique(z$features), each = 3)) +
+                 y = 110, label = rep(unique(z$features),
+                                      each = length(unique(z$time)))) +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  (length(unique(z$samples)) *
                                   length(unique(z$features)) *
@@ -597,7 +598,8 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                                   length(unique(z$features)) *
                                   length(unique(z$time)) + .5),
                                  length(unique(z$samples))),
-                 y = 110, label = rep(unique(z$features), each = 3)) +
+                 y = 110, label = rep(unique(z$features),
+                                      each = length(unique(z$time)))) +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  (length(unique(z$samples)) *
                                   length(unique(z$features)) *
