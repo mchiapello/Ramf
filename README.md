@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/mchiapello/Ramf.svg?branch=master)](https://travis-ci.org/mchiapello/Ramf)
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
+[![Build status](https://ci.appveyor.com/api/projects/status/x5l0mr07ohanfywk?svg=true)](https://ci.appveyor.com/project/mchiapello/ramf)
 
 # The **Ramf** package [pre-release]
 
