@@ -197,6 +197,11 @@ am_save.am_stat <- function(x, filename = "Summary", ...){
 }
 
 #' @export
+am_save.am_statime <- function(x, filename = "SummaryTime", ...){
+	write.csv(x, paste0(filename, "_StatTime.csv"), row.names = FALSE)
+}
+
+#' @export
 #' @importFrom ggplot2 ggsave
 am_save.am_plot <- function(x, filename = "Rplot.pdf", ...){
 	ggsave(plot = x, filename, ...)

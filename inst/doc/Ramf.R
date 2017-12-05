@@ -95,3 +95,43 @@ am_save(p1, "dotplor_trouvelot.pdf", width = 21, height = 21, units = "cm", dpi 
 # Save jpg plot
 am_save(p1, "dotplor_trouvelot.jpg")
 
+## ----loadDataTime----------------------------------------------------------
+# Grid
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "gridTime.csv")
+tgr <- readDataTime(f, type = "grid")
+
+## ----summaryTime-----------------------------------------------------------
+tgrs <- am_summary(tgr)
+tgrs
+
+## ----statTime--------------------------------------------------------------
+tgrst <- am_stat(tgr)
+tgrst
+
+## ----stat2Time-------------------------------------------------------------
+am_stat(tgr, method = "BH")
+
+## ----plotTime--------------------------------------------------------------
+am_barplot(tgr)
+am_boxplot(tgr)
+am_dotplot(tgr)
+
+## ----stat.plotTime---------------------------------------------------------
+am_barplot(tgr, annot = "letter", alpha = 0.05)
+am_barplot(tgr, annot = "letter", alpha = 0.01)
+am_dotplot(tgr, annot = "letter", method = "fdr")
+
+## ----saveTime--------------------------------------------------------------
+# Save the summary
+am_save(tgrs, "TimePoint") # Two files will be saved
+
+# Save the statisticas
+am_save(am_stat(tgr, method = "BH"), "TimePoint") # One file called Summary_Stat.csv will be saved
+
+# Save the plots
+am_save(am_barplot(tgr), "barplor_Timegrid.pdf")
+
+# Save jpg plot
+tgrb <- am_barplot(tgr)
+am_save(tgrb, "RPlot.pdf", unit = "cm", width = 20, height = 20, dpi = 300)
+

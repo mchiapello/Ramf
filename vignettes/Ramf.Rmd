@@ -1,5 +1,5 @@
 --- 
-title: "Arbuscular mycorrhizal fungi colonization" 
+title: "Arbuscular mycorrhizal fungi colonization package"
 author: "Marco Chiapello"
 output:  
   BiocStyle::html_document
@@ -41,7 +41,9 @@ The table contains:
 
 - 7 columns with **specific headers**
 
-- The table can contains a subset of the columns (eg, Total, Arbuscule, Vesicle)
+- The first 2 columns (samples and replicates) must be present
+
+- The last 5 columns (Total, Hyphopodia, IntHyphae, Arbuscule and Vesicle) could not be all present
 
 - If the headers are not the same of the ones in the example table the software will not be able to read the table
 
@@ -111,7 +113,7 @@ trs
 ### Statistical analysis
 
 The statistical analysis is performed using the `kruskal` function from `agricolae` package.
-To read more about the statatical framework, refer to this [link]().
+To read more about the statatical framework, refer to this [link](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance).
 
 > am_stat
 
@@ -129,7 +131,7 @@ trst
 By default, the correction method is "none", but it is possible to select between:
 Bonferroni, Holm, Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 adjustment.
- For more details refer to [agricolae package]().
+ For more details refer to [agricolae package](https://cran.r-project.org/web/packages/agricolae/index.html).
 
 #### Example
 ```{r stat2}
@@ -262,4 +264,160 @@ am_save(p1, "dotplor_trouvelot.pdf", width = 21, height = 21, units = "cm", dpi 
 am_save(p1, "dotplor_trouvelot.jpg")
 ```
 
+### Time series analysis
 
+The package contains functions able to deal with time course data.
+
+#### Grid scoring system for time point data
+
+The data should be provided in a **csv table** like the follow one:
+
+|  samples  | replicates | time | Total | Hyphopodia | IntrHyphae | Arbuscule | Vesicle |
+|:---------:|:----------:|:----:|:-----:|:----------:|:----------:|:---------:|:-------:|
+|     WT    |      A     |   4  |   30  |      3     |     30     |     30    |    10   |
+|     WT    |      A     |   4  |   24  |      5     |     24     |     24    |    7    |
+|     WT    |      B     |   4  |   20  |      2     |     20     |     20    |    5    |
+|     WT    |      B     |   5  |   15  |      2     |     15     |     15    |    3    |
+| cyclops-3 |      A     |   5  |   18  |      6     |     18     |     9     |    0    |
+| cyclops-3 |      A     |   5  |   16  |     10     |     10     |     0     |    0    |
+| cyclops-3 |      B     |   6  |   20  |     12     |     20     |     0     |    0    |
+| cyclops-3 |      B     |   6  |   14  |      4     |     14     |     0     |    0    |
+|    ...    |     ...    | ...  |  ...  |     ...    |     ...    |    ...    |   ...   |
+
+The table contains:
+
+- 8 columns with **specific headers**
+
+- The first 3 columns (samples, replicates and time) must be present
+
+- The last 5 columns (Total, Hyphopodia, IntHyphae, Arbuscule and Vesicle) could not be all present
+
+- If the headers are not the same of the ones in the example table the software will not be able to read the table
+
+- As many row as you need
+
+- The **first element of column "samples" will be used as control** for the statistical analysis (in this example "WT" will be used as control)
+
+### Loading time point  data 
+
+To load data in, use the follow command: 
+
+>readDataTime(file.csv, type = c("grid", "trouvelot"))
+
+#### Example
+```{r loadDataTime}
+# Grid
+f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "gridTime.csv")
+tgr <- readDataTime(f, type = "grid")
+```
+
+It is very important the order of the samples in the csv file. The first sample will
+be considered the control.
+
+
+### Summarize data
+
+To summarise the data and export the scoring results in a tabular format use the
+follow command:
+
+> am_summary
+
+
+#### Example
+```{r summaryTime}
+tgrs <- am_summary(tgr)
+tgrs
+```
+
+### Statistical analysis
+
+The statistical analysis is performed using the `kruskal` function from `agricolae` package.
+To read more about the statatical framework, refer to this [link](https://en.wikipedia.org/wiki/Kruskal%E2%80%93Wallis_one-way_analysis_of_variance).
+
+> am_stat
+
+
+#### Example
+```{r statTime}
+tgrst <- am_stat(tgr)
+tgrst
+```
+
+By default, the correction method is "none", but it is possible to select between:
+Bonferroni, Holm, Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+adjustment.
+ For more details refer to [agricolae package](https://cran.r-project.org/web/packages/agricolae/index.html).
+
+#### Example
+```{r stat2Time}
+am_stat(tgr, method = "BH")
+```
+
+The function reports the statistical analysis between the samples at the same time point and the statistical
+analysis of the same sample at different time points.
+
+### Plot data
+
+To summarise the data in a graphical way the package provide 3 plot types:
+
+- barplot
+
+  >am_barplot
+
+- boxplot
+
+  >am_boxplot
+
+- dotplot
+
+  >am_dotplot
+
+It is possible to plot a simple plot.
+
+#### Example
+```{r plotTime}
+am_barplot(tgr)
+am_boxplot(tgr)
+am_dotplot(tgr)
+```
+
+The plot fuctions for time points take the same set of option to customize your plot as the previous plots.
+
+It is also possible to include the statistical results under the plot with the 
+appropriate alpha. In time point data analysis the "asterisks" option does not work. The "letter" option
+works across the same feature for all the time points. So, you can compare the "Total" for different samples,
+ but you can not compare different features at different time points (eg, the comparison between "Total" HP0 after 4 days
+ and "Arbuscule" HP0 after 4 days is meaningless).
+
+```{r stat.plotTime}
+am_barplot(tgr, annot = "letter", alpha = 0.05)
+am_barplot(tgr, annot = "letter", alpha = 0.01)
+am_dotplot(tgr, annot = "letter", method = "fdr")
+```
+
+### Save data
+
+To export the data, a "save data" function is provided. 
+
+- **Summary data**: the function exports both the summary per replicate and the summary per sample in two distinct csv files.
+
+- **Statistical data**: the function exports a csv file
+
+- **Plots**: the function exports the plots and useful options can be used to export a pubblication ready image.
+
+
+#### Example
+```{r saveTime}
+# Save the summary
+am_save(tgrs, "TimePoint") # Two files will be saved
+
+# Save the statisticas
+am_save(am_stat(tgr, method = "BH"), "TimePoint") # One file called Summary_Stat.csv will be saved
+
+# Save the plots
+am_save(am_barplot(tgr), "barplor_Timegrid.pdf")
+
+# Save jpg plot
+tgrb <- am_barplot(tgr)
+am_save(tgrb, "RPlot.pdf", unit = "cm", width = 20, height = 20, dpi = 300)
+```
