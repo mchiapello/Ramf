@@ -620,3 +620,182 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 }
 
 
+#' @export
+am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+                                             "#009E73", "#F0E442", "#0072B2",
+                                             "#D55E00", "#CC79A7"),
+                            alpha = 0.05,
+                            annot = c("none", "asterisks", "letters"),
+                            method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                            main = "Colonization", ...){
+    Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
+    features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
+    dimen <- 0
+    alpha <- alpha
+    annot <- match.arg(annot)
+    method <- match.arg(method)
+    # Create summary table
+    y <- grid_summary(x)
+    num <- ncol(y)-2
+    if (annot == "none"){
+        d <- rep("", length(unique(y$samples)) * num)
+    }
+    if (annot == "asterisks"){
+        stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
+        stat_ctr <- stat[stat$group1 == y$samples[1], ]
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:ncol(y)])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:num, each = length(unique(y$samples)) - 1))
+        d <- NULL
+        for (i in seq_along(ll)){
+            d <- append(d, c("", ll[[i]]))
+        }
+        dimen <- 3
+    }
+    if (annot == "letters"){
+        stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
+        d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
+        dimen <- 3
+    }
+    # Change table shape
+    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+    final <- z %>% group_by(samples, features) %>%
+          mutate(num = n()) %>%
+          summarize(means = mean(values, na.rm = TRUE),
+                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
+    g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
+                                              factor(final$features, levels = c("Total", "Hyphopodia",
+                                                                           "IntrHyphae", "Arbuscule", "Vesicle"))),
+                                              y = means, fill = samples))
+    a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
+        geom_errorbar(aes(ymin = means - se, ymax = means + se), width = .1) +
+        theme_bw() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+              plot.title = element_text(size = 19),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              legend.position = "none") +
+        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
+                                    (length(unique(z$samples)) + .5) * (num - 1),
+                                    length(unique(z$samples))),
+                   colour = "lightgrey") +
+        labs(title = main, 
+             #              subtitle = "Grid method",
+             x = "",
+             y = "") +
+        annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
+                                 length(unique(z$samples)) * num + .5,
+                                 length(unique(z$samples))),
+                 y = 110, label = unique(final$features[order(match(final$features,
+                                                        factor(c("Total",
+                                                                 "Hyphopodia",
+                                                                 "IntrHyphae",
+                                                                 "Arbuscule",
+                                                                 "Vesicle"),
+                                                               levels = c("Total",
+                                                                          "Hyphopodia",
+                                                                          "IntrHyphae",
+                                                                          "Arbuscule",
+                                                                          "Vesicle"))))])) +
+        annotate("text", x = 1:(length(unique(y$samples)) * num),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
+        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+        scale_y_continuous(limits = c(-0.5, 110),
+                           breaks = seq(0, 110, 20))+ 
+        scale_fill_manual(values = cbPalette,
+                          breaks = levels(factor(final$samples,
+                                                 levels = unique(x$samples))))
+    class(a1) <- c("am_plot", class(a1))
+    return(a1)
+}
+
+#' @export
+am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+                                             "#009E73", "#F0E442", "#0072B2",
+                                             "#D55E00", "#CC79A7"),
+                            alpha = 0.05,
+                            annot = c("none", "asterisks", "letters"),
+                            method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                            main = "Colonization", ...){
+    Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
+    features <- replicates <- samples <- values <- NULL
+    dimen <- 0
+    alpha <- alpha
+    annot <- match.arg(annot)
+    method <- match.arg(method)
+    # Create summary table
+    y <- grid_summary(x)
+    num <- ncol(y)-2
+    if (annot == "none"){
+        d <- rep("", length(unique(y$samples)) * num)
+    }
+    if (annot == "asterisks"){
+        stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
+        stat_ctr <- stat[stat$group1 == y$samples[1], ]
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:ncol(y)])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:num, each = length(unique(y$samples)) - 1))
+        d <- NULL
+        for (i in seq_along(ll)){
+            d <- append(d, c("", ll[[i]]))
+        }
+        dimen <- 3
+    }
+    if (annot == "letters"){
+        stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
+        d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
+        dimen <- 3
+    }
+    # Change table shape
+    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+    g <- ggplot(data = z,
+                aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
+                                    factor(z$features, levels = c("Total", "Hyphopodia",
+                                                                  "IntrHyphae", "Arbuscule", "Vesicle")),
+                                          sep = ": "),
+                          y = values, color = samples))
+    a2 <- g +
+        geom_boxplot() +
+        theme_bw() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+              plot.title = element_text(size = 19),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank()) +
+        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
+                                    (length(unique(z$samples)) + .5) * (num - 1),
+                                    length(unique(z$samples))),
+                   colour = "lightgrey") +
+        labs(title = main,
+             #              subtitle = "Grid method",
+             x = "",
+             y = "") +
+        annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
+                                 length(unique(z$samples)) * num + .5,
+                                 length(unique(z$samples))),
+                 y = 110, label = unique(z$features[order(match(z$features,
+                                                        factor(c("Total",
+                                                                 "Hyphopodia",
+                                                                 "IntrHyphae",
+                                                                 "Arbuscule",
+                                                                 "Vesicle"),
+                                                               levels = c("Total",
+                                                                          "Hyphopodia",
+                                                                          "IntrHyphae",
+                                                                          "Arbuscule",
+                                                                          "Vesicle"))))])) +
+        annotate("text", x = 1:(length(unique(y$samples)) * num),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
+        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+        scale_y_continuous(limits = c(-0.5, 110),
+                           breaks = seq(0, 110, 20))+ 
+        scale_colour_manual(values = cbPalette, 
+                            breaks = levels(factor(z$features,
+                                                   levels = c("Total", "Hyphopodia",
+                                                              "IntrHyphae", "Arbuscule", "Vesicle"))))
+    class(a2) <- c("am_plot", class(a2))
+    return(a2)
+}
