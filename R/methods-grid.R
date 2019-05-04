@@ -26,7 +26,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization", ...){
+                            main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
     dimen <- 0
@@ -117,7 +117,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization", ...){
+                            main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
     dimen <- 0
@@ -206,7 +206,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization", ...){
+                            main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
     dimen <- 0
@@ -339,7 +339,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization",
+                            main = "Gridline intersect method",
                             lab = "days", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
@@ -442,7 +442,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization",
+                            main = "Gridline intersect method",
                             lab = "days", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
@@ -534,7 +534,7 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization",
+                            main = "Gridline intersect method",
                             lab = "days", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
@@ -629,7 +629,7 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
-                            main = "Colonization", ...){
+                            main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
     dimen <- 0
@@ -646,11 +646,12 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
           mutate(num = n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
                     se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
+          ungroup %>%
           mutate(features = factor(features, levels = c("Total", "Hyphopodia",
                                                         "IntrHyphae", "Arbuscule",
-                                                        "Vesicle"))) %>%
-          arrange(features) %>%
-          ungroup
+                                                        "Vesicle")),
+                 samples = factor(samples, levels = unique(x$samples))) %>%
+          arrange(features, samples)
     # Add annotations
     if (annot == "none"){
         final  <- final %>%
@@ -666,11 +667,17 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
+        final  <- final %>%
+            mutate(annot = d) %>%
+            group_by(samples)
         dimen <- 3
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
+        final  <- final %>%
+            mutate(annot = d) %>%
+            group_by(samples)
         dimen <- 3
     }
     g <- ggplot(data = final, aes(x = features,
@@ -691,7 +698,7 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
              y = "root length colonized [%]") +
 #         annotate("text", x = dodge,
 #                  y = -Inf, vjust = -0.5, label = final$means, size = dimen) +
-        geom_text(aes( label = annot, y = max(means + se)), vjust = -0.5, position = dodge)  +
+        geom_text(aes( label = annot, y = (means + se)), vjust = -0.5, position = dodge)  +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
@@ -709,7 +716,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                            main = "Colonization", ...){
+                            main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
     dimen <- 0
