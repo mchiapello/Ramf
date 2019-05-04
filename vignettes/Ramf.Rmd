@@ -171,6 +171,16 @@ am_dotplot(tr)
 The plot fuctions take a set of option to customize your plot.
 
 #### Example
+```{r plot2}
+am_barplot_legend(gr)
+am_boxplot(gr)
+am_dotplot(gr)
+am_barplot(tr)
+am_boxplot(tr)
+am_dotplot(tr)
+```
+
+#### Example
 
 The plot can use different color palettes. We advise to use [Colorbrewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) or
 [Colorgorical](http://vrl.cs.brown.edu/color).

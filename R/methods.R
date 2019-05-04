@@ -26,6 +26,47 @@
 #' @importFrom dplyr contains
 am_summary <- function(x) UseMethod("am_summary")
 
+#' am_barplot_legend object.
+#' 
+#' @usage am_barplot_legend(x, cbPalette,
+#'					alpha = 0.05,
+#'					annot = c("none", "asterisks", "letters"),
+#'					method = c("none","holm","hommel", "hochberg",
+#'							   "bonferroni", "BH", "BY", "fdr"),
+#'          legend = c("right", "left", "top", "bottom"),
+#'          main = "Colonization", ...)
+#' @param x dataset containing Trouvelot or Grid data
+#' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
+#'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
+#' 					Colorbrewer and Colorgorical are website where is possible
+#' 					design nice color palettes.
+#' @param alpha Significant threshold
+#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
+#'            below the sample statistically different from the control. The control
+#'            is the first sample in the input file. If is is "letters" on the plot
+#'            letters appear below the samples groupping the samples based on the 
+#'            statistical test. For statistical tests check `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+#'               adjustment
+#'               (see agricolae package for more details).
+#'               The default is no adjustment for multiple comparisons.
+#' @param legend Indicate the legend position
+#' @param main Plot title. Default "Colonization".
+#' @param ... ignored
+#' @examples
+#' am_barplot_legend(example_grid)
+#' am_barplot_legend(example_trouvelot)
+#' @export
+#' @import tidyr ggplot2
+am_barplot <- function(x, cbPalette,
+					   alpha = 0.05,
+					   annot = c("none", "asterisks", "letters"),
+					   method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
+             legend = c("right", "left", "top", "bottom"),
+					   main = "Colonization", lab = "days", ...) UseMethod("am_barplot")
+
 #' am_barplot object.
 #' 
 #' @usage am_barplot(x, cbPalette,

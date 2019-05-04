@@ -1,6 +1,6 @@
 #' @export
 am_summary.grid <- function(x){
-    Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
+    Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <-. <- NULL
     features <- replicates <- samples <- values <- num <- n <- num_mean <- NULL
     tmp <- grid_summary(x)
     final <- tmp %>%
@@ -300,7 +300,7 @@ am_stat.grid <- function(x, method = c("none","holm","hommel", "hochberg",
 
 #' @export
 am_summary.gridTime <- function(x){
-    Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- NULL
+    Arbuscule <- Hyphopodia <- IntrHyphae <- Total <- Vesicle <- comp <- . <- NULL
     features <- replicates <- samples <- values <- num <- n <- num_mean <- NULL
     y <- x %>% 
             group_by(samples, time, replicates) %>%
@@ -621,13 +621,14 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 
 
 #' @export
-am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
+                            legend = c("right", "left", "top", "bottom"),
                             main = "Colonization", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
@@ -635,6 +636,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
+    legend <- match.arg(legend)
     # Create summary table
     y <- grid_summary(x)
     num <- ncol(y)-2
@@ -676,7 +678,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
-              legend.position = "none") +
+              legend.position = legend) +
         geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
                                     (length(unique(z$samples)) + .5) * (num - 1),
                                     length(unique(z$samples))),
@@ -684,7 +686,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  length(unique(z$samples)) * num + .5,
                                  length(unique(z$samples))),
@@ -701,7 +703,8 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                                           "Vesicle"))))])) +
         annotate("text", x = 1:(length(unique(y$samples)) * num),
                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
-        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+        scale_x_discrete(labels = rep(rep("", length(unique(x$samples))), 
+                                      ncol(x) - 2)) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
