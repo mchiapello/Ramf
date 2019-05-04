@@ -640,8 +640,22 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
     # Create summary table
     y <- grid_summary(x)
     num <- ncol(y)-2
+    # Change table shape
+    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+    final <- z %>% group_by(samples, features) %>%
+          mutate(num = n()) %>%
+          summarize(means = mean(values, na.rm = TRUE),
+                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
+          mutate(features = factor(features, levels = c("Total", "Hyphopodia",
+                                                        "IntrHyphae", "Arbuscule",
+                                                        "Vesicle"))) %>%
+          arrange(features) %>%
+          ungroup
+    # Add annotations
     if (annot == "none"){
-        d <- rep("", length(unique(y$samples)) * num)
+        final  <- final %>%
+            mutate(annot = rep("", nrow(final))) %>%
+            group_by(samples)
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -659,15 +673,6 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
         dimen <- 3
     }
-    # Change table shape
-    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
-    final <- z %>% group_by(samples, features) %>%
-          mutate(num = n()) %>%
-          summarize(means = mean(values, na.rm = TRUE),
-                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
-          mutate(features = factor(features, levels = c("Total", "Hyphopodia",
-                                                        "IntrHyphae", "Arbuscule",
-                                                        "Vesicle")))
     g <- ggplot(data = final, aes(x = features,
                                               y = means, fill = samples))
     dodge <- position_dodge(width=0.9)
@@ -684,8 +689,9 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
              #              subtitle = "Grid method",
              x = "",
              y = "root length colonized [%]") +
-#         annotate("text", x = 1:(length(unique(y$samples)) * num),
-#                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
+#         annotate("text", x = dodge,
+#                  y = -Inf, vjust = -0.5, label = final$means, size = dimen) +
+        geom_text(aes( label = annot, y = max(means + se)), vjust = -0.5, position = dodge)  +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
