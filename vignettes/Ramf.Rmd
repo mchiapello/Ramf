@@ -171,13 +171,8 @@ am_dotplot(tr)
 The plot fuctions take a set of option to customize your plot.
 
 #### Example
-```{r plot2}
+```{r plot1}
 am_barplot_legend(gr)
-am_boxplot(gr)
-am_dotplot(gr)
-am_barplot(tr)
-am_boxplot(tr)
-am_dotplot(tr)
 ```
 
 #### Example

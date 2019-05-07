@@ -82,7 +82,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  length(unique(z$samples)) * num + .5,
                                  length(unique(z$samples))),
@@ -170,7 +170,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  length(unique(z$samples)) * num + .5,
                                  length(unique(z$samples))),
@@ -259,7 +259,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  length(unique(z$samples)) * num + .5,
                                  length(unique(z$samples))),
@@ -401,7 +401,7 @@ am_barplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         scale_x_discrete(labels = rep(unique(final$samples),
                                       length(unique(final$time)) *
                                       length(unique(final$features)))) +
@@ -496,7 +496,7 @@ am_boxplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         scale_x_discrete(labels = rep(unique(z$samples), 
                                     ((length(unique(z$features)) *
                                       length(unique(z$samples)))))) +
@@ -589,7 +589,7 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
                    colour = "lightgrey") +
         labs(title = main,
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         scale_x_discrete(labels = rep(unique(z$samples), 
                                     ((length(unique(z$features)) *
                                       length(unique(z$samples)))))) +
@@ -769,7 +769,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root length colonized [%]") +
         annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
                                  length(unique(z$samples)) * num + .5,
                                  length(unique(z$samples))),
