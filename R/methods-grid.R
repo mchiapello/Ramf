@@ -846,7 +846,8 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
             group_by(samples, features) %>%
             dplyr::filter(values == max(values)) %>%
-            arrange(features, samples)
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
     if (annot == "letters"){
@@ -879,7 +880,8 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
              #              subtitle = "Grid method",
              x = "",
              y = "root length colonized [%]") +
-        geom_text(data = tmp, aes(label = annot, y = max(values)), vjust = -0.5, position = dodge) +
+        geom_text(data = an, aes(label = annot, y = values), vjust = -0.5, 
+                  position = dodge, show.legend = FALSE) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
         scale_colour_manual(values = cbPalette, 
