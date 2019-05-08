@@ -853,9 +853,15 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
-        z  <- z %>%
-            mutate(annot = d) %>%
-            group_by(samples)
+        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- z %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
     g <- ggplot(data = z,
@@ -880,7 +886,7 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
              #              subtitle = "Grid method",
              x = "",
              y = "root length colonized [%]") +
-        geom_text(data = an, aes(label = annot, y = values), vjust = -0.5, 
+        geom_text(data = an, aes(label = annot, y = values), vjust = -0.8, 
                   position = dodge, show.legend = FALSE) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
