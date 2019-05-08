@@ -799,7 +799,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 }
 
 #' @export
-legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_dotplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -814,6 +814,7 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
+    legend <- match.arg(legend)
     # Create summary table
     y <- grid_summary(x)
     num <- ncol(y)-2
@@ -826,9 +827,16 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
           arrange(features, samples)
     # Add annotations
     if (annot == "none"){
-        z  <- z %>%
-            mutate(annot = rep("", nrow(z))) %>%
-            group_by(samples)
+        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = "")
+        an <- z %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
+        dimen <- 3
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
