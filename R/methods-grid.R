@@ -878,18 +878,20 @@ legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               legend.position = legend) +
-        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-                                    (length(unique(z$samples)) + .5) * (num - 1),
-                                    length(unique(z$samples))),
+        geom_vline(xintercept = c(1.5,2.5,3.5,4.5),
                    colour = "lightgrey") +
+#         geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
+#                                     (length(unique(z$samples)) + .5) * (num - 1),
+#                                     length(unique(z$samples))),
+#                    colour = "lightgrey") +
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
              y = "root length colonized [%]") +
         geom_text(data = an, aes(label = annot, y = values), vjust = -0.8, 
                   position = dodge, show.legend = FALSE) +
-        scale_y_continuous(limits = c(-0.5, 110),
-                           breaks = seq(0, 110, 20))+ 
+        scale_y_continuous(limits = c(-0.5, 105),
+                           breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
                           breaks = levels(factor(final$samples,
                                                  levels = unique(x$samples))))
