@@ -886,12 +886,8 @@ am_dotplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
               panel.grid.major.x = element_blank(),
               panel.grid.minor.x = element_blank(),
               legend.position = legend) +
-        geom_vline(xintercept = c(1.5,2.5,3.5,4.5),
+        geom_vline(xintercept = seq(1.5, length(unique(an$features))-0.5, 1),
                    colour = "lightgrey") +
-#         geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-#                                     (length(unique(z$samples)) + .5) * (num - 1),
-#                                     length(unique(z$samples))),
-#                    colour = "lightgrey") +
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
