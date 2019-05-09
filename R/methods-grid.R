@@ -710,25 +710,44 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
 }
 
 #' @export
-am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_boxplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
+                            legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
-    features <- replicates <- samples <- values <- NULL
+    features <- replicates <- samples <- values <- n <- num <- Var1 <- final<- NULL
     dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
+    legend <- match.arg(legend)
     # Create summary table
     y <- grid_summary(x)
     num <- ncol(y)-2
+    # Change table shape
+    z <- y %>% tidyr::gather(features, values, -samples, -replicates) %>%
+          mutate(features = factor(features, levels = c("Total", "Hyphopodia",
+                                                        "IntrHyphae", "Arbuscule",
+                                                        "Vesicle")),
+                 samples = factor(samples, levels = unique(x$samples))) %>%
+          arrange(features, samples)
+    # Add annotations
     if (annot == "none"){
-        d <- rep("", length(unique(y$samples)) * num)
+        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = "")
+        an <- z %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
+        dimen <- 3
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -739,61 +758,57 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
+        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- z %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
+        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- z %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
-    # Change table shape
-    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
     g <- ggplot(data = z,
-                aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
-                                    factor(z$features, levels = c("Total", "Hyphopodia",
-                                                                  "IntrHyphae", "Arbuscule", "Vesicle")),
-                                          sep = ": "),
+                aes(x = features,
                           y = values, color = samples))
+    dodge <- position_dodge(width=0.75)
     a2 <- g +
         geom_boxplot() +
         theme_bw() +
-        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-              plot.title = element_text(size = 19),
+        theme(plot.title = element_text(size = 19),
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
-              panel.grid.minor.x = element_blank()) +
-        geom_vline(xintercept = seq(length(unique(z$samples)) + .5,
-                                    (length(unique(z$samples)) + .5) * (num - 1),
-                                    length(unique(z$samples))),
+              panel.grid.minor.x = element_blank(),
+              legend.position = legend) +
+        geom_vline(xintercept = seq(1.5, length(unique(an$features))-0.5, 1),
                    colour = "lightgrey") +
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
              y = "root length colonized [%]") +
-        annotate("text", x = seq(length(unique(z$samples)) * .5 + .5,
-                                 length(unique(z$samples)) * num + .5,
-                                 length(unique(z$samples))),
-                 y = 110, label = unique(z$features[order(match(z$features,
-                                                        factor(c("Total",
-                                                                 "Hyphopodia",
-                                                                 "IntrHyphae",
-                                                                 "Arbuscule",
-                                                                 "Vesicle"),
-                                                               levels = c("Total",
-                                                                          "Hyphopodia",
-                                                                          "IntrHyphae",
-                                                                          "Arbuscule",
-                                                                          "Vesicle"))))])) +
-        annotate("text", x = 1:(length(unique(y$samples)) * num),
-                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
-        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-        scale_y_continuous(limits = c(-0.5, 110),
-                           breaks = seq(0, 110, 20))+ 
+        geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
+                  position = dodge, show.legend = FALSE) +
+        scale_y_continuous(limits = c(-0.5, 105),
+                           breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
-                            breaks = levels(factor(z$features,
-                                                   levels = c("Total", "Hyphopodia",
-                                                              "IntrHyphae", "Arbuscule", "Vesicle"))))
+                          breaks = levels(factor(final$samples,
+                                                 levels = unique(x$samples))))
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -809,7 +824,7 @@ am_dotplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
                             legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
-    features <- replicates <- samples <- values <- NULL
+    features <- replicates <- samples <- values <- Var1 <- final <- NULL
     dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
