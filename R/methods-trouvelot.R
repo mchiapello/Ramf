@@ -167,7 +167,6 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
     return(a2)
 }
 
-
 #' @export
 am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
@@ -244,5 +243,222 @@ am_stat.trouvelot <- function(x, method = c("none","holm","hommel", "hochberg",
     method <- match.arg(method)
     stat <- .trouvelot_stat(x, method = method)
     return(stat)
+}
+
+###############################################################################
+
+#' @export
+am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+                                                  "#009E73", "#F0E442", "#0072B2",
+                                                  "#D55E00", "#CC79A7"),
+                            alpha = 0.05,
+                            annot = c("none", "asterisks", "letters"),
+                            method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                                 main = "Colonization", ...){
+    A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
+    mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
+    values <- means <- se <- num <- NULL
+    dimen <- 0
+    alpha <- alpha
+    annot <- match.arg(annot)
+    method <- match.arg(method)
+    # Create summary table
+    tmp <- trouvelot_summary(x)
+    if (annot == "none"){
+        d <- rep("", length(unique(tmp$samples)) * 4)
+    }
+    if (annot == "asterisks"){
+        stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
+        stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+        d <- NULL
+        for (i in seq_along(ll)){
+            d <- append(d, c("", ll[[i]]))
+        }
+        dimen <- 3
+    }
+    if (annot == "letters"){
+        stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
+        d <- as.vector(as.matrix(stat[,2:5]))
+        dimen <- 3
+    }
+    z <- tmp %>% tidyr::gather(features, values, -samples, -replicates)
+    final <- z %>% group_by(samples, features) %>%
+          mutate(num = n()) %>%
+          summarize(means = mean(values, na.rm = TRUE),
+                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
+    g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
+                                                   factor(final$features, levels = c("F", "M", "a", "A"))),
+                                                   y = means, fill = samples))
+    a1 <- g + geom_col() + theme(axis.text.x = element_text(angle = 90, vjust = .5, hjust = 1)) +
+        geom_errorbar(aes(ymin = means - se, ymax = means + se), width = .1) +
+        theme_bw() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+              plot.title = element_text(size = 19),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank(),
+              legend.position = "none") +
+        geom_vline(xintercept = seq(length(unique(final$samples)) + .5, length(unique(final$samples)) * 3 + .5,
+                                    length(unique(final$samples))), colour = "lightgrey") +
+                      #         geom_hline(yintercept = 105, colour = "lightgrey") +
+            labs(title = main, 
+                 #                  subtitle = "Trouvelot method",
+                 x = "",
+                 y = "") +
+            annotate("text", x = seq(length(unique(final$samples)) * .5 + .5, length(unique(final$samples)) * 5 + .5,
+                                     length(unique(final$samples)))[1:4],
+                     y = 110, label = c("F%", "M%", "a%", "A%")) +
+        annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
+            scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+            scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
+                    min(final$means - final$se), 0), 110), breaks = seq(0, 110, 20)) +
+            scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
+    class(a1) <- c("am_plot", class(a1))
+    return(a1)
+}
+
+#' @export
+am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+                                                  "#009E73", "#F0E442", "#0072B2",
+                                                  "#D55E00", "#CC79A7"),
+                            alpha = 0.05,
+                            annot = c("none", "asterisks", "letters"),
+                            method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                                 main = "Colonization", ...){
+    A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
+    mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
+    values <- NULL
+    dimen <- 0
+    alpha <- alpha
+    annot <- match.arg(annot)
+    method <- match.arg(method)
+    # Create summary table
+    tmp <- trouvelot_summary(x)
+    if (annot == "none"){
+        d <- rep("", length(unique(tmp$samples)) * 4)
+    }
+    if (annot == "asterisks"){
+        stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
+        stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+        d <- NULL
+        for (i in seq_along(ll)){
+            d <- append(d, c("", ll[[i]]))
+        }
+        dimen <- 3
+    }
+    if (annot == "letters"){
+        stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
+        d <- as.vector(as.matrix(stat[,2:5]))
+        dimen <- 3
+    }
+    fin <- tmp %>% gather(feature, value, -samples, -replicates)
+    g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
+                                              factor(fin$feature, levels = c("F", "A", "a", "M")),
+                                              sep = ": "),
+                              y = value, color = samples))
+    a2 <- g +
+        geom_boxplot() +
+        theme_bw() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+              plot.title = element_text(size = 19),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank()) +
+        geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
+                                    length(unique(fin$samples))), colour = "lightgrey") +
+                      #     geom_hline(yintercept = 105, colour = "lightgrey") +
+        labs(title = main, 
+             #              subtitle = "Trouvelot method",
+             x = "",
+             y = "") +
+        annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
+                                 length(unique(fin$samples)))[1:4],
+                 y = 110, label = c("F%", "M%", "a%", "A%")) +
+        annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
+        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+        scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
+        scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+    class(a2) <- c("am_plot", class(a2))
+    return(a2)
+}
+
+#' @export
+am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+                                                  "#009E73", "#F0E442", "#0072B2",
+                                                  "#D55E00", "#CC79A7"),
+                            alpha = 0.05,
+                            annot = c("none", "asterisks", "letters"),
+                            method = c("none","holm","hommel", "hochberg",
+                                       "bonferroni", "BH", "BY", "fdr"),
+                                 main = "Colonization", ...){
+    A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
+    mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
+    values <- NULL
+    dimen <- 0
+    alpha <- alpha
+    annot <- match.arg(annot)
+    method <- match.arg(method)
+    # Create summary table
+    tmp <- trouvelot_summary(x)
+    if (annot == "none"){
+        d <- rep("", length(unique(tmp$samples)) * 4)
+    }
+    if (annot == "asterisks"){
+        stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
+        stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+        stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
+        ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+        d <- NULL
+        for (i in seq_along(ll)){
+            d <- append(d, c("", ll[[i]]))
+        }
+        dimen <- 3
+    }
+    if (annot == "letters"){
+        stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
+        d <- as.vector(as.matrix(stat[,2:5]))
+        dimen <- 3
+    }
+    fin <- tmp %>% gather(feature, value, -samples, -replicates)
+    g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
+                                              factor(fin$feature, levels = c("F", "A", "a", "M")),
+                                              sep = ": "),
+                              y = value, color = as.factor(samples)))
+    a2 <- g +
+        geom_point(position = position_jitter(width = 0.2)) +
+        theme_bw() +
+        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
+              plot.title = element_text(size = 19),
+              panel.grid.major.y = element_blank(),
+              panel.grid.minor.y = element_blank(),
+              panel.grid.major.x = element_blank(),
+              panel.grid.minor.x = element_blank()) +
+        geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
+                                    length(unique(fin$samples))), colour = "lightgrey") +
+                      #     geom_hline(yintercept = 105, colour = "lightgrey") +
+        labs(title = main, 
+             #              subtitle = "Trouvelot method",
+             x = "",
+             y = "") +
+        annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
+                                 length(unique(fin$samples)))[1:4],
+                 y = 110, label = c("F%", "M%", "a%", "A%")) +
+        annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
+                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
+        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
+        scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
+        scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+    class(a2) <- c("am_plot", class(a2))
+    return(a2)
 }
 
