@@ -332,35 +332,61 @@ am_barplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
 }
 
 #' @export
-am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                                 main = "Colonization", ...){
+                            legend = c("right", "left", "top", "bottom"),
+                            main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
-    mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
+    mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- Var1 <- NULL
     values <- NULL
     dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
+    legend <- match.arg(legend)
     # Create summary table
-    tmp <- trouvelot_summary(x)
+    y <- trouvelot_summary(x)
+    final <- y %>% 
+        gather(features, values, -samples, -replicates) %>%
+        ungroup %>%
+        mutate(features = factor(features, levels = c("F", "M", "a", "A")),
+               samples = factor(samples, levels = unique(x$samples))) %>%
+        arrange(features, samples)
+    # Add annotations
     if (annot == "none"){
-        d <- rep("", length(unique(tmp$samples)) * 4)
-    }
+        tmp <- expand.grid(unique(final$features), unique(final$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = "")
+        an <- final %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
+        dimen <- 3
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
-        stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+        stat_ctr <- stat[stat$group1 == y$samples[1], ]
         stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
-        ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+        ll <- split(stat_l, rep(1:4, each = length(unique(y$samples)) - 1))
         d <- NULL
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
+        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- final %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
     if (annot == "letters"){
@@ -368,7 +394,6 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
         d <- as.vector(as.matrix(stat[,2:5]))
         dimen <- 3
     }
-    fin <- tmp %>% gather(feature, value, -samples, -replicates)
     g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
                                               factor(fin$feature, levels = c("F", "A", "a", "M")),
                                               sep = ": "),
