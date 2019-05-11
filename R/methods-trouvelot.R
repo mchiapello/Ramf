@@ -434,14 +434,15 @@ am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
 }
 
 #' @export
-am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_dotplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                                 main = "Colonization", ...){
+                            legend = c("right", "left", "top", "bottom"),
+                            main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
     values <- NULL
@@ -449,56 +450,87 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
+    legend <- match.arg(legend)
     # Create summary table
-    tmp <- trouvelot_summary(x)
+    y <- trouvelot_summary(x)
+    final <- y %>% 
+        gather(features, values, -samples, -replicates) %>%
+        ungroup %>%
+        mutate(features = factor(features, levels = c("F", "M", "a", "A")),
+               samples = factor(samples, levels = unique(x$samples))) %>%
+        arrange(features, samples)
+    # Add annotations
     if (annot == "none"){
-        d <- rep("", length(unique(tmp$samples)) * 4)
+        tmp <- expand.grid(unique(final$features), unique(final$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = "")
+        an <- final %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
+        dimen <- 3
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
-        stat_ctr <- stat[stat$group1 == tmp$samples[1], ]
+        stat_ctr <- stat[stat$group1 == y$samples[1], ]
         stat_l <- ifelse(as.numeric(as.matrix(stat_ctr[, 3:6])) < alpha, "*", "") 
-        ll <- split(stat_l, rep(1:4, each = length(unique(tmp$samples)) - 1))
+        ll <- split(stat_l, rep(1:4, each = length(unique(y$samples)) - 1))
         d <- NULL
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
+        tmp <- expand.grid(unique(final$features), unique(final$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- final %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:5]))
+        tmp <- expand.grid(unique(final$features), unique(final$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- final %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
-    fin <- tmp %>% gather(feature, value, -samples, -replicates)
-    g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
-                                              factor(fin$feature, levels = c("F", "A", "a", "M")),
-                                              sep = ": "),
-                              y = value, color = as.factor(samples)))
+    g <- ggplot(data = final, aes(x = features,
+                              y = values, color = samples))
+    dodge <- position_dodge(width=0.9)
     a2 <- g +
-        geom_point(position = position_jitter(width = 0.2)) +
+        geom_point(position = position_jitterdodge(dodge.width = 0.9,
+                                                   jitter.width = 0.1)) +
         theme_bw() +
-        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-              plot.title = element_text(size = 19),
+        theme(plot.title = element_text(size = 19),
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
-              panel.grid.minor.x = element_blank()) +
-        geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
-                                    length(unique(fin$samples))), colour = "lightgrey") +
-                      #     geom_hline(yintercept = 105, colour = "lightgrey") +
-        labs(title = main, 
-             #              subtitle = "Trouvelot method",
+              panel.grid.minor.x = element_blank(),
+              legend.position = legend) +
+        geom_vline(xintercept = seq(1.5, length(unique(an$features))-0.5, 1),
+                   colour = "lightgrey") +
+        labs(title = main,
              x = "",
              y = "") +
-        annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
-                                 length(unique(fin$samples)))[1:4],
-                 y = 110, label = c("F%", "M%", "a%", "A%")) +
-        annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
-                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
-        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-        scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
-        scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+        geom_text(data = an, aes(label = annot, y = values), vjust = -0.8, 
+                  position = dodge, show.legend = FALSE) +
+        scale_y_continuous(limits = c(-0.5, 105),
+                           breaks = seq(0, 105, 20))+ 
+        scale_colour_manual(values = cbPalette, 
+                          breaks = levels(factor(final$samples,
+                                                 levels = unique(x$samples))))
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
