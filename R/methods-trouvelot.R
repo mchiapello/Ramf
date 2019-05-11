@@ -369,6 +369,7 @@ am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
         dimen <- 3
+    }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
         stat_ctr <- stat[stat$group1 == y$samples[1], ]
@@ -378,7 +379,7 @@ am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        tmp <- expand.grid(unique(z$features), unique(z$samples)) %>%
+        tmp <- expand.grid(unique(final$features), unique(final$samples)) %>%
             arrange(Var1) %>%
             mutate(annot = d)
         an <- final %>%
@@ -392,36 +393,42 @@ am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:5]))
+        tmp <- expand.grid(unique(final$features), unique(final$samples)) %>%
+            arrange(Var1) %>%
+            mutate(annot = d)
+        an <- final %>%
+            left_join(tmp, by = c("features" = "Var1", "samples" = "Var2")) %>%
+            group_by(samples, features) %>%
+            dplyr::filter(values == max(values)) %>%
+            arrange(features, samples) %>%
+            dplyr::top_n(1, replicates)
         dimen <- 3
     }
-    g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
-                                              factor(fin$feature, levels = c("F", "A", "a", "M")),
-                                              sep = ": "),
-                              y = value, color = samples))
+    g <- ggplot(data = final, aes(x = features,
+                              y = values, color = samples))
+    dodge <- position_dodge(width=0.75)
     a2 <- g +
         geom_boxplot() +
         theme_bw() +
-        theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1),
-              plot.title = element_text(size = 19),
+        theme(plot.title = element_text(size = 19),
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
-              panel.grid.minor.x = element_blank()) +
-        geom_vline(xintercept = seq(length(unique(fin$samples)) + .5, length(unique(fin$samples)) * 3 + .5,
-                                    length(unique(fin$samples))), colour = "lightgrey") +
-                      #     geom_hline(yintercept = 105, colour = "lightgrey") +
-        labs(title = main, 
-             #              subtitle = "Trouvelot method",
+              panel.grid.minor.x = element_blank(),
+              legend.position = legend) +
+        geom_vline(xintercept = seq(1.5, length(unique(an$features))-0.5, 1),
+                   colour = "lightgrey") +
+        labs(title = main,
+             #              subtitle = "Grid method",
              x = "",
              y = "") +
-        annotate("text", x = seq(length(unique(fin$samples)) * .5 + .5, length(unique(fin$samples)) * 5 + .5,
-                                 length(unique(fin$samples)))[1:4],
-                 y = 110, label = c("F%", "M%", "a%", "A%")) +
-        annotate("text", x = 1:(length(unique(tmp$samples)) * 4),
-                 y = -Inf, vjust = -0.5, label = d, size = dimen) +
-        scale_x_discrete(labels = rep(unique(x$samples), 5)) +
-        scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
-        scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+        geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
+                  position = dodge, show.legend = FALSE) +
+        scale_y_continuous(limits = c(-0.5, 105),
+                           breaks = seq(0, 105, 20))+ 
+        scale_colour_manual(values = cbPalette, 
+                          breaks = levels(factor(final$samples,
+                                                 levels = unique(x$samples))))
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
