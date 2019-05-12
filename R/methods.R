@@ -26,9 +26,9 @@
 #' @importFrom dplyr contains
 am_summary <- function(x) UseMethod("am_summary")
 
-#' am_barplot_legend object.
+#' am_barplot object.
 #' 
-#' @usage am_barplot_legend(x, cbPalette,
+#' @usage am_barplot(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
@@ -55,21 +55,21 @@ am_summary <- function(x) UseMethod("am_summary")
 #' @param main Plot title. Default "Colonization".
 #' @param ... ignored
 #' @examples
-#' am_barplot_legend(example_grid)
-#' am_barplot_legend(example_trouvelot)
+#' am_barplot(example_grid)
+#' am_barplot(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_barplot_legend <- function(x, cbPalette,
+am_barplot <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
              legend = c("right", "left", "top", "bottom"),
-					   main = "Gridline intersect method", ...) UseMethod("am_barplot_legend")
+					   main = "Gridline intersect method", ...) UseMethod("am_barplot")
 
-#' am_barplot object.
+#' am_barplot2 object.
 #' 
-#' @usage am_barplot(x, cbPalette,
+#' @usage am_barplot2(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
@@ -96,20 +96,20 @@ am_barplot_legend <- function(x, cbPalette,
 #'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
-#' am_barplot(example_grid)
-#' am_barplot(example_trouvelot)
+#' am_barplot2(example_grid)
+#' am_barplot2(example_trouvelot)
 #' @export
 #' @import tidyr ggplot2
-am_barplot <- function(x, cbPalette,
+am_barplot2 <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", lab = "days", ...) UseMethod("am_barplot")
+					   main = "Colonization", ...) UseMethod("am_barplot2")
 
-#' am_boxplot_legend object.
+#' am_boxplot object.
 #' 
-#' @usage am_boxplot_legend(x, cbPalette,
+#' @usage am_boxplot(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
@@ -134,47 +134,6 @@ am_barplot <- function(x, cbPalette,
 #'               The default is no adjustment for multiple comparisons.
 #' @param legend Indicate the legend position
 #' @param main Plot title. Default "Colonization".
-#' @param ... ignored
-#' @examples
-#' am_boxplot_legend(example_grid)
-#' am_boxplot_legend(example_trouvelot)
-#' @export
-#' @import tidyr ggplot2
-am_boxplot_legend <- function(x, cbPalette,
-					   alpha = 0.05,
-					   annot = c("none", "asterisks", "letters"),
-					   method = c("none","holm","hommel", "hochberg",
-									   "bonferroni", "BH", "BY", "fdr"),
-             legend = c("right", "left", "top", "bottom"),
-					   main = "Gridline intersect method", ...) UseMethod("am_boxplot_legend")
-
-#' am_boxplot object.
-#' 
-#' @usage am_boxplot(x, cbPalette,
-#'					alpha = 0.05,
-#'					annot = c("none", "asterisks", "letters"),
-#'					method = c("none","holm","hommel", "hochberg",
-#'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", lab = "days", ...)
-#' @param x dataset containing Trouvelot or Grid data
-#' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
-#'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
-#' 					Colorbrewer and Colorgorical are website where is possible
-#' 					design nice color palettes.
-#' @param alpha Significant threshold
-#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
-#'            below the sample statistically different from the control. The control
-#'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
-#'            statistical test. For statistical tests check `am_stat` function.
-#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
-#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
-#'               adjustment
-#'               (see agricolae package for more details).
-#'               The default is no adjustment for multiple comparisons.
-#' @param main Plot title. Default "Colonization".
-#' @param lab Parameter used in time series plots. It specified the label to write
-#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_boxplot(example_grid)
@@ -186,52 +145,12 @@ am_boxplot <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", lab = "days", ...) UseMethod("am_boxplot")
-
-#' am_dotplot_legend object.
-#' 
-#' @usage am_dotplot_legend(x, cbPalette,
-#'					alpha = 0.05,
-#'					annot = c("none", "asterisks", "letters"),
-#'					method = c("none","holm","hommel", "hochberg",
-#'							   "bonferroni", "BH", "BY", "fdr"),
-#'          legend = c("right", "left", "top", "bottom"),
-#'          main = "Gridline intersect method", ...)
-#' @param x dataset containing Trouvelot or Grid data
-#' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
-#'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
-#' 					Colorbrewer and Colorgorical are website where is possible
-#' 					design nice color palettes.
-#' @param alpha Significant threshold
-#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
-#'            below the sample statistically different from the control. The control
-#'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
-#'            statistical test. For statistical tests check `am_stat` function.
-#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
-#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
-#'               adjustment
-#'               (see agricolae package for more details).
-#'               The default is no adjustment for multiple comparisons.
-#' @param legend Indicate the legend position
-#' @param main Plot title. Default "Colonization".
-#' @param ... ignored
-#' @examples
-#' am_dotplot_legend(example_grid)
-#' am_dotplot_legend(example_trouvelot)
-#' @export
-#' @import tidyr ggplot2
-am_dotplot_legend <- function(x, cbPalette,
-					   alpha = 0.05,
-					   annot = c("none", "asterisks", "letters"),
-					   method = c("none","holm","hommel", "hochberg",
-									   "bonferroni", "BH", "BY", "fdr"),
              legend = c("right", "left", "top", "bottom"),
-					   main = "Gridline intersect method", ...) UseMethod("am_dotplot_legend")
+					   main = "Gridline intersect method", ...) UseMethod("am_boxplot")
 
-#' am_dotplot object.
+#' am_boxplot object.
 #' 
-#' @usage am_dotplot(x, cbPalette,
+#' @usage am_boxplot2(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
@@ -258,6 +177,46 @@ am_dotplot_legend <- function(x, cbPalette,
 #'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
+#' am_boxplot2(example_grid)
+#' am_boxplot2(example_trouvelot)
+#' @export
+#' @import tidyr ggplot2
+am_boxplot2 <- function(x, cbPalette,
+					   alpha = 0.05,
+					   annot = c("none", "asterisks", "letters"),
+					   method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
+					   main = "Colonization", lab = "days", ...) UseMethod("am_boxplot2")
+
+#' am_dotplot object.
+#' 
+#' @usage am_dotplot(x, cbPalette,
+#'					alpha = 0.05,
+#'					annot = c("none", "asterisks", "letters"),
+#'					method = c("none","holm","hommel", "hochberg",
+#'							   "bonferroni", "BH", "BY", "fdr"),
+#'          legend = c("right", "left", "top", "bottom"),
+#'          main = "Gridline intersect method", ...)
+#' @param x dataset containing Trouvelot or Grid data
+#' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
+#'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
+#' 					Colorbrewer and Colorgorical are website where is possible
+#' 					design nice color palettes.
+#' @param alpha Significant threshold
+#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
+#'            below the sample statistically different from the control. The control
+#'            is the first sample in the input file. If is is "letters" on the plot
+#'            letters appear below the samples groupping the samples based on the 
+#'            statistical test. For statistical tests check `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+#'               adjustment
+#'               (see agricolae package for more details).
+#'               The default is no adjustment for multiple comparisons.
+#' @param legend Indicate the legend position
+#' @param main Plot title. Default "Colonization".
+#' @param ... ignored
+#' @examples
 #' am_dotplot(example_grid)
 #' am_dotplot(example_trouvelot)
 #' @export
@@ -267,7 +226,48 @@ am_dotplot <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", lab = "days", ...) UseMethod("am_dotplot")
+             legend = c("right", "left", "top", "bottom"),
+					   main = "Gridline intersect method", ...) UseMethod("am_dotplot")
+
+#' am_dotplot2 object.
+#' 
+#' @usage am_dotplot2(x, cbPalette,
+#'					alpha = 0.05,
+#'					annot = c("none", "asterisks", "letters"),
+#'					method = c("none","holm","hommel", "hochberg",
+#'							   "bonferroni", "BH", "BY", "fdr"),
+#'                   main = "Colonization", lab = "days", ...)
+#' @param x dataset containing Trouvelot or Grid data
+#' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
+#'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
+#' 					Colorbrewer and Colorgorical are website where is possible
+#' 					design nice color palettes.
+#' @param alpha Significant threshold
+#' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
+#'            below the sample statistically different from the control. The control
+#'            is the first sample in the input file. If is is "letters" on the plot
+#'            letters appear below the samples groupping the samples based on the 
+#'            statistical test. For statistical tests check `am_stat` function.
+#' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
+#'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
+#'               adjustment
+#'               (see agricolae package for more details).
+#'               The default is no adjustment for multiple comparisons.
+#' @param main Plot title. Default "Colonization".
+#' @param lab Parameter used in time series plots. It specified the label to write
+#'            close the time on the plot. Default is "days".
+#' @param ... ignored
+#' @examples
+#' am_dotplot2(example_grid)
+#' am_dotplot2(example_trouvelot)
+#' @export
+#' @import tidyr ggplot2
+am_dotplot2 <- function(x, cbPalette,
+					   alpha = 0.05,
+					   annot = c("none", "asterisks", "letters"),
+					   method = c("none","holm","hommel", "hochberg",
+									   "bonferroni", "BH", "BY", "fdr"),
+					   main = "Colonization", lab = "days", ...) UseMethod("am_dotplot2")
 
 #' am_stat object.
 #' 

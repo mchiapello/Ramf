@@ -23,7 +23,7 @@ am_summary.trouvelot <- function(x){
 }
 
 #' @export
-am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -98,7 +98,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 }
 
 #' @export
-am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -168,7 +168,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
 }
 
 #' @export
-am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -248,7 +248,7 @@ am_stat.trouvelot <- function(x, method = c("none","holm","hommel", "hochberg",
 ###############################################################################
 
 #' @export
-am_barplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -332,7 +332,7 @@ am_barplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
 }
 
 #' @export
-am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -434,7 +434,7 @@ am_boxplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "
 }
 
 #' @export
-am_dotplot_legend.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                                   "#009E73", "#F0E442", "#0072B2",
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,

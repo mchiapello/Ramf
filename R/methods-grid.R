@@ -28,7 +28,7 @@ am_stat.grid <- function(x, method = c("none","holm","hommel", "hochberg",
 }
 
 #' @export
-am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -119,7 +119,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 }
 
 #' @export
-am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_boxplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -208,7 +208,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 }
 
 #' @export
-am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -622,7 +622,7 @@ am_dotplot.gridTime <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9"
 ###############################################################################
 
 #' @export
-am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -710,7 +710,7 @@ am_barplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
 }
 
 #' @export
-am_boxplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
@@ -814,7 +814,7 @@ am_boxplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4
 }
 
 #' @export
-am_dotplot_legend.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
+am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
