@@ -74,7 +74,7 @@ am_barplot <- function(x, cbPalette,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", lab = "days",...)
+#'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -92,8 +92,6 @@ am_barplot <- function(x, cbPalette,
 #'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
-#' @param lab Parameter used in time series plots. It specified the label to write
-#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_barplot2(example_grid)
@@ -155,7 +153,7 @@ am_boxplot <- function(x, cbPalette,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", lab = "days", ...)
+#'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -173,8 +171,6 @@ am_boxplot <- function(x, cbPalette,
 #'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
-#' @param lab Parameter used in time series plots. It specified the label to write
-#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_boxplot2(example_grid)
@@ -186,7 +182,7 @@ am_boxplot2 <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", lab = "days", ...) UseMethod("am_boxplot2")
+					   main = "Colonization", ...) UseMethod("am_boxplot2")
 
 #' am_dotplot object.
 #' 
@@ -236,7 +232,7 @@ am_dotplot <- function(x, cbPalette,
 #'					annot = c("none", "asterisks", "letters"),
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
-#'                   main = "Colonization", lab = "days", ...)
+#'                   main = "Colonization", ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param cbPalette a vector of colors. Default is: c("#999999", "#E69F00", "#56B4E9",
 #'				    "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7").
@@ -254,8 +250,6 @@ am_dotplot <- function(x, cbPalette,
 #'               (see agricolae package for more details).
 #'               The default is no adjustment for multiple comparisons.
 #' @param main Plot title. Default "Colonization".
-#' @param lab Parameter used in time series plots. It specified the label to write
-#'            close the time on the plot. Default is "days".
 #' @param ... ignored
 #' @examples
 #' am_dotplot2(example_grid)
@@ -267,7 +261,7 @@ am_dotplot2 <- function(x, cbPalette,
 					   annot = c("none", "asterisks", "letters"),
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
-					   main = "Colonization", lab = "days", ...) UseMethod("am_dotplot2")
+					   main = "Colonization", ...) UseMethod("am_dotplot2")
 
 #' am_stat object.
 #' 
