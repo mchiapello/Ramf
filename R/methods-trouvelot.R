@@ -30,7 +30,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                                 main = "Colonization", ...){
+                                 main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
     values <- means <- se <- num <- NULL
@@ -105,7 +105,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                                 main = "Colonization", ...){
+                                 main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
     values <- NULL
@@ -175,7 +175,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
-                                 main = "Colonization", ...){
+                                 main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
     values <- NULL
