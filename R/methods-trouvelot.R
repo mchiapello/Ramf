@@ -92,7 +92,9 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
             scale_x_discrete(labels = rep(unique(x$samples), 5)) +
             scale_y_continuous(limits = c(ifelse(min(final$means - final$se) < 0,
                     min(final$means - final$se), 0), 110), breaks = seq(0, 110, 20)) +
-            scale_fill_manual(values = cbPalette, breaks = levels(factor(final$samples, levels = unique(x$samples))))
+            scale_fill_manual(values = cbPalette,
+                              breaks = levels(factor(final$samples, levels = unique(x$samples))),
+                              name = "")
     class(a1) <- c("am_plot", class(a1))
     return(a1)
 }
@@ -162,7 +164,10 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
         scale_x_discrete(labels = rep(unique(x$samples), 5)) +
         scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
-        scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+        scale_colour_manual(values = cbPalette, 
+                          breaks = levels(factor(final$samples,
+                                                 levels = unique(x$samples))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -232,7 +237,10 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
                  y = -Inf, vjust = -0.5, label = d, size = dimen) +
         scale_x_discrete(labels = rep(unique(x$samples), 5)) +
         scale_y_continuous(limits = c(-0.5, 110), breaks = seq(0, 110, 20)) +
-        scale_colour_manual(values = cbPalette, breaks = levels(factor(fin$feature, levels = c("F", "A", "a", "M"))))
+        scale_colour_manual(values = cbPalette, 
+                          breaks = levels(factor(final$samples,
+                                                 levels = unique(x$samples))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -326,7 +334,8 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                          name = "")
     class(a1) <- c("am_plot", class(a1))
     return(a1)
 }
@@ -428,7 +437,8 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -530,7 +540,8 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }

@@ -115,7 +115,8 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                          name = "")
     class(a1) <- c("am_plot", class(a1))
     return(a1)
 }
@@ -206,7 +207,8 @@ am_boxplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         scale_colour_manual(values = cbPalette, 
                             breaks = levels(factor(z$features,
                                                    levels = c("Total", "Hyphopodia",
-                                                              "IntrHyphae", "Arbuscule", "Vesicle"))))
+                                                              "IntrHyphae", "Arbuscule", "Vesicle"))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -297,7 +299,8 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         scale_colour_manual(values = cbPalette, 
                             breaks = levels(factor(z$features,
                                                    levels = c("Total", "Hyphopodia",
-                                                              "IntrHyphae", "Arbuscule", "Vesicle"))))
+                                                              "IntrHyphae", "Arbuscule", "Vesicle"))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -710,7 +713,8 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                          name = "")
     class(a1) <- c("am_plot", class(a1))
     return(a1)
 }
@@ -816,7 +820,8 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -923,7 +928,8 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
                           breaks = levels(factor(final$samples,
-                                                 levels = unique(x$samples))))
+                                                 levels = unique(x$samples))),
+                            name = "")
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
