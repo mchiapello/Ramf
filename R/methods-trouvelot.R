@@ -28,13 +28,13 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                                  main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
     values <- means <- se <- num <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -42,6 +42,7 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
     tmp <- trouvelot_summary(x)
     if (annot == "none"){
         d <- rep("", length(unique(tmp$samples)) * 4)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -52,12 +53,12 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:5]))
-        dimen <- 3
+        dimen <- annot_size
     }
     z <- tmp %>% tidyr::gather(features, values, -samples, -replicates)
     final <- z %>% group_by(samples, features) %>%
@@ -105,13 +106,13 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                                  main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
     values <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -119,6 +120,7 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
     tmp <- trouvelot_summary(x)
     if (annot == "none"){
         d <- rep("", length(unique(tmp$samples)) * 4)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -129,12 +131,12 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:5]))
-        dimen <- 3
+        dimen <- annot_size
     }
     fin <- tmp %>% gather(feature, value, -samples, -replicates)
     g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
@@ -178,13 +180,13 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                                  main = "Trouvelot method", ...){
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- NULL
     values <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -192,6 +194,7 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
     tmp <- trouvelot_summary(x)
     if (annot == "none"){
         d <- rep("", length(unique(tmp$samples)) * 4)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -202,12 +205,12 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:5]))
-        dimen <- 3
+        dimen <- annot_size
     }
     fin <- tmp %>% gather(feature, value, -samples, -replicates)
     g <- ggplot(data = fin, aes(x = interaction(factor(fin$samples, levels = unique(x$samples)),
@@ -261,6 +264,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
@@ -268,7 +272,6 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
     values <- means <- se <- num <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -289,6 +292,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
         final  <- final %>%
             mutate(annot = rep("", nrow(final))) %>%
             group_by(samples)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -302,7 +306,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
         final  <- final %>%
             mutate(annot = d) %>%
             group_by(samples)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -310,7 +314,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
         final  <- final %>%
             mutate(annot = d) %>%
             group_by(samples)
-        dimen <- 3
+        dimen <- annot_size
     }
     g <- ggplot(data = final, aes(x = features, y = means, fill = samples))
     dodge <- position_dodge(width=0.9)
@@ -327,9 +331,8 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
              #              subtitle = "Grid method",
              x = "",
              y = "") +
-#         annotate("text", x = dodge,
-#                  y = -Inf, vjust = -0.5, label = final$means, size = dimen) +
-        geom_text(aes( label = annot, y = (means + se)), vjust = -0.5, position = dodge)  +
+        geom_text(aes( label = annot, y = (means + se)), vjust = -0.5, position = dodge,
+                  show.legend = FALSE, size = dimen)  +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
@@ -346,6 +349,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
@@ -353,7 +357,6 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- Var1 <- NULL
     values <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -377,7 +380,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -397,7 +400,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -411,7 +414,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     g <- ggplot(data = final, aes(x = features,
                               y = values, color = samples))
@@ -432,7 +435,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
              x = "",
              y = "") +
         geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
-                  position = dodge, show.legend = FALSE) +
+                  position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
@@ -449,6 +452,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
                                                   "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
@@ -456,7 +460,6 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
     A <- Abundance <- Colonization <- M <- M1 <- a <- feature <- features <- final_a <- m <- NULL
     mA <- n_myc <- nn <- num <- perc <- replicates <- samples <- scoring <- tmpa <- tot <- tot2 <- value <- Var1 <- NULL
     values <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -480,7 +483,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .trouvelot_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -500,7 +503,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .trouvelot_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -514,7 +517,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     g <- ggplot(data = final, aes(x = features,
                               y = values, color = samples))
@@ -535,7 +538,7 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
              x = "",
              y = "") +
         geom_text(data = an, aes(label = annot, y = values), vjust = -0.8, 
-                  position = dodge, show.legend = FALSE) +
+                  position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 

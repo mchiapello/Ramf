@@ -33,12 +33,12 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -57,12 +57,12 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
-        dimen <- 3
+        dimen <- annot_size
     }
     # Change table shape
     z <- y %>% tidyr::gather(features, values, -samples, -replicates)
@@ -126,13 +126,13 @@ am_boxplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#009E73", "#F0E442", "#0072B2",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
+                            annot_size = 5,
                             annot = c("none", "asterisks", "letters"),
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -151,12 +151,12 @@ am_boxplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
-        dimen <- 3
+        dimen <- annot_size
     }
     # Change table shape
     z <- y %>% tidyr::gather(features, values, -samples, -replicates)
@@ -219,12 +219,12 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -243,12 +243,12 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         for (i in seq_along(ll)){
             d <- append(d, c("", ll[[i]]))
         }
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
         d <- as.vector(as.matrix(stat[,2:ncol(stat)]))
-        dimen <- 3
+        dimen <- annot_size
     }
     # Change table shape
     z <- y %>% tidyr::gather(features, values, -samples, -replicates)
@@ -636,13 +636,13 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -667,6 +667,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         final  <- final %>%
             mutate(annot = rep("", nrow(final))) %>%
             group_by(samples)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -680,7 +681,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         final  <- final %>%
             mutate(annot = d) %>%
             group_by(samples)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -688,7 +689,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         final  <- final %>%
             mutate(annot = d) %>%
             group_by(samples)
-        dimen <- 3
+        dimen <- annot_size
     }
     g <- ggplot(data = final, aes(x = features,
                                               y = means, fill = samples))
@@ -708,7 +709,8 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
              fill = "", 
              x = "",
              y = "root length colonized [%]") +
-        geom_text(aes( label = annot, y = (means + se)), vjust = -0.5, position = dodge)  +
+        geom_text(aes( label = annot, y = (means + se)), vjust = -0.5, position = dodge,
+                  show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 110),
                            breaks = seq(0, 110, 20))+ 
         scale_fill_manual(values = cbPalette,
@@ -725,13 +727,13 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- n <- num <- Var1 <- final<- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -757,7 +759,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -777,7 +779,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -791,7 +793,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     g <- ggplot(data = z,
                 aes(x = features,
@@ -815,7 +817,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
              x = "",
              y = "root length colonized [%]") +
         geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
-                  position = dodge, show.legend = FALSE) +
+                  position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
@@ -832,13 +834,13 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                              "#D55E00", "#CC79A7"),
                             alpha = 0.05,
                             annot = c("none", "asterisks", "letters"),
+                            annot_size = 5,
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
     features <- replicates <- samples <- values <- Var1 <- final <- NULL
-    dimen <- 0
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -864,7 +866,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -884,7 +886,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     if (annot == "letters"){
         stat <- .grid_stat(x, method = method, group = TRUE, alpha = alpha)
@@ -898,7 +900,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
             dplyr::filter(values == max(values)) %>%
             arrange(features, samples) %>%
             dplyr::top_n(1, replicates)
-        dimen <- 3
+        dimen <- annot_size
     }
     g <- ggplot(data = z,
                 aes(x = features,
@@ -923,7 +925,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
              x = "",
              y = "root length colonized [%]") +
         geom_text(data = an, aes(label = annot, y = values), vjust = -0.8, 
-                  position = dodge, show.legend = FALSE) +
+                  position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
