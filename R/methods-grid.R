@@ -47,6 +47,7 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     num <- ncol(y)-2
     if (annot == "none"){
         d <- rep("", length(unique(y$samples)) * num)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -69,7 +70,14 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     final <- z %>% group_by(samples, features) %>%
           mutate(num = n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
-                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
+                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
+          ungroup %>%
+          mutate(features = factor(features, levels = c("Total", "Hyphopodia",
+                                                        "IntrHyphae", "Arbuscule",
+                                                        "Vesicle")),
+                 samples = factor(samples, levels = unique(x$samples))) %>%
+          arrange(features, samples) %>%
+          group_by(samples)
     g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
                                               factor(final$features, levels = c("Total", "Hyphopodia",
                                                                            "IntrHyphae", "Arbuscule", "Vesicle"))),
@@ -141,6 +149,7 @@ am_boxplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     num <- ncol(y)-2
     if (annot == "none"){
         d <- rep("", length(unique(y$samples)) * num)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -159,7 +168,12 @@ am_boxplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         dimen <- annot_size
     }
     # Change table shape
-    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+    z <- y %>% tidyr::gather(features, values, -samples, -replicates) %>%
+          mutate(features = factor(features, levels = c("Total", "Hyphopodia",
+                                                        "IntrHyphae", "Arbuscule",
+                                                        "Vesicle")),
+                 samples = factor(samples, levels = unique(x$samples))) %>%
+          arrange(features, samples)
     g <- ggplot(data = z,
                 aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
                                     factor(z$features, levels = c("Total", "Hyphopodia",
@@ -233,6 +247,7 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     num <- ncol(y)-2
     if (annot == "none"){
         d <- rep("", length(unique(y$samples)) * num)
+        dimen <- annot_size
     }
     if (annot == "asterisks"){
         stat <- .grid_stat(x, method = method, group = FALSE, alpha = alpha)
@@ -251,7 +266,12 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         dimen <- annot_size
     }
     # Change table shape
-    z <- y %>% tidyr::gather(features, values, -samples, -replicates)
+    z <- y %>% tidyr::gather(features, values, -samples, -replicates) %>%
+          mutate(features = factor(features, levels = c("Total", "Hyphopodia",
+                                                        "IntrHyphae", "Arbuscule",
+                                                        "Vesicle")),
+                 samples = factor(samples, levels = unique(x$samples))) %>%
+          arrange(features, samples)
     g <- ggplot(data = z,
                 aes(x = interaction(factor(z$samples, levels = unique(x$samples)),
                                     factor(z$features, levels = c("Total", "Hyphopodia",

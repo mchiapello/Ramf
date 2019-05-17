@@ -5,7 +5,7 @@ am_summary.trouvelot <- function(x){
     # Final table
     final <- tmp %>%
     group_by(samples) %>%
-    mutate(num = n()) %>%
+    mutate(num = dplyr::n()) %>%
     summarise(`Mean F` = round(mean(F, na.rm = TRUE), 2),
               `Standard error F` = round(sd(F, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
               `Mean M` = round(mean(M, na.rm = TRUE), 2),
@@ -62,7 +62,7 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
     }
     z <- tmp %>% tidyr::gather(features, values, -samples, -replicates)
     final <- z %>% group_by(samples, features) %>%
-          mutate(num = n()) %>%
+          mutate(num = dplyr::n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
                     se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
     g <- ggplot(data = final, aes(x = interaction(factor(final$samples, levels = unique(x$samples)),
@@ -280,7 +280,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
     y <- trouvelot_summary(x)
     z <- y %>% tidyr::gather(features, values, -samples, -replicates)
     final <- z %>% group_by(samples, features) %>%
-          mutate(num = n()) %>%
+          mutate(num = dplyr::n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
                     se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
           ungroup %>%
