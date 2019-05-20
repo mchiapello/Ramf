@@ -172,7 +172,7 @@ The plot fuctions take a set of option to customize your plot.
 
 #### Example
 ```{r plot1}
-am_barplot_legend(gr)
+am_barplot(gr)
 ```
 
 #### Example

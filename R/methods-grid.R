@@ -37,7 +37,7 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             method = c("none","holm","hommel", "hochberg",
                                        "bonferroni", "BH", "BY", "fdr"),
                             main = "Gridline intersect method", ...){
-    Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
+    Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- final <- NULL
     features <- replicates <- samples <- values <- n <- num <- means <- se <- NULL
     alpha <- alpha
     annot <- match.arg(annot)
@@ -238,7 +238,7 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                                        "bonferroni", "BH", "BY", "fdr"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
-    features <- replicates <- samples <- values <- NULL
+    features <- replicates <- samples <- values <- final <- NULL
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -753,7 +753,7 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
-    features <- replicates <- samples <- values <- n <- num <- Var1 <- final<- NULL
+    features <- replicates <- samples <- values <- n <- num <- Var1 <- NULL
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -817,7 +817,8 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     }
     g <- ggplot(data = z,
                 aes(x = features,
-                          y = values, color = samples))
+                    y = values,
+                    colour = samples))
     dodge <- position_dodge(width=0.75)
     a2 <- g +
         geom_boxplot() +
@@ -836,14 +837,14 @@ am_boxplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
              color = "",
              x = "",
              y = "root length colonized [%]") +
-        geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
-                  position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
-                          breaks = levels(factor(final$samples,
+                          breaks = levels(factor(z$samples,
                                                  levels = unique(x$samples))),
-                            name = "")
+                            name = "") +
+        geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
+                  position = dodge, show.legend = FALSE, size = dimen) 
     class(a2) <- c("am_plot", class(a2))
     return(a2)
 }
@@ -860,7 +861,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
                             legend = c("right", "left", "top", "bottom"),
                             main = "Gridline intersect method", ...){
     Arbuscule <- Hypopodia <- Intr_Hyphae <- Total <- Vesicle <- comp <- NULL
-    features <- replicates <- samples <- values <- Var1 <- final <- NULL
+    features <- replicates <- samples <- values <- Var1 <- NULL
     alpha <- alpha
     annot <- match.arg(annot)
     method <- match.arg(method)
@@ -949,7 +950,7 @@ am_dotplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
         scale_y_continuous(limits = c(-0.5, 105),
                            breaks = seq(0, 105, 20))+ 
         scale_colour_manual(values = cbPalette, 
-                          breaks = levels(factor(final$samples,
+                          breaks = levels(factor(z$samples,
                                                  levels = unique(x$samples))),
                             name = "")
     class(a2) <- c("am_plot", class(a2))
