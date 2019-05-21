@@ -7,6 +7,7 @@
 am_boxplot2(x, cbPalette,
 				alpha = 0.05,
 				annot = c("none", "asterisks", "letters"),
+                 annot_size = 5,
 				method = c("none","holm","hommel", "hochberg",
 						   "bonferroni", "BH", "BY", "fdr"),
                   main = "Colonization", ...)
@@ -26,6 +27,8 @@ below the sample statistically different from the control. The control
 is the first sample in the input file. If is is "letters" on the plot
 letters appear below the samples groupping the samples based on the 
 statistical test. For statistical tests check `am_stat` function.}
+
+\item{annot_size}{annotation font size. Default 5.}
 
 \item{method}{adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
