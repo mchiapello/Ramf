@@ -31,6 +31,7 @@ am_summary <- function(x) UseMethod("am_summary")
 #' @usage am_barplot(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
+#'                  annot_size = 5,
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
 #'          legend = c("right", "left", "top", "bottom"),
@@ -46,6 +47,7 @@ am_summary <- function(x) UseMethod("am_summary")
 #'            is the first sample in the input file. If is is "letters" on the plot
 #'            letters appear below the samples groupping the samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
+#' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 #'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 #'               adjustment
@@ -62,6 +64,7 @@ am_summary <- function(x) UseMethod("am_summary")
 am_barplot <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
+                       annot_size = 5,
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
              legend = c("right", "left", "top", "bottom"),
@@ -72,6 +75,7 @@ am_barplot <- function(x, cbPalette,
 #' @usage am_barplot2(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
+#'                  annot_size = 5,
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
 #'                   main = "Colonization", ...)
@@ -86,6 +90,7 @@ am_barplot <- function(x, cbPalette,
 #'            is the first sample in the input file. If is is "letters" on the plot
 #'            letters appear below the samples groupping the samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
+#' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 #'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 #'               adjustment
@@ -101,6 +106,7 @@ am_barplot <- function(x, cbPalette,
 am_barplot2 <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
+                       annot_size = 5,
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
 					   main = "Colonization", ...) UseMethod("am_barplot2")
@@ -110,6 +116,7 @@ am_barplot2 <- function(x, cbPalette,
 #' @usage am_boxplot(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
+#'                  annot_size = 5,
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
 #'          legend = c("right", "left", "top", "bottom"),
@@ -125,6 +132,7 @@ am_barplot2 <- function(x, cbPalette,
 #'            is the first sample in the input file. If is is "letters" on the plot
 #'            letters appear below the samples groupping the samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
+#' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 #'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 #'               adjustment
@@ -141,6 +149,7 @@ am_barplot2 <- function(x, cbPalette,
 am_boxplot <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
+                       annot_size = 5,
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
              legend = c("right", "left", "top", "bottom"),
@@ -151,6 +160,7 @@ am_boxplot <- function(x, cbPalette,
 #' @usage am_boxplot2(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
+#'                  annot_size = 5,
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
 #'                   main = "Colonization", ...)
@@ -165,6 +175,7 @@ am_boxplot <- function(x, cbPalette,
 #'            is the first sample in the input file. If is is "letters" on the plot
 #'            letters appear below the samples groupping the samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
+#' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 #'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 #'               adjustment
@@ -180,6 +191,7 @@ am_boxplot <- function(x, cbPalette,
 am_boxplot2 <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
+                       annot_size = 5,
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
 					   main = "Colonization", ...) UseMethod("am_boxplot2")
@@ -189,6 +201,7 @@ am_boxplot2 <- function(x, cbPalette,
 #' @usage am_dotplot(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
+#'                  annot_size = 5,
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
 #'          legend = c("right", "left", "top", "bottom"),
@@ -204,6 +217,7 @@ am_boxplot2 <- function(x, cbPalette,
 #'            is the first sample in the input file. If is is "letters" on the plot
 #'            letters appear below the samples groupping the samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
+#' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 #'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 #'               adjustment
@@ -220,6 +234,7 @@ am_boxplot2 <- function(x, cbPalette,
 am_dotplot <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
+                       annot_size = 5,
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
              legend = c("right", "left", "top", "bottom"),
@@ -230,6 +245,7 @@ am_dotplot <- function(x, cbPalette,
 #' @usage am_dotplot2(x, cbPalette,
 #'					alpha = 0.05,
 #'					annot = c("none", "asterisks", "letters"),
+#'                  annot_size = 5,
 #'					method = c("none","holm","hommel", "hochberg",
 #'							   "bonferroni", "BH", "BY", "fdr"),
 #'                   main = "Colonization", ...)
@@ -244,6 +260,7 @@ am_dotplot <- function(x, cbPalette,
 #'            is the first sample in the input file. If is is "letters" on the plot
 #'            letters appear below the samples groupping the samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
+#' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
 #'               Hochberg, Bonferroni, Benjamini-Hochberg, Benjamini-Yekutieli or fdr 
 #'               adjustment
@@ -259,6 +276,7 @@ am_dotplot <- function(x, cbPalette,
 am_dotplot2 <- function(x, cbPalette,
 					   alpha = 0.05,
 					   annot = c("none", "asterisks", "letters"),
+                       annot_size = 5,
 					   method = c("none","holm","hommel", "hochberg",
 									   "bonferroni", "BH", "BY", "fdr"),
 					   main = "Colonization", ...) UseMethod("am_dotplot2")
