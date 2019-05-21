@@ -40,7 +40,7 @@ vignette("Ramf")
 
 ## Read data in
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
-x <- readData(f)
+x <- readData(f, type = "grid")
 
 ## Summary of the data
 sx <- am_summary(x)
