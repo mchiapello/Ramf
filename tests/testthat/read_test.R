@@ -17,8 +17,8 @@ test_that("Trouvelot table", {
 
 
 test_that("Grid_table column names", {
-  expect_equal(names(readData("../../inst/extdata/grid.csv")), c("replicates",
-																 "samples",
+  expect_equal(names(readData("../../inst/extdata/grid.csv")), c("Replicates",
+																 "Samples",
 																 "Total",
 																 "Hyphopodia",
 																 "IntrHyphae",
@@ -28,12 +28,12 @@ test_that("Grid_table column names", {
 
 test_that("Trouvelot_table column names", {
   expect_equal(names(readData("../../inst/extdata/trouvelot.csv")),
-			   c("scoring", "replicates", "samples"))
+			   c("scoring", "Replicates", "Samples"))
 })
 
 test_that("Grid_table column classes", {
-  expect_equal(class(readData("../../inst/extdata/grid.csv")$replicates), "character")
-  expect_equal(class(readData("../../inst/extdata/grid.csv")$samples), "character")
+  expect_equal(class(readData("../../inst/extdata/grid.csv")$Replicates), "character")
+  expect_equal(class(readData("../../inst/extdata/grid.csv")$Samples), "character")
   expect_equal(class(readData("../../inst/extdata/grid.csv")$Total), "numeric")
   expect_equal(class(readData("../../inst/extdata/grid.csv")$Hyphopodia), "numeric")
   expect_equal(class(readData("../../inst/extdata/grid.csv")$IntrHyphae), "numeric")
@@ -43,8 +43,8 @@ test_that("Grid_table column classes", {
 
 test_that("Trouvelot_table column classes", {
   expect_equal(class(readData("../../inst/extdata/trouvelot.csv")$scoring), "character")
-  expect_equal(class(readData("../../inst/extdata/trouvelot.csv")$replicates), "character")
-  expect_equal(class(readData("../../inst/extdata/trouvelot.csv")$samples), "character")
+  expect_equal(class(readData("../../inst/extdata/trouvelot.csv")$Replicates), "character")
+  expect_equal(class(readData("../../inst/extdata/trouvelot.csv")$Samples), "character")
 })
 
 test_that("Grid table dimention", {
