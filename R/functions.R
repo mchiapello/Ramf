@@ -15,14 +15,14 @@ grid_summary <- function(x){
 # Trouvelot
 trouvelot_summary <- function(x){
     A <- Abundance <- Colonization <- M <- M1 <- a <- cbPalette <- feature <- features <- final_a <- m <- NULL
-    mA <- n_myc <- nn <- num <- perc <- Replicates <- Samples <- scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
+    mA <- n_myc <- nn <- num <- perc <- Replicates <- Samples <- Scoring <- tmpa <- tot <- tot2 <- value <- n <- NULL
     values <- NULL
     y <- x %>% 
-        group_by(scoring, Replicates, Samples) %>%
+        group_by(Scoring, Replicates, Samples) %>%
         tally %>%
         ungroup
     # Prepare complete dataset
-    theo_df <- tibble(scoring = rep(c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3",
+    theo_df <- tibble(Scoring = rep(c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3",
                  "1A2", "2A2", "3A2", "4A2", "5A2", "1A1",
                  "2A1", "3A1", "4A1", "5A1", "1A0", "2A0",
                  "3A0", "4A0", "5A0"), dim(table(y$Replicates, y$Samples))[1] * dim(table(y$Replicates, y$Samples))[2]),
@@ -30,22 +30,22 @@ trouvelot_summary <- function(x){
                    Samples = rep(names(table(y$Samples)), each = 21 * dim(table(y$Replicates, y$Samples))[1])
     )
     # Merge complete dataset with user data
-    complete_df <- left_join(theo_df, y, by = c("scoring", "Replicates", "Samples"))
+    complete_df <- left_join(theo_df, y, by = c("Scoring", "Replicates", "Samples"))
     ### Compute F
     N <- complete_df %>% 
         group_by(Samples, Replicates) %>%
         summarise(N = sum(n, na.rm = TRUE))
     n0 <- complete_df %>% 
         group_by(Samples, Replicates) %>%
-        dplyr::filter(scoring == "0A0") %>%
+        dplyr::filter(Scoring == "0A0") %>%
         summarise(n0 = sum(n, na.rm = TRUE))
     z <- inner_join(N, n0, by = c("Samples", "Replicates"))
     z <- z %>% 
         mutate(F = round(100 * (N -n0) / N, 2))
     # Compute M
     yy <- complete_df %>% 
-        mutate(Colonization = substring(scoring, 1, 1),
-               Abundance = substring(scoring, 2, 3)
+        mutate(Colonization = substring(Scoring, 1, 1),
+               Abundance = substring(Scoring, 2, 3)
                )
     yy2 <- yy %>%
         group_by(Samples, Replicates, Colonization) %>%

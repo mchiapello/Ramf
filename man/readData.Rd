@@ -11,8 +11,8 @@
   \item{- Total:}{Number of total fungal structures identified}
   \item{- Hyphopodia:}{Number of hypopodia identified}
   \item{- IntrHyphae:}{Number of interanl hyphae identified}
-  \item{- Arbuscule:}{Number of arbuscules identified}
-  \item{- Vesicle:}{Number of vesicles identified}
+  \item{- Arbuscules:}{Number of arbuscules identified}
+  \item{- Vesicles:}{Number of vesicles identified}
 }
 A Trouvelot dataset should have 3 variables:
 \describe{
