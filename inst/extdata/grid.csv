@@ -1,4 +1,4 @@
-samples,replicates,Total,Hyphopodia,IntrHyphae,Arbuscule,Vesicle
+Samples,Replicates,Total,Hyphopodia,IntrHyphae,Arbuscules,Vesicles
 WT,A,30,3,30,30,10
 WT,A,24,5,24,24,7
 WT,A,15,2,15,15,3

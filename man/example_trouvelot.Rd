@@ -8,8 +8,8 @@
 \describe{
   It is mandatory that the dataset is formatted as follow
   \item{scoring}{Scoring value}
-  \item{replicates}{Sample replicates}
-  \item{samples}{Sample names}
+  \item{Replicates}{Sample Replicates}
+  \item{Samples}{Sample names}
 }}
 \source{
 Mara Novero
@@ -18,7 +18,7 @@ Mara Novero
 example_trouvelot
 }
 \description{
-A dataset containing the data for s34 samples: one control and two mutants.
+A dataset containing the data for s34 Samples: one control and two mutants.
 The scoring system is the Trouvelot one.
 }
 \keyword{datasets}

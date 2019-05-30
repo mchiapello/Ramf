@@ -45,7 +45,7 @@ am_summary <- function(x) UseMethod("am_summary")
 #' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
+#'            letters appear below the Samples groupping the Samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
 #' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
@@ -88,7 +88,7 @@ am_barplot <- function(x, cbPalette,
 #' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
+#'            letters appear below the Samples groupping the Samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
 #' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
@@ -130,7 +130,7 @@ am_barplot2 <- function(x, cbPalette,
 #' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
+#'            letters appear below the Samples groupping the Samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
 #' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
@@ -173,7 +173,7 @@ am_boxplot <- function(x, cbPalette,
 #' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
+#'            letters appear below the Samples groupping the Samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
 #' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
@@ -215,7 +215,7 @@ am_boxplot2 <- function(x, cbPalette,
 #' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
+#'            letters appear below the Samples groupping the Samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
 #' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,
@@ -258,7 +258,7 @@ am_dotplot <- function(x, cbPalette,
 #' @param annot Default is "none". If it is "asterisks" on the plot asterisks appear
 #'            below the sample statistically different from the control. The control
 #'            is the first sample in the input file. If is is "letters" on the plot
-#'            letters appear below the samples groupping the samples based on the 
+#'            letters appear below the Samples groupping the Samples based on the 
 #'            statistical test. For statistical tests check `am_stat` function.
 #' @param annot_size annotation font size. Default 5.
 #' @param method adjusts the p-value for multiple comparisons using the Bonferroni, Holm,

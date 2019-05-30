@@ -25,7 +25,7 @@ am_boxplot2(x, cbPalette,
 \item{annot}{Default is "none". If it is "asterisks" on the plot asterisks appear
 below the sample statistically different from the control. The control
 is the first sample in the input file. If is is "letters" on the plot
-letters appear below the samples groupping the samples based on the 
+letters appear below the Samples groupping the Samples based on the 
 statistical test. For statistical tests check `am_stat` function.}
 
 \item{annot_size}{annotation font size. Default 5.}

@@ -13,27 +13,27 @@
 #' @format A grid dataset should have 7 variables:
 #' \describe{
 #'   It is mandatory that the dataset is formatted as follow
-#'   \item{- samples:}{Sample names}
-#'   \item{- replicates:}{Sample replicates}
+#'   \item{- Samples:}{Sample names}
+#'   \item{- Replicates:}{Sample Replicates}
 #'   \item{- Total:}{Number of total fungal structures identified}
 #'   \item{- Hyphopodia:}{Number of hypopodia identified}
 #'   \item{- IntrHyphae:}{Number of interanl hyphae identified}
-#'   \item{- Arbuscule:}{Number of arbuscules identified}
-#'   \item{- Vesicle:}{Number of vesicles identified}
+#'   \item{- Arbuscules:}{Number of arbuscules identified}
+#'   \item{- Vesicles:}{Number of vesicles identified}
 #' }
 #' A Trouvelot dataset should have 3 variables:
 #' \describe{
 #'   It is mandatory that the dataset is formatted as follow
-#'   \item{- samples:}{Sample names}
-#'   \item{- replicates:}{Sample replicates}
-#'   \item{- scoring:}{Scoring value.
+#'   \item{- Samples:}{Sample names}
+#'   \item{- Replicates:}{Sample Replicates}
+#'   \item{- Scoring:}{Scoring value.
 #'                     The only possible terms in this column are:
 #'                     0A0,1A3,2A3,3A3,4A3,5A3,1A2,2A2,3A2,4A2,5A2,1A1,2A1,
 #'                     3A1,4A1,5A1,1A0,2A0,3A0,4A0,5A0.
 #'                     If 0 is present, it will be converted into 0A0}
 #' }
 #'
-#'          The order of the samples (in the "samples" column) is the order used for plot display. So,
+#'          The order of the Samples (in the "Samples" column) is the order used for plot display. So,
 #'          if you like to have a specific order, please sort the original data accordingly
 #' @export
 #' @author Marco Chiapello <mc983@cam.ac.uk>
@@ -57,24 +57,24 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
     }
     ## Trouvelot specific checks
     if (type == "trouvelot"){
-        tnames <- c("samples", "replicates", "scoring")
+        tnames <- c("Samples", "Replicates", "Scoring")
         snames <- c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3", "1A2", "2A2", "3A2",
                    "4A2", "5A2", "1A1", "2A1", "3A1", "4A1", "5A1", "1A0", "2A0",
                    "3A0", "4A0", "5A0", "0") 
         if (all(names(x) == tnames)){
-            if (length(setdiff(x$scoring, snames)) != 0){
-                message(paste("This term in column scoring is wrong:\n",
-                              setdiff(x$scoring, snames), "\n", sep = ""))
+            if (length(setdiff(x$Scoring, snames)) != 0){
+                message(paste("This term in column Scoring is wrong:\n",
+                              setdiff(x$Scoring, snames), "\n", sep = ""))
                 message("The only allowed terms are:")
                 message(paste(snames, "", sep = ", "))
                 #                 message("\n")
             x <- NULL
             stop("The dataset has not been imported")
             }
-            x$scoring <- as.character(x$scoring)
-            x$replicates <- as.character(x$replicates)
-            x$samples <- as.character(x$samples)
-            x$scoring <- gsub("^0$", "0A0", x$scoring)
+            x$Scoring <- as.character(x$Scoring)
+            x$Replicates <- as.character(x$Replicates)
+            x$Samples <- as.character(x$Samples)
+            x$Scoring <- gsub("^0$", "0A0", x$Scoring)
             class(x) <- c("trouvelot", class(x))
         } else {
             ttmp <- which(names(x) != tnames)
@@ -89,12 +89,12 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
     }
     ## Grid specific checks
     if (type == "grid"){
-        gnames <- c("samples", "replicates", "Total", "Hyphopodia", "IntrHyphae",
-                    "Arbuscule", "Vesicle")
+        gnames <- c("Samples", "Replicates", "Total", "Hyphopodia", "IntrHyphae",
+                    "Arbuscules", "Vesicles")
         if(all(names(x)[1:2] == gnames[1:2]) & 
            all(names(x)[3:length(names(x))] %in% gnames[3:7])){
-            x$samples <- as.character(x$samples)
-            x$replicates <- as.character(x$replicates)
+            x$Samples <- as.character(x$Samples)
+            x$Replicates <- as.character(x$Replicates)
             if(any(names(x) == "Total")){
                 x$Total <- as.numeric(x$Total)
             }
@@ -104,11 +104,11 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
             if(any(names(x) == "IntrHyphae")){
                 x$IntrHyphae <-  as.numeric(x$IntrHyphae)
             }
-            if(any(names(x) == "Arbuscule")){
-                x$Arbuscule <- as.numeric(x$Arbuscule)
+            if(any(names(x) == "Arbuscules")){
+                x$Arbuscules <- as.numeric(x$Arbuscules)
             }
-            if(any(names(x) == "Vescicle")){
-                x$Vesicle <- as.numeric(x$Vesicle)
+            if(any(names(x) == "Vescicles")){
+                x$Vesicles <- as.numeric(x$Vesicles)
             }
                 class(x) <- c("grid", class(x))
         } else {
@@ -120,8 +120,8 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
             x <- NULL
             stop("The dataset has not been imported")
             }
-			if(all(names(x)[1:2] != c("samples", "replicates"))){
-                message(paste("The column headers ('samples' or 'replicates') are not in the correct order!"))
+			if(all(names(x)[1:2] != c("Samples", "Replicates"))){
+                message(paste("The column headers ('Samples' or 'Replicates') are not in the correct order!"))
             x <- NULL
             stop("The dataset has not been imported")
 			}
@@ -145,8 +145,8 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
 #' @format A grid dataset should have 7 variables:
 #' \describe{
 #'   It is mandatory that the dataset is formatted as follow
-#'   \item{- samples:}{Sample names}
-#'   \item{- replicates:}{Sample replicates}
+#'   \item{- Samples:}{Sample names}
+#'   \item{- Replicates:}{Sample Replicates}
 #'   \item{- time:}{When the sample have been collected}
 #'   \item{- Total:}{Number of total fungal structures identified}
 #'   \item{- Hyphopodia:}{Number of hypopodia identified}
@@ -157,17 +157,17 @@ readData <- function(infile, type = c("none", "trouvelot", "grid")){
 #' A Trouvelot dataset should have 3 variables:
 #' \describe{
 #'   It is mandatory that the dataset is formatted as follow
-#'   \item{- samples:}{Sample names}
-#'   \item{- replicates:}{Sample replicates}
+#'   \item{- Samples:}{Sample names}
+#'   \item{- Replicates:}{Sample Replicates}
 #'   \item{- time:}{When the sample have been collected}
-#'   \item{- scoring:}{Scoring value.
+#'   \item{- Scoring:}{Scoring value.
 #'                     The only possible terms in this column are:
 #'                     0A0,1A3,2A3,3A3,4A3,5A3,1A2,2A2,3A2,4A2,5A2,1A1,2A1,
 #'                     3A1,4A1,5A1,1A0,2A0,3A0,4A0,5A0.
 #'                     If 0 is present, it will be converted into 0A0}
 #' }
 #'
-#'          The order of the samples (in the "samples" column) is the order used for plot display. So,
+#'          The order of the Samples (in the "Samples" column) is the order used for plot display. So,
 #'          if you like to have a specific order, please sort the original data accordingly
 #' @export
 #' @author Marco Chiapello <mc983@cam.ac.uk>
@@ -197,24 +197,24 @@ readDataTime <- function(infile, type = c("none", "trouvelot", "grid")){
 ################################################################################
     ## Trouvelot specific checks
     if (type == "trouvelot"){
-        tnames <- c("samples", "replicates", "scoring")
+        tnames <- c("Samples", "Replicates", "Scoring")
         snames <- c("0A0", "1A3", "2A3", "3A3", "4A3", "5A3", "1A2", "2A2", "3A2",
                    "4A2", "5A2", "1A1", "2A1", "3A1", "4A1", "5A1", "1A0", "2A0",
                    "3A0", "4A0", "5A0", "0") 
         if (all(names(x) == tnames)){
-            if (length(setdiff(x$scoring, snames)) != 0){
-                message(paste("This term in column scoring is wrong:\n",
-                              setdiff(x$scoring, snames), "\n", sep = ""))
+            if (length(setdiff(x$Scoring, snames)) != 0){
+                message(paste("This term in column Scoring is wrong:\n",
+                              setdiff(x$Scoring, snames), "\n", sep = ""))
                 message("The only allowed terms are:")
                 message(paste(snames, "", sep = ", "))
                 #                 message("\n")
             x <- NULL
             stop("The dataset has not been imported")
             }
-            x$scoring <- as.character(x$scoring)
-            x$replicates <- as.character(x$replicates)
-            x$samples <- as.character(x$samples)
-            x$scoring <- gsub("^0$", "0A0", x$scoring)
+            x$Scoring <- as.character(x$Scoring)
+            x$Replicates <- as.character(x$Replicates)
+            x$Samples <- as.character(x$Samples)
+            x$Scoring <- gsub("^0$", "0A0", x$Scoring)
             class(x) <- c("trouvelotTime", class(x))
         } else {
             ttmp <- which(names(x) != tnames)
@@ -231,12 +231,12 @@ readDataTime <- function(infile, type = c("none", "trouvelot", "grid")){
 ################################################################################
     ## Grid specific checks
     if (type == "grid"){
-        gnames <- c("samples", "replicates", "time", "Total", "Hyphopodia", "IntrHyphae",
+        gnames <- c("Samples", "Replicates", "time", "Total", "Hyphopodia", "IntrHyphae",
                     "Arbuscule", "Vesicle")
         if(all(names(x)[1:3] == gnames[1:3]) & 
            all(names(x)[4:length(names(x))] %in% gnames[4:8])){
-            x$samples <- as.character(x$samples)
-            x$replicates <- as.character(x$replicates)
+            x$Samples <- as.character(x$Samples)
+            x$Replicates <- as.character(x$Replicates)
             if(any(names(x) == "Total")){
                 x$Total <- as.numeric(x$Total)
             }
@@ -263,8 +263,8 @@ readDataTime <- function(infile, type = c("none", "trouvelot", "grid")){
             x <- NULL
             stop("The dataset has not been imported")
             }
-			if(all(names(x)[1:2] != c("samples", "replicates"))){
-                message(paste("The column headers ('samples' or 'replicates') are not in the correct order!"))
+			if(all(names(x)[1:2] != c("Samples", "Replicates"))){
+                message(paste("The column headers ('Samples' or 'Replicates') are not in the correct order!"))
             x <- NULL
             stop("The dataset has not been imported")
 			}
