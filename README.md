@@ -21,8 +21,9 @@ If you get this error:
 Please, install the package from [Bioconductor](http://bioconductor.org/):
 
 ```r
-source("https://bioconductor.org/biocLite.R")
-biocLite("BiocStyle")
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("BiocStyle")
 ```
 
 Repeat the Ramf package installation command.
