@@ -1,6 +1,6 @@
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 
-# The **Ramf** package [pre-release]
+# The **Ramf** package
 
 ## Overview
 <img align = "right" src="inst/extdata/Ramf.png" height="200">
