@@ -7,9 +7,9 @@
 \format{A data frame with 1008 rows and 3 variables:
 \describe{
   It is mandatory that the dataset is formatted as follow
-  \item{scoring}{Scoring value}
-  \item{Replicates}{Sample Replicates}
   \item{Samples}{Sample names}
+  \item{Replicates}{Sample Replicates}
+  \item{Scoring}{Scoring value}
 }}
 \source{
 Mara Novero

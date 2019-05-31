@@ -11,8 +11,8 @@
 #'   \item{Total}{Number of total fungal structures identified}
 #'   \item{Hyphopodia}{Number of hypopodia identified}
 #'   \item{IntrHyphae}{Number of interanl hyphae identified}
-#'   \item{Arbuscule}{Number of arbuscules identified}
-#'   \item{Vesicle}{Number of vesicles identified}
+#'   \item{Arbuscules}{Number of arbuscules identified}
+#'   \item{Vesicles}{Number of vesicles identified}
 #' }
 #' @source PhD Caroline Gutjahr
 "example_grid"
@@ -26,9 +26,9 @@
 #' @format A data frame with 1008 rows and 3 variables:
 #' \describe{
 #'   It is mandatory that the dataset is formatted as follow
-#'   \item{scoring}{Scoring value}
-#'   \item{Replicates}{Sample Replicates}
 #'   \item{Samples}{Sample names}
+#'   \item{Replicates}{Sample Replicates}
+#'   \item{Scoring}{Scoring value}
 #' }
 #' @source Mara Novero
 "example_trouvelot"
