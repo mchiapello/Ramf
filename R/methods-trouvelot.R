@@ -84,7 +84,7 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
             labs(title = main, 
                  #                  subtitle = "Trouvelot method",
                  x = "",
-                 y = "") +
+                 y = "root colonization [%]") +
             annotate("text", x = seq(length(unique(final$Samples)) * .5 + .5, length(unique(final$Samples)) * 5 + .5,
                                      length(unique(final$Samples)))[1:4],
                      y = 110, label = c("F%", "M%", "a%", "A%")) +
@@ -158,7 +158,7 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         labs(title = main, 
              #              subtitle = "Trouvelot method",
              x = "",
-             y = "") +
+             y = "root colonization [%]") +
         annotate("text", x = seq(length(unique(final$Samples)) * .5 + .5, length(unique(final$Samples)) * 5 + .5,
                                  length(unique(final$Samples)))[1:4],
                  y = 110, label = c("F%", "M%", "a%", "A%")) +
@@ -232,7 +232,7 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         labs(title = main, 
              #              subtitle = "Trouvelot method",
              x = "",
-             y = "") +
+             y = "root colonization [%]") +
         annotate("text", x = seq(length(unique(final$Samples)) * .5 + .5, length(unique(final$Samples)) * 5 + .5,
                                  length(unique(final$Samples)))[1:4],
                  y = 110, label = c("F%", "M%", "a%", "A%")) +
@@ -330,7 +330,7 @@ am_barplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
         labs(title = main, 
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root colonization [%]") +
         geom_text(aes( label = annot, y = (means + se)), vjust = -0.5, position = dodge,
                   show.legend = FALSE, size = dimen)  +
         scale_y_continuous(limits = c(-0.5, 110),
@@ -433,7 +433,7 @@ am_boxplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
         labs(title = main,
              #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root colonization [%]") +
         geom_text(data = an, aes(x = features, label = annot, y = values), vjust = -0.8, 
                   position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
