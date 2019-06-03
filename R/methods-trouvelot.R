@@ -64,7 +64,11 @@ am_barplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
     final <- z %>% group_by(Samples, features) %>%
           mutate(num = dplyr::n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
-                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)))
+                    se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
+          ungroup %>%
+          mutate(Samples = factor(Samples, levels = unique(x$Samples))) %>%
+          arrange(features, Samples) %>%
+          group_by(Samples, features) 
     g <- ggplot(data = final, aes(x = interaction(factor(final$Samples, levels = unique(x$Samples)),
                                                    factor(final$features, levels = c("F", "M", "a", "A"))),
                                                    y = means, fill = Samples))
@@ -138,7 +142,11 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         d <- as.vector(as.matrix(stat[,2:5]))
         dimen <- annot_size
     }
-    final <- tmp %>% gather(feature, value, -Samples, -Replicates)
+    final <- tmp %>% gather(feature, value, -Samples, -Replicates) %>%
+          ungroup %>%
+          mutate(Samples = factor(Samples, levels = unique(x$Samples))) %>%
+          arrange(Samples) %>%
+          group_by(Samples) 
     g <- ggplot(data = final, aes(x = interaction(factor(final$Samples, levels = unique(x$Samples)),
                                               factor(final$feature, levels = c("F", "A", "a", "M")),
                                               sep = ": "),
@@ -151,7 +159,8 @@ am_boxplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
-              panel.grid.minor.x = element_blank()) +
+              panel.grid.minor.x = element_blank(),
+              legend.position = "none") +
         geom_vline(xintercept = seq(length(unique(final$Samples)) + .5, length(unique(final$Samples)) * 3 + .5,
                                     length(unique(final$Samples))), colour = "lightgrey") +
                       #     geom_hline(yintercept = 105, colour = "lightgrey") +
@@ -212,7 +221,11 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
         d <- as.vector(as.matrix(stat[,2:5]))
         dimen <- annot_size
     }
-    final <- tmp %>% gather(feature, value, -Samples, -Replicates)
+    final <- tmp %>% gather(feature, value, -Samples, -Replicates) %>%
+          ungroup %>%
+          mutate(Samples = factor(Samples, levels = unique(x$Samples))) %>%
+          arrange(Samples) %>%
+          group_by(Samples) 
     g <- ggplot(data = final, aes(x = interaction(factor(final$Samples, levels = unique(x$Samples)),
                                               factor(final$feature, levels = c("F", "A", "a", "M")),
                                               sep = ": "),
@@ -225,7 +238,8 @@ am_dotplot2.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E
               panel.grid.major.y = element_blank(),
               panel.grid.minor.y = element_blank(),
               panel.grid.major.x = element_blank(),
-              panel.grid.minor.x = element_blank()) +
+              panel.grid.minor.x = element_blank(),
+              legend.position = "none") +
         geom_vline(xintercept = seq(length(unique(final$Samples)) + .5, length(unique(final$Samples)) * 3 + .5,
                                     length(unique(final$Samples))), colour = "lightgrey") +
                       #     geom_hline(yintercept = 105, colour = "lightgrey") +
