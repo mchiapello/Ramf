@@ -299,11 +299,9 @@ am_stat <- function(x, method = c("none","holm","hommel", "hochberg",
                                   "bonferroni", "BH", "BY", "fdr"),
                                   ...) UseMethod("am_stat")
 
-
-
-#' am_anova object.
+#' am_anova_grid object.
 #' 
-#' @usage am_anova(x, col = c("Total", "Hyphopodia", "IntrHyphae",
+#' @usage am_anova_grid(x, col = c("Total", "Hyphopodia", "IntrHyphae",
 #'                            "Arbuscules", "Vesicles"), ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param col contains the column to test. Should be one among: "Total", 
@@ -321,17 +319,17 @@ am_stat <- function(x, method = c("none","holm","hommel", "hochberg",
 #'                         "Sand", "Sand", "Soil", "Soil"),
 #'                 Total = c(88, 95, 87, 74, 95, 93, 80, 79, 72, 52, 80,
 #'                           53))
-#' am_anova(x, col = "Total")
+#' am_anova_grid(x, col = "Total")
 #' @export
 #' @import agricolae 
-am_anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
+am_anova_grid <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
                                 "Arbuscules", "Vesicles"), 
-                     ...) UseMethod("am_anova")
+                     ...) UseMethod("am_anova_grid")
 
 
-#' am_2anova object.
+#' am_2anova_grid object.
 #' 
-#' @usage am_2anova(x, col = c("Total", "Hyphopodia", "IntrHyphae",
+#' @usage am_2anova_grid(x, col = c("Total", "Hyphopodia", "IntrHyphae",
 #'                            "Arbuscules", "Vesicles"), ...)
 #' @param x dataset containing Trouvelot or Grid data
 #' @param col contains the column to test. Should be one among: "Total", 
@@ -352,18 +350,18 @@ am_anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
 #'                         "Sand", "Sand", "Soil", "Soil"),
 #'                 Total = c(88, 95, 87, 74, 95, 93, 80, 79, 72, 52, 80,
 #'                           53))
-#' am_2anova(x, col = "Total")
+#' am_2anova_grid(x, col = "Total")
 #' @export
 #' @import agricolae 
-am_2anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
+am_2anova_grid <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
                                 "Arbuscules", "Vesicles"), 
-                     ...) UseMethod("am_2anova")
+                     ...) UseMethod("am_2anova_grid")
 
 ########## ANOVA
 # One way
 #' @export
 #' @importFrom graphics plot
-am_anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
+am_anova_grid <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
                                 "Arbuscules", "Vesicles"), ...){
     col <- match.arg(col)
     pv <- kruskal(x[names(x) %in% col], (x$Samples))$statistics$p.chisq
@@ -376,8 +374,103 @@ am_anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
 
 # Two way
 #' @export
-am_2anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
+am_2anova_grid <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
                                  "Arbuscules", "Vesicles"), ...){
+    col <- match.arg(col)
+    if ("trt" %in% names(x)){
+    pp <- aov(as.data.frame(x)[,names(x) %in% col] ~ x$Samples + x$trt)
+    plot(pp, 1)
+    plot(pp, 2)
+    pv <- summary(aov(as.data.frame(x)[,names(x) %in% col] ~ x$Samples * x$trt))[[1]][["Pr(>F)"]]
+    if(pv[1] < 0.05){
+        message(paste0("The pvalue for Samples is ", pv[1], ". There are significant differences in ", col, " feature.\n"))
+    } else{
+        message(paste0("The pvalue for Samples is ", pv[1], ". There are NOT significant differences in ", col, " feature.\n"))
+    }
+    if(pv[2] < 0.05){
+        message(paste0("The pvalue for treatment is ", pv[2], ". There are significant differences in ", col, " feature.\n"))
+    } else{
+        message(paste0("The pvalue for treatment is ", pv[2], ". There are NOT significant differences in ", col, " feature\n."))
+    }
+    if(pv[3] < 0.05){
+        message(paste0("The pvalue for Sample-treatment interaction is ", pv[2], ". There are significant differences in ", col, " feature.\n"))
+    } else{
+        message(paste0("The pvalue for Sample-treatment interaction is ", pv[2], ". There are NOT significant differences in ", col, " feature.\n"))
+    }
+    } else {
+        stop('You do not have the "trt" (treatment) column. Please add it to compute the 2-way ANOVA\n')
+    }
+}
+
+#' am_anova_trouvelot object.
+#' 
+#' @usage am_anova_trouvelot(x, col = c("F", "M", "a", "A"), ...)
+#' @param x dataset containing Trouvelot or Grid data
+#' @param col contains the column to test. Should be one among: "F", "M", "a", "A" 
+#' @param ... ignored
+#' @examples
+#' x <- data.frame(Samples = c("Low_phosphate", "Low_phosphate",
+#'                            "Low_phosphate", "Low_phosphate",
+#'                            "Medium_phosphate", "Medium_phosphate",
+#'                            "Medium_phosphate", "Medium_phosphate",
+#'                            "High_phosphate", "High_phosphate",
+#'                            "High_phosphate", "High_phosphate"),
+#'                 trt = c("Sand", "Sand", "Soil", "Soil",
+#'                         "Sand", "Sand", "Soil", "Soil",
+#'                         "Sand", "Sand", "Soil", "Soil"),
+#'                 F = c(88, 95, 87, 74, 95, 93, 80, 79, 72, 52, 80,
+#'                           53))
+#' am_anova_trouvelot(x, col = "F")
+#' @export
+#' @import agricolae 
+am_anova_trouvelot <- function(x, col = c("F", "M", "a", "A"), 
+                     ...) UseMethod("am_anova_trouvelot")
+
+
+#' am_2anova_trouvelot object.
+#' 
+#' @usage am_2anova_trouvelot(x, col = c("F", "M", "a", "A"), ...)
+#' @param x dataset containing Trouvelot or Grid data
+#' @param col contains the column to test. Should be one among: "F", "M", "a", "A" 
+#' @param ... ignored
+#' @description The dataset should be prepared in order to have a column called
+#'              "trt" that contains the treatments. If the column is not present
+#'              the function will fail.
+#' @examples
+#' x <- data.frame(Samples = c("Low_phosphate", "Low_phosphate",
+#'                            "Low_phosphate", "Low_phosphate",
+#'                            "Medium_phosphate", "Medium_phosphate",
+#'                            "Medium_phosphate", "Medium_phosphate",
+#'                            "High_phosphate", "High_phosphate",
+#'                            "High_phosphate", "High_phosphate"),
+#'                 trt = c("Sand", "Sand", "Soil", "Soil",
+#'                         "Sand", "Sand", "Soil", "Soil",
+#'                         "Sand", "Sand", "Soil", "Soil"),
+#'                 F = c(88, 95, 87, 74, 95, 93, 80, 79, 72, 52, 80,
+#'                           53))
+#' am_2anova_trouvelot(x, col = "F")
+#' @export
+#' @import agricolae 
+am_2anova_trouvelot <- function(x, col = c("F", "M", "a", "A"), 
+                     ...) UseMethod("am_2anova_trouvelot")
+
+########## ANOVA
+# One way
+#' @export
+#' @importFrom graphics plot
+am_anova_trouvelot <- function(x, col = c("F", "M", "a", "A"), ...){
+    col <- match.arg(col)
+    pv <- kruskal(x[names(x) %in% col], (x$Samples))$statistics$p.chisq
+    if(pv < 0.05){
+        message(paste0("The pvalue is ", pv, ". There are significant differences in ", col, " feature."))
+    } else{
+        message(paste0("The pvalue is ", pv, ". There are NOT significant differences in ", col, " feature."))
+    }
+}
+
+# Two way
+#' @export
+am_2anova_trouvelot <- function(x, col = c("F", "M", "a", "A"), ...){
     col <- match.arg(col)
     if ("trt" %in% names(x)){
     pp <- aov(as.data.frame(x)[,names(x) %in% col] ~ x$Samples + x$trt)
