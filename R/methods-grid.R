@@ -590,7 +590,7 @@ am_dotplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
 #     # Change table shape
 #     z <- final %>% tidyr::gather(features, values, -Samples, -time, -Replicates)
 #     z$group <- paste(z$Samples, z$time, z$features, sep = "_")
-#     # Order
+#     # Order
 #     z <- z[order(match(z$features, c("Total", "Hyphopodia", "IntrHyphae",
 #                                                  "Arbuscules", "Vesicles")),
 #                          z$time,
