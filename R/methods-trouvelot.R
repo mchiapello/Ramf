@@ -548,9 +548,10 @@ am_dotplot.trouvelot <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9
               legend.position = legend) +
         geom_vline(xintercept = seq(1.5, length(unique(an$features))-0.5, 1),
                    colour = "lightgrey") +
-        labs(title = main,
+        labs(title = main, 
+             #              subtitle = "Grid method",
              x = "",
-             y = "") +
+             y = "root colonization [%]") +
         geom_text(data = an, aes(label = annot, y = values), vjust = -0.8, 
                   position = dodge, show.legend = FALSE, size = dimen) +
         scale_y_continuous(limits = c(-0.5, 105),
