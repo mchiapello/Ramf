@@ -1,0 +1,7 @@
+"group1","group2","Total.pval","Hyphopodia.pval","IntrHyphae.pval","Arbuscules.pval","Vesicles.pval"
+"WT","cyclops-3",0.1029,0.0184,0.0509,0,0
+"WT","cyclops-4",0.0397,0.2495,0.0124,0,0
+"WT","ccamk-13",0.0097,0.0184,3e-04,0,0
+"cyclops-3","cyclops-4",0.5565,0.1261,0.3856,1,1
+"cyclops-3","ccamk-13",0.1636,1,0.0063,1,1
+"cyclops-4","ccamk-13",0.3843,0.1261,0.0249,1,1
