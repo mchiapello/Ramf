@@ -1,15 +1,14 @@
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 
-# The **Ramf** package
-
-## Overview
-<img align = "right" src="inst/extdata/Ramf.png" height="200">
-
+# The **Ramf** package <img src="../inst/extdata/Ramf.png" align="right" alt="" width="120" />
 A package for arbuscular mycorrhyzal fungi colonization
 
+## Citation
+If you use the package, please cite it:
+
+Marco Chiapello , Debatosh Das, Caroline Gutjahr. Ramf: An open-source R package for statistical analysis and display of quantitative root colonization by arbuscular mycorrhiza fungi. _Frontiers Plant Science_. **In press**.
+
 ## Installation
-
-
 ```r
 devtools::install_github("mchiapello/Ramf")
 ```
@@ -28,31 +27,34 @@ BiocManager::install("BiocStyle")
 
 Repeat the Ramf package installation command.
 
-## Usage
+## Simple usage
+Read the Reference page for more information.
 
 
 ```r
 ## Load library
 library(Ramf)
 
-## Read vignette
-vignette("Ramf")
-
-## Read data in
+## Read data in
 f <- dir(system.file("extdata", package = "Ramf"), full.names = TRUE, pattern = "grid.csv")
 x <- readData(f, type = "grid")
 
 ## Summary of the data
-sx <- am_summary(x)
+am_summary(x)
 
-## Plot
-barx <- am_barplot(x)
-boxx <- am_boxplot(x)
-dotx <- am_dotplot(x)
+## Plot
+am_barplot(x)
+am_boxplot(x)
+am_dotplot(x)
+
+# Plot with different display
+am_barplot2(x)
+am_boxplot2(x)
+am_dotplot2(x)
 
 ## Statistics
-sx <- am_stat(x)
-sxc <- am_stat(x, methods = "BH")
+am_stat(x)
+am_stat(x, methods = "BH")
 
 ## Plot with statistics
 am_barplot(x, annots = "asterisks")
@@ -61,12 +63,12 @@ am_barplot(x, annots = "asterisks")
 am_barplot(x, annot = "letters")
 
 ## Save summary data
-am_save(sx, "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"
+am_save(am_summary(x), "My_data") # 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"
 
 ## Save plot data
-am_save(boxx, "RPlot.jpg")
-am_save(barx, "RPlot.pdf", unit = "cm", width = 20, height = 20, dpi = 300) # set image unit, dimention and quality
-am_save(dotx, "RPlot.png", width = 7, height = 7)
+am_save(am_dotplot(x), "RPlot.jpg")
+am_save(am_dotplot(x), "RPlot.pdf", unit = "cm", width = 20, height = 20, dpi = 300) # set image unit, dimention and quality
+am_save(am_dotplot(x), "RPlot.png", width = 7, height = 7)
 ```
 
 
