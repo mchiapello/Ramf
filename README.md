@@ -1,6 +1,6 @@
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 
-# The **Ramf** package <img src="../inst/extdata/Ramf.png" align="right" alt="" width="120" />
+# The **Ramf** package <img src="inst/extdata/Ramf.png" align="right" alt="" width="120" />
 A package for arbuscular mycorrhyzal fungi colonization
 
 ## Citation
