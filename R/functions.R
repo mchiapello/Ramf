@@ -29,7 +29,7 @@ trouvelot_summary <- function(x){
                   Replicates = rep(rep(rownames(table(y$Replicates, y$Samples)), each = 21), dim(table(y$Replicates, y$Samples))[2]),
                    Samples = rep(names(table(y$Samples)), each = 21 * dim(table(y$Replicates, y$Samples))[1])
     )
-    # Merge complete dataset with user data
+    # Merge complete dataset with user data
     complete_df <- left_join(theo_df, y, by = c("Scoring", "Replicates", "Samples"))
     ### Compute F
     N <- complete_df %>% 
@@ -202,7 +202,7 @@ trouvelot_summary <- function(x){
 }
 
 ###############################################################################
-## TIME
+## TIME
 
 .grid_statime <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
     V1 <- Samples <- comb <- NULL
@@ -261,40 +261,3 @@ trouvelot_summary <- function(x){
     }
 }
 
-########## ANOVA
-# One way
-am_anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
-                                "Arbuscules", "Vesicles"), ...){
-    col <- match.arg(col)
-    pv <- kruskal(x[names(x) %in% col], (x$Samples))$statistics$p.chisq
-    if(pv < 0.05){
-        message(paste0("The pvalue is ", pv, ". There are significant differences in ", col, " feature."))
-    } else{
-        message(paste0("The pvalue is ", pv, ". There are NOT significant differences in ", col, " feature."))
-    }
-}
-
-# Two way
-am_2anova <- function(x, col = c("Total", "Hyphopodia", "IntrHyphae",
-                                 "Arbuscules", "Vesicles")){
-    col <- match.arg(col)
-    pp <- aov(x[,names(x) %in% col] ~ x$Samples + x$trt)
-    plot(pp, 1)
-    plot(pp, 2)
-    pv <- summary(aov(x[,names(x) %in% col] ~ x$Samples * x$trt))[[1]][["Pr(>F)"]]
-    if(pv[1] < 0.05){
-        message(paste0("The pvalue for Samples is ", pv[1], ". There are significant differences in ", col, " feature.\n"))
-    } else{
-        message(paste0("The pvalue for Samples is ", pv[1], ". There are NOT significant differences in ", col, " feature.\n\n"))
-    }
-    if(pv[2] < 0.05){
-        message(paste0("The pvalue for treatment is ", pv[2], ". There are significant differences in ", col, " feature.\n"))
-    } else{
-        message(paste0("The pvalue for treatment is ", pv[2], ". There are NOT significant differences in ", col, " feature."))
-    }
-    if(pv[3] < 0.05){
-        message(paste0("The pvalue for Sample-treatment interaction is ", pv[2], ". There are significant differences in ", col, " feature.\n"))
-    } else{
-        message(paste0("The pvalue for Sample-treatment interaction is ", pv[2], ". There are NOT significant differences in ", col, " feature."))
-    }
-}
