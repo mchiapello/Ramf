@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
+[![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/)
 
 # The **Ramf** package <img src="inst/extdata/Ramf.png" align="right" alt="" width="120" />
 A package for arbuscular mycorrhyzal fungi colonization
