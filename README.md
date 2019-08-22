@@ -1,5 +1,9 @@
 [![codecov](https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg)](https://codecov.io/gh/mchiapello/Ramf)
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mchiapello/Ramf?sort=semver&style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/mchiapello/Ramf?style=plastic)
+![GitHub Release Date](https://img.shields.io/github/release-date/mchiapello/Ramf?style=plastic)
+![GitHub repo size](https://img.shields.io/github/repo-size/mchiapello/Ramf?style=plastic)
 
 # The **Ramf** package <img src="inst/extdata/Ramf.png" align="right" alt="" width="120" />
 A package for arbuscular mycorrhyzal fungi colonization
