@@ -2,16 +2,17 @@
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/mchiapello/Ramf?sort=semver&style=plastic)
 ![GitHub last commit](https://img.shields.io/github/last-commit/mchiapello/Ramf?style=plastic)
-![GitHub Release Date](https://img.shields.io/github/release-date/mchiapello/Ramf?style=plastic)
-![GitHub repo size](https://img.shields.io/github/repo-size/mchiapello/Ramf?style=plastic)
 
-# The **Ramf** package <img src="inst/extdata/Ramf.png" align="right" alt="" width="120" />
+
+# The **Ramf** package <img src="man/figures/logo.png" align="right" alt="" width="120" />
 A package for arbuscular mycorrhyzal fungi colonization
 
 ## Citation
 If you use the package, please cite it:
 
+```
 Marco Chiapello , Debatosh Das, Caroline Gutjahr. Ramf: An open-source R package for statistical analysis and display of quantitative root colonization by arbuscular mycorrhiza fungi. _Frontiers Plant Science_. **In press**.
+```
 
 ## Installation
 ```r

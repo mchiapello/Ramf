@@ -70,71 +70,71 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><a href="https://codecov.io/gh/mchiapello/Ramf"><img src="https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle"></a> <img src="https://img.shields.io/github/v/release/mchiapello/Ramf?sort=semver&amp;style=plastic" alt="GitHub release (latest SemVer)"><img src="https://img.shields.io/github/last-commit/mchiapello/Ramf?style=plastic" alt="GitHub last commit"><img src="https://img.shields.io/github/release-date/mchiapello/Ramf?style=plastic" alt="GitHub Release Date"><img src="https://img.shields.io/github/repo-size/mchiapello/Ramf?style=plastic" alt="GitHub repo size"></p>
+<p><a href="https://codecov.io/gh/mchiapello/Ramf"><img src="https://codecov.io/gh/mchiapello/Ramf/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://www.tidyverse.org/lifecycle/"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle"></a> <img src="https://img.shields.io/github/v/release/mchiapello/Ramf?sort=semver&amp;style=plastic" alt="GitHub release (latest SemVer)"><img src="https://img.shields.io/github/last-commit/mchiapello/Ramf?style=plastic" alt="GitHub last commit"></p>
 <div id="the-ramf-package-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#the-ramf-package-" class="anchor"></a>The <strong>Ramf</strong> package <img src="inst/extdata/Ramf.png" align="right" alt="" width="120">
+<a href="#the-ramf-package-" class="anchor"></a>The <strong>Ramf</strong> package <img src="reference/figures/logo.png" align="right" alt="" width="120">
 </h1></div>
 <p>A package for arbuscular mycorrhyzal fungi colonization</p>
 <div id="citation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#citation" class="anchor"></a>Citation</h2>
 <p>If you use the package, please cite it:</p>
-<p>Marco Chiapello , Debatosh Das, Caroline Gutjahr. Ramf: An open-source R package for statistical analysis and display of quantitative root colonization by arbuscular mycorrhiza fungi. <em>Frontiers Plant Science</em>. <strong>In press</strong>.</p>
+<pre><code>Marco Chiapello , Debatosh Das, Caroline Gutjahr. Ramf: An open-source R package for statistical analysis and display of quantitative root colonization by arbuscular mycorrhiza fungi. _Frontiers Plant Science_. **In press**.</code></pre>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"mchiapello/Ramf"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"mchiapello/Ramf"</span>)</a></code></pre></div>
 <p>If you get this error:</p>
 <p>“ERROR: dependency ‘BiocStyle’ is not avalilable for package ‘Ramf’”</p>
 <p>Please, install the package from <a href="http://bioconductor.org/">Bioconductor</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb2-2" title="2">    <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"BiocStyle"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb3-2" title="2">    <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"BiocManager"</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3">BiocManager<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/BiocManager/topics/install">install</a></span>(<span class="st">"BiocStyle"</span>)</a></code></pre></div>
 <p>Repeat the Ramf package installation command.</p>
 </div>
 <div id="simple-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#simple-usage" class="anchor"></a>Simple usage</h2>
 <p>Read the Reference page for more information.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co">## Load library</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Ramf)</a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co">## Read data in</span></a>
-<a class="sourceLine" id="cb3-5" title="5">f &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">dir</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"Ramf"</span>), <span class="dt">full.names =</span> <span class="ot">TRUE</span>, <span class="dt">pattern =</span> <span class="st">"grid.csv"</span>)</a>
-<a class="sourceLine" id="cb3-6" title="6">x &lt;-<span class="st"> </span><span class="kw"><a href="reference/readData.html">readData</a></span>(f, <span class="dt">type =</span> <span class="st">"grid"</span>)</a>
-<a class="sourceLine" id="cb3-7" title="7"></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co">## Summary of the data</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="kw"><a href="reference/am_summary.html">am_summary</a></span>(x)</a>
-<a class="sourceLine" id="cb3-10" title="10"></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="co">## Plot</span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="kw"><a href="reference/am_barplot.html">am_barplot</a></span>(x)</a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="kw"><a href="reference/am_boxplot.html">am_boxplot</a></span>(x)</a>
-<a class="sourceLine" id="cb3-14" title="14"><span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x)</a>
-<a class="sourceLine" id="cb3-15" title="15"></a>
-<a class="sourceLine" id="cb3-16" title="16"><span class="co"># Plot with different display</span></a>
-<a class="sourceLine" id="cb3-17" title="17"><span class="kw"><a href="reference/am_barplot2.html">am_barplot2</a></span>(x)</a>
-<a class="sourceLine" id="cb3-18" title="18"><span class="kw"><a href="reference/am_boxplot2.html">am_boxplot2</a></span>(x)</a>
-<a class="sourceLine" id="cb3-19" title="19"><span class="kw"><a href="reference/am_dotplot2.html">am_dotplot2</a></span>(x)</a>
-<a class="sourceLine" id="cb3-20" title="20"></a>
-<a class="sourceLine" id="cb3-21" title="21"><span class="co">## Statistics</span></a>
-<a class="sourceLine" id="cb3-22" title="22"><span class="kw"><a href="reference/am_stat.html">am_stat</a></span>(x)</a>
-<a class="sourceLine" id="cb3-23" title="23"><span class="kw"><a href="reference/am_stat.html">am_stat</a></span>(x, <span class="dt">methods =</span> <span class="st">"BH"</span>)</a>
-<a class="sourceLine" id="cb3-24" title="24"></a>
-<a class="sourceLine" id="cb3-25" title="25"><span class="co">## Plot with statistics</span></a>
-<a class="sourceLine" id="cb3-26" title="26"><span class="kw"><a href="reference/am_barplot.html">am_barplot</a></span>(x, <span class="dt">annots =</span> <span class="st">"asterisks"</span>)</a>
-<a class="sourceLine" id="cb3-27" title="27"></a>
-<a class="sourceLine" id="cb3-28" title="28"><span class="co">## Plot with statistics</span></a>
-<a class="sourceLine" id="cb3-29" title="29"><span class="kw"><a href="reference/am_barplot.html">am_barplot</a></span>(x, <span class="dt">annot =</span> <span class="st">"letters"</span>)</a>
-<a class="sourceLine" id="cb3-30" title="30"></a>
-<a class="sourceLine" id="cb3-31" title="31"><span class="co">## Save summary data</span></a>
-<a class="sourceLine" id="cb3-32" title="32"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_summary.html">am_summary</a></span>(x), <span class="st">"My_data"</span>) <span class="co"># 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"</span></a>
-<a class="sourceLine" id="cb3-33" title="33"></a>
-<a class="sourceLine" id="cb3-34" title="34"><span class="co">## Save plot data</span></a>
-<a class="sourceLine" id="cb3-35" title="35"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x), <span class="st">"RPlot.jpg"</span>)</a>
-<a class="sourceLine" id="cb3-36" title="36"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x), <span class="st">"RPlot.pdf"</span>, <span class="dt">unit =</span> <span class="st">"cm"</span>, <span class="dt">width =</span> <span class="dv">20</span>, <span class="dt">height =</span> <span class="dv">20</span>, <span class="dt">dpi =</span> <span class="dv">300</span>) <span class="co"># set image unit, dimention and quality</span></a>
-<a class="sourceLine" id="cb3-37" title="37"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x), <span class="st">"RPlot.png"</span>, <span class="dt">width =</span> <span class="dv">7</span>, <span class="dt">height =</span> <span class="dv">7</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co">## Load library</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Ramf)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">## Read data in</span></a>
+<a class="sourceLine" id="cb4-5" title="5">f &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list.files">dir</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="dt">package =</span> <span class="st">"Ramf"</span>), <span class="dt">full.names =</span> <span class="ot">TRUE</span>, <span class="dt">pattern =</span> <span class="st">"grid.csv"</span>)</a>
+<a class="sourceLine" id="cb4-6" title="6">x &lt;-<span class="st"> </span><span class="kw"><a href="reference/readData.html">readData</a></span>(f, <span class="dt">type =</span> <span class="st">"grid"</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">## Summary of the data</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="kw"><a href="reference/am_summary.html">am_summary</a></span>(x)</a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">## Plot</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="kw"><a href="reference/am_barplot.html">am_barplot</a></span>(x)</a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="kw"><a href="reference/am_boxplot.html">am_boxplot</a></span>(x)</a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x)</a>
+<a class="sourceLine" id="cb4-15" title="15"></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co"># Plot with different display</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="kw"><a href="reference/am_barplot2.html">am_barplot2</a></span>(x)</a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="kw"><a href="reference/am_boxplot2.html">am_boxplot2</a></span>(x)</a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="kw"><a href="reference/am_dotplot2.html">am_dotplot2</a></span>(x)</a>
+<a class="sourceLine" id="cb4-20" title="20"></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">## Statistics</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="kw"><a href="reference/am_stat.html">am_stat</a></span>(x)</a>
+<a class="sourceLine" id="cb4-23" title="23"><span class="kw"><a href="reference/am_stat.html">am_stat</a></span>(x, <span class="dt">methods =</span> <span class="st">"BH"</span>)</a>
+<a class="sourceLine" id="cb4-24" title="24"></a>
+<a class="sourceLine" id="cb4-25" title="25"><span class="co">## Plot with statistics</span></a>
+<a class="sourceLine" id="cb4-26" title="26"><span class="kw"><a href="reference/am_barplot.html">am_barplot</a></span>(x, <span class="dt">annots =</span> <span class="st">"asterisks"</span>)</a>
+<a class="sourceLine" id="cb4-27" title="27"></a>
+<a class="sourceLine" id="cb4-28" title="28"><span class="co">## Plot with statistics</span></a>
+<a class="sourceLine" id="cb4-29" title="29"><span class="kw"><a href="reference/am_barplot.html">am_barplot</a></span>(x, <span class="dt">annot =</span> <span class="st">"letters"</span>)</a>
+<a class="sourceLine" id="cb4-30" title="30"></a>
+<a class="sourceLine" id="cb4-31" title="31"><span class="co">## Save summary data</span></a>
+<a class="sourceLine" id="cb4-32" title="32"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_summary.html">am_summary</a></span>(x), <span class="st">"My_data"</span>) <span class="co"># 2 files will be save: "My_data_per_Sample.csv" and "My_data_per_Replicate.csv"</span></a>
+<a class="sourceLine" id="cb4-33" title="33"></a>
+<a class="sourceLine" id="cb4-34" title="34"><span class="co">## Save plot data</span></a>
+<a class="sourceLine" id="cb4-35" title="35"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x), <span class="st">"RPlot.jpg"</span>)</a>
+<a class="sourceLine" id="cb4-36" title="36"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x), <span class="st">"RPlot.pdf"</span>, <span class="dt">unit =</span> <span class="st">"cm"</span>, <span class="dt">width =</span> <span class="dv">20</span>, <span class="dt">height =</span> <span class="dv">20</span>, <span class="dt">dpi =</span> <span class="dv">300</span>) <span class="co"># set image unit, dimention and quality</span></a>
+<a class="sourceLine" id="cb4-37" title="37"><span class="kw"><a href="reference/am_save.html">am_save</a></span>(<span class="kw"><a href="reference/am_dotplot.html">am_dotplot</a></span>(x), <span class="st">"RPlot.png"</span>, <span class="dt">width =</span> <span class="dv">7</span>, <span class="dt">height =</span> <span class="dv">7</span>)</a></code></pre></div>
 <p>If you encounter a bug, please report it on <a href="https://github.com/mchiapello/Ramf/issues">github</a>.</p>
 </div>
 </div>
