@@ -4,7 +4,8 @@
 \name{example_grid}
 \alias{example_grid}
 \title{Grid system scoring table}
-\format{A data frame with 63 rows and 7 variables:
+\format{
+A data frame with 63 rows and 7 variables:
 \describe{
   It is mandatory that the dataset is formatted as follow
   \item{Replicates}{Sample Replicates}
@@ -14,7 +15,8 @@
   \item{IntrHyphae}{Number of interanl hyphae identified}
   \item{Arbuscules}{Number of arbuscules identified}
   \item{Vesicles}{Number of vesicles identified}
-}}
+}
+}
 \source{
 PhD Caroline Gutjahr
 }

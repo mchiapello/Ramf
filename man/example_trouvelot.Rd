@@ -4,13 +4,15 @@
 \name{example_trouvelot}
 \alias{example_trouvelot}
 \title{Trouvelot system scoring table}
-\format{A data frame with 1008 rows and 3 variables:
+\format{
+A data frame with 1008 rows and 3 variables:
 \describe{
   It is mandatory that the dataset is formatted as follow
   \item{Samples}{Sample names}
   \item{Replicates}{Sample Replicates}
   \item{Scoring}{Scoring value}
-}}
+}
+}
 \source{
 Mara Novero
 }
