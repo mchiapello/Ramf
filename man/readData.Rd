@@ -3,7 +3,8 @@
 \name{readData}
 \alias{readData}
 \title{Read colonization files in.}
-\format{A grid dataset should have 7 variables:
+\format{
+A grid dataset should have 7 variables:
 \describe{
   It is mandatory that the dataset is formatted as follow
   \item{- Samples:}{Sample names}
@@ -27,7 +28,8 @@ A Trouvelot dataset should have 3 variables:
 }
 
          The order of the Samples (in the "Samples" column) is the order used for plot display. So,
-         if you like to have a specific order, please sort the original data accordingly}
+         if you like to have a specific order, please sort the original data accordingly
+}
 \usage{
 readData(infile, type = c("none", "trouvelot", "grid"))
 }

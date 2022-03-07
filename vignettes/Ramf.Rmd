@@ -225,6 +225,7 @@ appropriate alpha
 am_barplot(gr, annot = "asterisks", alpha = 0.05)
 am_barplot(gri, annot = "asterisks", alpha = 0.05)
 am_dotplot(tr, annot = "asterisks", alpha = 0.01)
+am_boxplot(tr, annot = "asterisks", alpha = 0.01)
 ```
 
 The asterisks above the plot show which sample is significant different from the control. 

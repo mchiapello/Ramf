@@ -104,9 +104,9 @@ trouvelot_summary <- function(x){
 .grid_stat <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
     V1 <- NULL
     sls <- am_summary(x)
-    sls[[1]]$Samples <- paste0(rep(1:length(unique(sls[[1]]$Samples)),
-                        rep(as.numeric(tapply(sls[[1]]$Replicates, factor(sls[[1]]$Samples,
-                        levels = unique(sls[[1]]$Samples)), length)),1)), "_", sls[[1]]$Samples)
+    sls[[1]]$Samples <- paste0(rep(LETTERS[1:length(unique(sls[[1]]$Samples))],
+                                   rep(as.numeric(tapply(sls[[1]]$Replicates, factor(sls[[1]]$Samples,
+                                                                                     levels = unique(sls[[1]]$Samples)), length)),1)), "_", sls[[1]]$Samples)
     stat <- list()
     num <- ncol(sls[[1]])
     if (group == FALSE){
@@ -125,8 +125,8 @@ trouvelot_summary <- function(x){
         }
         stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11, 13, 14)]
         names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:num], ".pval"))
-        stat$group1 <- gsub("^\\d+_", "", stat$group1)
-        stat$group2 <- gsub("^\\d+_", "", stat$group2)
+        stat$group1 <- gsub("^\\w_", "", stat$group1)
+        stat$group2 <- gsub("^\\w_", "", stat$group2)
         class(stat) <- c("am_stat", class(stat))
         return(stat)
     } else {
@@ -146,7 +146,7 @@ trouvelot_summary <- function(x){
         stat$sample <- rownames(stat)
         stat <- stat[, c(ncol(stat), 1:(num-2))]
         names(stat) <- c("sample", paste0(names(sls[[1]])[3:num], ".group"))
-        stat$sample <- gsub("^\\d+_", "", stat$sample)
+        stat$sample <- gsub("^\\w_", "", stat$sample)
         return(stat)
     }
 }
@@ -154,9 +154,12 @@ trouvelot_summary <- function(x){
 .trouvelot_stat <- function(x, group = FALSE, method = method, alpha = 0.05, ...){
     V1 <- NULL
     sls <- am_summary(x)
-    sls[[1]]$Samples <- paste0(rep(1:length(unique(sls[[1]]$Samples)),
-                        rep(as.numeric(tapply(sls[[1]]$Replicates, factor(sls[[1]]$Samples,
-                        levels = unique(sls[[1]]$Samples)), length)),1)), "_", sls[[1]]$Samples)
+    #     sls[[1]]$Samples <- paste0(rep(1:length(unique(sls[[1]]$Samples)),
+    #                         rep(as.numeric(tapply(sls[[1]]$Replicates, factor(sls[[1]]$Samples,
+    #                         levels = unique(sls[[1]]$Samples)), length)),1)), "_", sls[[1]]$Samples)
+    sls[[1]]$Samples <- paste0(rep(LETTERS[1:length(unique(sls[[1]]$Samples))],
+                                   rep(as.numeric(tapply(sls[[1]]$Replicates, factor(sls[[1]]$Samples,
+                                                                                     levels = unique(sls[[1]]$Samples)), length)),1)), "_", sls[[1]]$Samples)
     stat <- list()
     if (group == FALSE){
         for(i in 3:6){
@@ -175,8 +178,8 @@ trouvelot_summary <- function(x){
         }
         stat <- do.call(cbind, stat)[-c(4, 5, 7, 8, 10, 11)]
         names(stat) <- c("group1", "group2", paste0(names(sls[[1]])[3:6], ".pval"))
-        stat$group1 <- gsub("^\\d+_", "", stat$group1)
-        stat$group2 <- gsub("^\\d+_", "", stat$group2)
+        stat$group1 <- gsub("^\\w_", "", stat$group1)
+        stat$group2 <- gsub("^\\w_", "", stat$group2)
         class(stat) <- c("am_stat", class(stat))
         return(stat)
     } else {
@@ -196,7 +199,7 @@ trouvelot_summary <- function(x){
         stat$sample <- rownames(stat)
         stat <- stat[, c(5, 1:4)]
         names(stat) <- c("sample", paste0(names(sls[[1]])[3:6], ".group"))
-        stat$sample <- gsub("^\\d+_", "", stat$sample)
+        stat$sample <- gsub("^\\w_", "", stat$sample)
         return(stat)
     }
 }

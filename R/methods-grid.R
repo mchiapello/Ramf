@@ -5,7 +5,7 @@ am_summary.grid <- function(x){
     tmp <- grid_summary(x)
     final <- tmp %>%
         group_by(Samples) %>%
-        mutate(num = n()) %>%
+        mutate(num = dplyr::n()) %>%
         summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE) %>%
         mutate_at(vars(contains("_sd")), funs(. / sqrt(num_mean))) %>%
         select(-contains("num"))
@@ -68,7 +68,7 @@ am_barplot2.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     # Change table shape
     z <- y %>% tidyr::gather(features, values, -Samples, -Replicates)
     final <- z %>% group_by(Samples, features) %>%
-          mutate(num = n()) %>%
+          mutate(num = dplyr::n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
                     se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
           ungroup %>%
@@ -673,7 +673,7 @@ am_barplot.grid <- function(x, cbPalette = c("#999999", "#E69F00", "#56B4E9",
     # Change table shape
     z <- y %>% tidyr::gather(features, values, -Samples, -Replicates)
     final <- z %>% group_by(Samples, features) %>%
-          mutate(num = n()) %>%
+          mutate(num = dplyr::n()) %>%
           summarize(means = mean(values, na.rm = TRUE),
                     se    = sd(values, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE))) %>%
           ungroup %>%
