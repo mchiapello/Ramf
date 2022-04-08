@@ -6,7 +6,8 @@ am_summary.grid <- function(x){
     final <- tmp %>%
         group_by(Samples) %>%
         mutate(num = dplyr::n()) %>%
-        summarise_if(is.numeric, funs(mean, sd), na.rm = TRUE) %>%
+        summarise(across(where(is.numeric), list(~ mean(., na.rm = TRUE),
+                                                 ~ sd(., na.rm = TRUE)))) %>%
         mutate(across(contains("_sd"), ~(. / sqrt(num_mean)))) %>%
         select(-contains("num"))
     names(final)[grepl("_sd", names(final))] <- gsub("_sd", "_se",
