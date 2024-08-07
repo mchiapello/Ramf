@@ -91,9 +91,9 @@ trouvelot_summary <- function(x){
     tmp <- inner_join(yy4, yy6, by = c("Samples", "Replicates")) %>%
         mutate(A = a * (M / 100))
     tmp <- inner_join(z, tmp, by = c("Samples", "Replicates")) %>% 
-        select(Samples, Replicates, F, M, a, A)
+        select(Samples, Replicates, F, M, a, A, m)
     tmp <- tmp %>% dplyr::filter(!is.na(F))
-    tmp[, c("F", "M", "a", "A")] <- round(tmp[, c("F", "M", "a", "A")], 2)
+    tmp[, c("F", "M", "a", "A", "m")] <- round(tmp[, c("F", "M", "a", "A", "m")], 2)
     tmp <- tmp %>% arrange(factor(Samples, levels = unique(x$Samples)), Replicates)
     return(tmp)
 }
