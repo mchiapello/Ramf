@@ -13,7 +13,9 @@ am_summary.trouvelot <- function(x){
               `Mean a` = round(mean(a, na.rm = TRUE), 2),
               `Standar error a` = round(sd(a, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
               `Mean A` = round(mean(A, na.rm = TRUE), 2),
-              `Standard error A` = round(sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2)
+              `Standard error A` = round(sd(A, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 2),
+              `Mean m` = round(mean(m, na.rm = TRUE), 2),
+              `Standard error m` = round(sd(m, na.rm = TRUE) / sqrt(mean(num, na.rm = TRUE)), 3)
               )
     final <- final[match(unique(x$Samples), final$Samples), ]
     l <- list(tmp, final)
